@@ -12,6 +12,7 @@ namespace Equipo2
 {
     public partial class Form1 : Form
     {
+        string x;
         public Form1()
         {
             InitializeComponent();
