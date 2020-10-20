@@ -12,6 +12,7 @@ namespace Equipo1
 {
     public partial class Form1 : Form
     {
+        string soy_un_string;
         public Form1()
         {
             InitializeComponent();
