@@ -10,10 +10,9 @@ using System.Windows.Forms;
 
 namespace Equipo1
 {
-    public partial class Form1 : Form
+    public partial class VENTAS : Form
     {
-        string soy_un_string;
-        public Form1()
+        public VENTAS()
         {
             InitializeComponent();
         }

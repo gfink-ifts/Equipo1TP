@@ -46,16 +46,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="CLIENTES.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CLIENTES.Designer.cs">
+      <DependentUpon>CLIENTES.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CONTACTOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CONTACTOS.Designer.cs">
+      <DependentUpon>CONTACTOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PRINCIPAL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PRINCIPAL.Designer.cs">
+      <DependentUpon>PRINCIPAL.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="PROVINCIAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PROVINCIAS.Designer.cs">
+      <DependentUpon>PROVINCIAS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SERVICIOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SERVICIOS.Designer.cs">
+      <DependentUpon>SERVICIOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TIPO_SERVICIOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TIPO_SERVICIOS.Designer.cs">
+      <DependentUpon>TIPO_SERVICIOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VENTAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VENTAS.Designer.cs">
+      <DependentUpon>VENTAS.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CLIENTES.resx">
+      <DependentUpon>CLIENTES.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CONTACTOS.resx">
+      <DependentUpon>CONTACTOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PRINCIPAL.resx">
+      <DependentUpon>PRINCIPAL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +108,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="PROVINCIAS.resx">
+      <DependentUpon>PROVINCIAS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SERVICIOS.resx">
+      <DependentUpon>SERVICIOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TIPO_SERVICIOS.resx">
+      <DependentUpon>TIPO_SERVICIOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VENTAS.resx">
+      <DependentUpon>VENTAS.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
