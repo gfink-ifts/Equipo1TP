@@ -17,5 +17,10 @@ namespace Equipo1
         {
             InitializeComponent();
         }
+
+        private void PRINCIPAL_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
