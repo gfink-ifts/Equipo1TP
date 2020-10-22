@@ -28,7 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(338, 118);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(372, 144);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // SERVICIOS
             // 
@@ -36,6 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "SERVICIOS";
             this.Text = "SERVICIOS";
@@ -44,5 +55,7 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button button1;
     }
 }
