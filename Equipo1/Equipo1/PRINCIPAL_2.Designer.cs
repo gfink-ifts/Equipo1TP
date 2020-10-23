@@ -28,70 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_salir = new System.Windows.Forms.Button();
+            this.btn_ventas = new System.Windows.Forms.Button();
+            this.btn_productos = new System.Windows.Forms.Button();
+            this.btn_provincias = new System.Windows.Forms.Button();
+            this.btn_contactos = new System.Windows.Forms.Button();
+            this.btn_tipo_productos = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_clientes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button7
+            // btn_salir
             // 
-            this.button7.ForeColor = System.Drawing.Color.Crimson;
-            this.button7.Location = new System.Drawing.Point(104, 266);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(107, 23);
-            this.button7.TabIndex = 15;
-            this.button7.Text = "SALIR";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_salir.Location = new System.Drawing.Point(104, 266);
+            this.btn_salir.Name = "btn_salir";
+            this.btn_salir.Size = new System.Drawing.Size(107, 23);
+            this.btn_salir.TabIndex = 15;
+            this.btn_salir.Text = "SALIR";
+            this.btn_salir.UseVisualStyleBackColor = true;
+            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
-            // button6
+            // btn_ventas
             // 
-            this.button6.Location = new System.Drawing.Point(12, 159);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(202, 23);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "VENTAS";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btn_ventas.Location = new System.Drawing.Point(12, 159);
+            this.btn_ventas.Name = "btn_ventas";
+            this.btn_ventas.Size = new System.Drawing.Size(202, 23);
+            this.btn_ventas.TabIndex = 14;
+            this.btn_ventas.Text = "VENTAS";
+            this.btn_ventas.UseVisualStyleBackColor = true;
+            this.btn_ventas.Click += new System.EventHandler(this.btn_ventas_Click);
             // 
-            // button5
+            // btn_productos
             // 
-            this.button5.Location = new System.Drawing.Point(12, 189);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(202, 23);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "PRODUCTOS Y SERVICIOS";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_productos.Location = new System.Drawing.Point(12, 189);
+            this.btn_productos.Name = "btn_productos";
+            this.btn_productos.Size = new System.Drawing.Size(202, 23);
+            this.btn_productos.TabIndex = 13;
+            this.btn_productos.Text = "PRODUCTOS Y SERVICIOS";
+            this.btn_productos.UseVisualStyleBackColor = true;
+            this.btn_productos.Click += new System.EventHandler(this.btn_productos_Click);
             // 
-            // button4
+            // btn_provincias
             // 
-            this.button4.Location = new System.Drawing.Point(12, 129);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(202, 23);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "PROVINCIAS";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_provincias.Location = new System.Drawing.Point(12, 129);
+            this.btn_provincias.Name = "btn_provincias";
+            this.btn_provincias.Size = new System.Drawing.Size(202, 23);
+            this.btn_provincias.TabIndex = 12;
+            this.btn_provincias.Text = "PROVINCIAS";
+            this.btn_provincias.UseVisualStyleBackColor = true;
+            this.btn_provincias.Click += new System.EventHandler(this.btn_provincias_Click);
             // 
-            // button3
+            // btn_contactos
             // 
-            this.button3.Location = new System.Drawing.Point(12, 99);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(202, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "CONTACTOS";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_contactos.Location = new System.Drawing.Point(12, 99);
+            this.btn_contactos.Name = "btn_contactos";
+            this.btn_contactos.Size = new System.Drawing.Size(202, 23);
+            this.btn_contactos.TabIndex = 11;
+            this.btn_contactos.Text = "CONTACTOS";
+            this.btn_contactos.UseVisualStyleBackColor = true;
+            this.btn_contactos.Click += new System.EventHandler(this.btn_contactos_Click);
             // 
-            // button2
+            // btn_tipo_productos
             // 
-            this.button2.Location = new System.Drawing.Point(11, 219);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(203, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "TIPO PRODUCTOS Y SERVICIOS";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_tipo_productos.Location = new System.Drawing.Point(11, 219);
+            this.btn_tipo_productos.Name = "btn_tipo_productos";
+            this.btn_tipo_productos.Size = new System.Drawing.Size(203, 23);
+            this.btn_tipo_productos.TabIndex = 10;
+            this.btn_tipo_productos.Text = "TIPO PRODUCTOS Y SERVICIOS";
+            this.btn_tipo_productos.UseVisualStyleBackColor = true;
+            this.btn_tipo_productos.Click += new System.EventHandler(this.btn_tipo_productos_Click);
             // 
             // label1
             // 
@@ -103,14 +109,15 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "MENU TABLAS";
             // 
-            // button1
+            // btn_clientes
             // 
-            this.button1.Location = new System.Drawing.Point(11, 69);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(203, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "CLIENTES";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_clientes.Location = new System.Drawing.Point(11, 69);
+            this.btn_clientes.Name = "btn_clientes";
+            this.btn_clientes.Size = new System.Drawing.Size(203, 23);
+            this.btn_clientes.TabIndex = 8;
+            this.btn_clientes.Text = "CLIENTES";
+            this.btn_clientes.UseVisualStyleBackColor = true;
+            this.btn_clientes.Click += new System.EventHandler(this.btn_clientes_Click);
             // 
             // PRINCIPAL_2
             // 
@@ -118,15 +125,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(226, 294);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_salir);
+            this.Controls.Add(this.btn_ventas);
+            this.Controls.Add(this.btn_productos);
+            this.Controls.Add(this.btn_provincias);
+            this.Controls.Add(this.btn_contactos);
+            this.Controls.Add(this.btn_tipo_productos);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.Controls.Add(this.btn_clientes);
+            this.ForeColor = System.Drawing.Color.MediumBlue;
             this.Name = "PRINCIPAL_2";
             this.Text = "TABLAS";
             this.ResumeLayout(false);
@@ -136,13 +143,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_salir;
+        private System.Windows.Forms.Button btn_ventas;
+        private System.Windows.Forms.Button btn_productos;
+        private System.Windows.Forms.Button btn_provincias;
+        private System.Windows.Forms.Button btn_contactos;
+        private System.Windows.Forms.Button btn_tipo_productos;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_clientes;
     }
 }
