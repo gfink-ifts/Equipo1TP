@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_actualizar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btn_leer = new System.Windows.Forms.Button();
+            this.btn_eliminar = new System.Windows.Forms.Button();
+            this.btn_consultas_reportes = new System.Windows.Forms.Button();
+            this.btn_crear = new System.Windows.Forms.Button();
+            this.btn_salir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btn_actualizar
             // 
-            this.button1.Location = new System.Drawing.Point(11, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(203, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "CLIENTES";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_actualizar.Location = new System.Drawing.Point(11, 66);
+            this.btn_actualizar.Name = "btn_actualizar";
+            this.btn_actualizar.Size = new System.Drawing.Size(203, 23);
+            this.btn_actualizar.TabIndex = 0;
+            this.btn_actualizar.Text = "ACTUALIZAR";
+            this.btn_actualizar.UseVisualStyleBackColor = true;
+            this.btn_actualizar.Click += new System.EventHandler(this.btn_actualizar_Click);
             // 
             // label1
             // 
@@ -57,75 +57,70 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "MENU PRINCIPAL";
             // 
-            // button2
+            // btn_leer
             // 
-            this.button2.Location = new System.Drawing.Point(11, 216);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(203, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "TIPO PRODUCTOS Y SERVICIOS";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_leer.Location = new System.Drawing.Point(12, 96);
+            this.btn_leer.Name = "btn_leer";
+            this.btn_leer.Size = new System.Drawing.Size(202, 23);
+            this.btn_leer.TabIndex = 3;
+            this.btn_leer.Text = "LEER";
+            this.btn_leer.UseVisualStyleBackColor = true;
+            this.btn_leer.Click += new System.EventHandler(this.btn_leer_Click);
             // 
-            // button3
+            // btn_eliminar
             // 
-            this.button3.Location = new System.Drawing.Point(12, 96);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(202, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "CONTACTOS";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_eliminar.Location = new System.Drawing.Point(12, 126);
+            this.btn_eliminar.Name = "btn_eliminar";
+            this.btn_eliminar.Size = new System.Drawing.Size(202, 23);
+            this.btn_eliminar.TabIndex = 4;
+            this.btn_eliminar.Text = "ELIMINAR";
+            this.btn_eliminar.UseVisualStyleBackColor = true;
+            this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
-            // button4
+            // btn_consultas_reportes
             // 
-            this.button4.Location = new System.Drawing.Point(12, 126);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(202, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "PROVINCIAS";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_consultas_reportes.Location = new System.Drawing.Point(12, 186);
+            this.btn_consultas_reportes.Name = "btn_consultas_reportes";
+            this.btn_consultas_reportes.Size = new System.Drawing.Size(202, 23);
+            this.btn_consultas_reportes.TabIndex = 5;
+            this.btn_consultas_reportes.Text = "CONSULTAS Y REPORTES";
+            this.btn_consultas_reportes.UseVisualStyleBackColor = true;
+            this.btn_consultas_reportes.Click += new System.EventHandler(this.btn_consultas_reportes_Click);
             // 
-            // button5
+            // btn_crear
             // 
-            this.button5.Location = new System.Drawing.Point(12, 186);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(202, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "PRODUCTOS Y SERVICIOS";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_crear.Location = new System.Drawing.Point(12, 156);
+            this.btn_crear.Name = "btn_crear";
+            this.btn_crear.Size = new System.Drawing.Size(202, 23);
+            this.btn_crear.TabIndex = 6;
+            this.btn_crear.Text = "CREAR";
+            this.btn_crear.UseVisualStyleBackColor = true;
+            this.btn_crear.Click += new System.EventHandler(this.btn_crear_Click);
             // 
-            // button6
+            // btn_salir
             // 
-            this.button6.Location = new System.Drawing.Point(12, 156);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(202, 23);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "VENTAS";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.ForeColor = System.Drawing.Color.Crimson;
-            this.button7.Location = new System.Drawing.Point(104, 263);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(107, 23);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "SALIR";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
+            this.btn_salir.Location = new System.Drawing.Point(107, 228);
+            this.btn_salir.Name = "btn_salir";
+            this.btn_salir.Size = new System.Drawing.Size(107, 23);
+            this.btn_salir.TabIndex = 7;
+            this.btn_salir.Text = "SALIR";
+            this.btn_salir.UseVisualStyleBackColor = true;
+            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
             // PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(227, 291);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(227, 251);
+            this.Controls.Add(this.btn_salir);
+            this.Controls.Add(this.btn_crear);
+            this.Controls.Add(this.btn_consultas_reportes);
+            this.Controls.Add(this.btn_eliminar);
+            this.Controls.Add(this.btn_leer);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_actualizar);
             this.ForeColor = System.Drawing.Color.MediumBlue;
             this.Name = "PRINCIPAL";
             this.Text = "Principal";
@@ -137,14 +132,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_actualizar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btn_leer;
+        private System.Windows.Forms.Button btn_eliminar;
+        private System.Windows.Forms.Button btn_consultas_reportes;
+        private System.Windows.Forms.Button btn_crear;
+        private System.Windows.Forms.Button btn_salir;
     }
 }
 
