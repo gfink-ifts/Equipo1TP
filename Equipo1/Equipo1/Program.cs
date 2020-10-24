@@ -16,7 +16,7 @@ namespace Equipo1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PRINCIPAL());
+            Application.Run(new PRINCIPAL_2());
         }
     }
 }

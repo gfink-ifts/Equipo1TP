@@ -30,13 +30,13 @@
         {
             this.btn_salir = new System.Windows.Forms.Button();
             this.lbl_titulo = new System.Windows.Forms.Label();
-            this.cbx_cliente = new System.Windows.Forms.ComboBox();
+            this.cbx_descripcion = new System.Windows.Forms.ComboBox();
             this.btn_ejecutar = new System.Windows.Forms.Button();
-            this.txt_orden = new System.Windows.Forms.TextBox();
+            this.txt_tipo = new System.Windows.Forms.TextBox();
             this.lbl_orden = new System.Windows.Forms.Label();
-            this.txt_servicio = new System.Windows.Forms.TextBox();
+            this.txt_precio = new System.Windows.Forms.TextBox();
             this.lbl_servicio = new System.Windows.Forms.Label();
-            this.txt_cliente = new System.Windows.Forms.TextBox();
+            this.txt_descripcion = new System.Windows.Forms.TextBox();
             this.lbl_cliente = new System.Windows.Forms.Label();
             this.gpx_CRUD = new System.Windows.Forms.GroupBox();
             this.rbn_borrar = new System.Windows.Forms.RadioButton();
@@ -67,13 +67,13 @@
             this.lbl_titulo.TabIndex = 16;
             this.lbl_titulo.Text = "SERVICIOS";
             // 
-            // cbx_cliente
+            // cbx_descripcion
             // 
-            this.cbx_cliente.FormattingEnabled = true;
-            this.cbx_cliente.Location = new System.Drawing.Point(117, 111);
-            this.cbx_cliente.Name = "cbx_cliente";
-            this.cbx_cliente.Size = new System.Drawing.Size(273, 21);
-            this.cbx_cliente.TabIndex = 43;
+            this.cbx_descripcion.FormattingEnabled = true;
+            this.cbx_descripcion.Location = new System.Drawing.Point(125, 111);
+            this.cbx_descripcion.Name = "cbx_descripcion";
+            this.cbx_descripcion.Size = new System.Drawing.Size(273, 21);
+            this.cbx_descripcion.TabIndex = 43;
             // 
             // btn_ejecutar
             // 
@@ -84,13 +84,14 @@
             this.btn_ejecutar.TabIndex = 41;
             this.btn_ejecutar.Text = "EJECUTAR";
             this.btn_ejecutar.UseVisualStyleBackColor = true;
+            this.btn_ejecutar.Click += new System.EventHandler(this.btn_ejecutar_Click);
             // 
-            // txt_orden
+            // txt_tipo
             // 
-            this.txt_orden.Location = new System.Drawing.Point(107, 164);
-            this.txt_orden.Name = "txt_orden";
-            this.txt_orden.Size = new System.Drawing.Size(273, 20);
-            this.txt_orden.TabIndex = 37;
+            this.txt_tipo.Location = new System.Drawing.Point(107, 164);
+            this.txt_tipo.Name = "txt_tipo";
+            this.txt_tipo.Size = new System.Drawing.Size(273, 20);
+            this.txt_tipo.TabIndex = 37;
             // 
             // lbl_orden
             // 
@@ -102,12 +103,12 @@
             this.lbl_orden.TabIndex = 38;
             this.lbl_orden.Text = "TIPO";
             // 
-            // txt_servicio
+            // txt_precio
             // 
-            this.txt_servicio.Location = new System.Drawing.Point(107, 138);
-            this.txt_servicio.Name = "txt_servicio";
-            this.txt_servicio.Size = new System.Drawing.Size(273, 20);
-            this.txt_servicio.TabIndex = 35;
+            this.txt_precio.Location = new System.Drawing.Point(107, 138);
+            this.txt_precio.Name = "txt_precio";
+            this.txt_precio.Size = new System.Drawing.Size(273, 20);
+            this.txt_precio.TabIndex = 35;
             // 
             // lbl_servicio
             // 
@@ -119,12 +120,12 @@
             this.lbl_servicio.TabIndex = 36;
             this.lbl_servicio.Text = "PRECIO";
             // 
-            // txt_cliente
+            // txt_descripcion
             // 
-            this.txt_cliente.Location = new System.Drawing.Point(107, 112);
-            this.txt_cliente.Name = "txt_cliente";
-            this.txt_cliente.Size = new System.Drawing.Size(273, 20);
-            this.txt_cliente.TabIndex = 33;
+            this.txt_descripcion.Location = new System.Drawing.Point(107, 112);
+            this.txt_descripcion.Name = "txt_descripcion";
+            this.txt_descripcion.Size = new System.Drawing.Size(273, 20);
+            this.txt_descripcion.TabIndex = 33;
             // 
             // lbl_cliente
             // 
@@ -144,7 +145,7 @@
             this.gpx_CRUD.Controls.Add(this.rbn_crear);
             this.gpx_CRUD.Location = new System.Drawing.Point(8, 50);
             this.gpx_CRUD.Name = "gpx_CRUD";
-            this.gpx_CRUD.Size = new System.Drawing.Size(372, 39);
+            this.gpx_CRUD.Size = new System.Drawing.Size(382, 39);
             this.gpx_CRUD.TabIndex = 32;
             this.gpx_CRUD.TabStop = false;
             // 
@@ -198,13 +199,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(402, 241);
-            this.Controls.Add(this.cbx_cliente);
+            this.Controls.Add(this.cbx_descripcion);
             this.Controls.Add(this.btn_ejecutar);
-            this.Controls.Add(this.txt_orden);
+            this.Controls.Add(this.txt_tipo);
             this.Controls.Add(this.lbl_orden);
-            this.Controls.Add(this.txt_servicio);
+            this.Controls.Add(this.txt_precio);
             this.Controls.Add(this.lbl_servicio);
-            this.Controls.Add(this.txt_cliente);
+            this.Controls.Add(this.txt_descripcion);
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.gpx_CRUD);
             this.Controls.Add(this.btn_salir);
@@ -212,6 +213,7 @@
             this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "SERVICIOS";
             this.Text = "SERVICIOS";
+            this.Load += new System.EventHandler(this.SERVICIOS_Load);
             this.gpx_CRUD.ResumeLayout(false);
             this.gpx_CRUD.PerformLayout();
             this.ResumeLayout(false);
@@ -223,13 +225,13 @@
 
         private System.Windows.Forms.Button btn_salir;
         private System.Windows.Forms.Label lbl_titulo;
-        private System.Windows.Forms.ComboBox cbx_cliente;
+        private System.Windows.Forms.ComboBox cbx_descripcion;
         private System.Windows.Forms.Button btn_ejecutar;
-        private System.Windows.Forms.TextBox txt_orden;
+        private System.Windows.Forms.TextBox txt_tipo;
         private System.Windows.Forms.Label lbl_orden;
-        private System.Windows.Forms.TextBox txt_servicio;
+        private System.Windows.Forms.TextBox txt_precio;
         private System.Windows.Forms.Label lbl_servicio;
-        private System.Windows.Forms.TextBox txt_cliente;
+        private System.Windows.Forms.TextBox txt_descripcion;
         private System.Windows.Forms.Label lbl_cliente;
         private System.Windows.Forms.GroupBox gpx_CRUD;
         private System.Windows.Forms.RadioButton rbn_borrar;
