@@ -21,5 +21,10 @@ namespace Equipo1
         {
             this.Close();
         }
+
+        private void PROVINCIAS_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -81,7 +81,6 @@ namespace Equipo1
         {
             txt_nombre.Text = "";
             txt_area.Text = "";
-            txt_area.Text = "";
             txt_idcontacto.Text = "";
             txt_registro.Text = "";
         }
