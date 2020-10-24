@@ -70,11 +70,7 @@ namespace Equipo1
             }
 
         }
-
-        private void btn_salir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+              
 
         //FUNCION LIMPIAR
         void Limpiar()
@@ -85,5 +81,9 @@ namespace Equipo1
             txt_registro.Text = "";
         }
 
+        private void btn_salir_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
