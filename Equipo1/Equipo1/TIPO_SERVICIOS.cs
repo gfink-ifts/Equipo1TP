@@ -79,9 +79,9 @@ namespace Equipo1
         //FUNCION LIMPIAR
         void Limpiar()
         {
-            txt_descripcion.Text = "";
-            txt_precio.Text = "";
-            txt_tipo.Text = "";
+            
+            txt_descripcion1.Text = "";
+            
         }
 
     }
