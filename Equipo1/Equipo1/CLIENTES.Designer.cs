@@ -120,13 +120,14 @@
             // btn_salir
             // 
             this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_salir.Location = new System.Drawing.Point(381, 309);
+            this.btn_salir.Location = new System.Drawing.Point(417, 309);
             this.btn_salir.Margin = new System.Windows.Forms.Padding(4);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(143, 28);
             this.btn_salir.TabIndex = 31;
             this.btn_salir.Text = "SALIR";
             this.btn_salir.UseVisualStyleBackColor = true;
+            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click_1);
             // 
             // cbx_descripcion
             // 

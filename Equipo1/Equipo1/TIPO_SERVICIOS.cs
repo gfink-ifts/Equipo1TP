@@ -71,19 +71,19 @@ namespace Equipo1
 
         }
 
-        private void btn_salir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+      
         //FUNCION LIMPIAR
         void Limpiar()
         {
-            txt_descripcion.Text = "";
-            txt_precio.Text = "";
-            txt_tipo.Text = "";
+            
+            txt_descripcion1.Text = "";
+            
         }
 
+        private void btn_salir_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
