@@ -105,22 +105,47 @@ namespace Equipo1
             //CRUD: LEER
             else if (rbn_leer.Checked)
             {
-                
+                int index = cbx_descripcion.SelectedIndex;
+                string id = (index + 1).ToString();
+
+                SqlDataAdapter leer_registro;
+                DataTable data = new DataTable();
+
+                //VARIABLE DONDE ALMACENO LA INSTRUCCION
+                leer_registro = new SqlDataAdapter("SELECT * WHERE id_servicios=@id", mi_conexion);
+
+                //VINCULACION DE PARAMETROS
+                //leer_registro.Parameters.AddWithValue("@id", id);
+
+                //ABRO LA CONEXION
+                mi_conexion.Open();
+
+                //EJECUTO LA QUERY
+                //actualizar_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                mi_conexion.Close();
+
+                MessageBox.Show("Actualizo el registro.");
+
+                Limpiar();
             }
             //CRUD: UPDATE
             else if (rbn_actualizar.Checked)
             {
                 string precio = Convert.ToString(txt_precio.Text);
-                int index = (cbx_descripcion.SelectedIndex);
+                int index = cbx_descripcion.SelectedIndex;
                 string id = (index + 1).ToString();
-                MessageBox.Show(id);
-
+                int index_tipo = cbx_tipo.SelectedIndex;
+                string id_tipo = (index_tipo + 1).ToString();
+                
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
-                SqlCommand actualizar_registro = new SqlCommand ("UPDATE SERVICIOS SET PRECIOS=@precio WHERE id_servicios=@id", mi_conexion);
+                SqlCommand actualizar_registro = new SqlCommand ("UPDATE SERVICIOS SET PRECIOS=@precio, ID_TIPO_SERVICIOS=@id_tipo WHERE id_servicios=@id", mi_conexion);
 
                 //VINCULACION DE PARAMETROS
                 actualizar_registro.Parameters.AddWithValue("@precio", precio);
                 actualizar_registro.Parameters.AddWithValue("@id", id);
+                actualizar_registro.Parameters.AddWithValue("@id_tipo", id_tipo);
 
                 //ABRO LA CONEXION
                 mi_conexion.Open();
