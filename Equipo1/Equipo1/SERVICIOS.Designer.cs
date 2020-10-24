@@ -70,10 +70,11 @@
             // cbx_descripcion
             // 
             this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(125, 111);
+            this.cbx_descripcion.Location = new System.Drawing.Point(107, 112);
             this.cbx_descripcion.Name = "cbx_descripcion";
             this.cbx_descripcion.Size = new System.Drawing.Size(273, 21);
             this.cbx_descripcion.TabIndex = 43;
+            this.cbx_descripcion.SelectionChangeCommitted += new System.EventHandler(this.cbx_descripcion_SelectionChangeCommitted);
             // 
             // btn_ejecutar
             // 
@@ -159,6 +160,7 @@
             this.rbn_borrar.TabStop = true;
             this.rbn_borrar.Text = "BORRAR";
             this.rbn_borrar.UseVisualStyleBackColor = true;
+            this.rbn_borrar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbn_borrar_MouseClick);
             // 
             // rbn_actualizar
             // 
@@ -170,6 +172,7 @@
             this.rbn_actualizar.TabStop = true;
             this.rbn_actualizar.Text = "ACTUALIZAR";
             this.rbn_actualizar.UseVisualStyleBackColor = true;
+            this.rbn_actualizar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbn_actualizar_MouseClick);
             // 
             // rbn_leer
             // 
@@ -181,6 +184,7 @@
             this.rbn_leer.TabStop = true;
             this.rbn_leer.Text = "LEER";
             this.rbn_leer.UseVisualStyleBackColor = true;
+            this.rbn_leer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbn_leer_MouseClick);
             // 
             // rbn_crear
             // 
@@ -192,6 +196,7 @@
             this.rbn_crear.TabStop = true;
             this.rbn_crear.Text = "CREAR";
             this.rbn_crear.UseVisualStyleBackColor = true;
+            this.rbn_crear.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbn_crear_MouseClick);
             // 
             // SERVICIOS
             // 
