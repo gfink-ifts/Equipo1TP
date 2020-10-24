@@ -43,6 +43,7 @@
             this.rbn_actualizar = new System.Windows.Forms.RadioButton();
             this.rbn_leer = new System.Windows.Forms.RadioButton();
             this.rbn_crear = new System.Windows.Forms.RadioButton();
+            this.cbx_tipo = new System.Windows.Forms.ComboBox();
             this.gpx_CRUD.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,12 +199,21 @@
             this.rbn_crear.UseVisualStyleBackColor = true;
             this.rbn_crear.MouseClick += new System.Windows.Forms.MouseEventHandler(this.rbn_crear_MouseClick);
             // 
+            // cbx_tipo
+            // 
+            this.cbx_tipo.FormattingEnabled = true;
+            this.cbx_tipo.Location = new System.Drawing.Point(107, 164);
+            this.cbx_tipo.Name = "cbx_tipo";
+            this.cbx_tipo.Size = new System.Drawing.Size(273, 21);
+            this.cbx_tipo.TabIndex = 44;
+            // 
             // SERVICIOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(402, 241);
+            this.Controls.Add(this.cbx_tipo);
             this.Controls.Add(this.cbx_descripcion);
             this.Controls.Add(this.btn_ejecutar);
             this.Controls.Add(this.txt_tipo);
@@ -243,5 +253,6 @@
         private System.Windows.Forms.RadioButton rbn_actualizar;
         private System.Windows.Forms.RadioButton rbn_leer;
         private System.Windows.Forms.RadioButton rbn_crear;
+        private System.Windows.Forms.ComboBox cbx_tipo;
     }
 }

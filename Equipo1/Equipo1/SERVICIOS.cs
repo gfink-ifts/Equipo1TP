@@ -42,6 +42,8 @@ namespace Equipo1
             //ENCIENDE Y APAGA LOS CONTROLES
             cbx_descripcion.Visible = false;
             txt_descripcion.Visible = true;
+            cbx_tipo.Visible = false;
+            txt_tipo.Visible = true;
 
             Limpiar();
         }
@@ -52,6 +54,8 @@ namespace Equipo1
             //ENCIENDE Y APAGA LOS CONTROLES
             cbx_descripcion.Visible = true;
             txt_descripcion.Visible = false;
+            cbx_tipo.Visible = false;
+            txt_tipo.Visible = true;
 
             mostrar_servicios();
             Limpiar();
@@ -63,8 +67,11 @@ namespace Equipo1
             //ENCIENDE Y APAGA LOS CONTROLES
             cbx_descripcion.Visible = true;
             txt_descripcion.Visible = false;
+            cbx_tipo.Visible = true;
+            txt_tipo.Visible = false;
 
             mostrar_servicios();
+            mostrar_tipo();
             Limpiar();
             
         }
@@ -75,6 +82,8 @@ namespace Equipo1
             //ENCIENDE Y APAGA LOS CONTROLES
             cbx_descripcion.Visible = true;
             txt_descripcion.Visible = false;
+            cbx_tipo.Visible = false;
+            txt_tipo.Visible = true;
 
             mostrar_servicios();
             Limpiar();
@@ -142,6 +151,10 @@ namespace Equipo1
             this.Close();
         }
 
+        private void cbx_descripcion_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            mostrar_campos(cbx_descripcion.SelectedValue.ToString());
+        }
 
         //  ******************* FUNCIONES *******************
 
@@ -164,6 +177,25 @@ namespace Equipo1
             mi_conexion.Close();
         }
 
+        //FUNCION MOSTRAR TIPO
+        void mostrar_tipo()
+        {
+            SqlDataAdapter mostrar_tipo;
+            DataTable data = new DataTable();
+            //Abro la conexion
+            mi_conexion.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            mostrar_tipo = new SqlDataAdapter("SELECT ID_TIPO_SERVICIOS, DESCRIPCION FROM TIPO_SERVICIOS", mi_conexion);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            mostrar_tipo.Fill(data);
+            //RELLENA EL COMBO BOX
+            cbx_tipo.DataSource = data;
+            cbx_tipo.ValueMember = "ID_TIPO_SERVICIOS"; //VARIABLE VISIBLE
+            cbx_tipo.DisplayMember = "DESCRIPCION"; //VARIABLE DESPLEGADA
+            //CIERRA LA CONEXION
+            mi_conexion.Close();
+        }
+
         //FUNCION LLENA LOS CAMPOS
         void mostrar_campos(string id)
         {
@@ -172,7 +204,7 @@ namespace Equipo1
             //Abro la conexion
             mi_conexion.Open();
             //VARIABLE DONDE ALMACENO LA INSTRUCCION
-            llenar_campos = new SqlDataAdapter("SELECT S.precios, T.descripcion FROM SERVICIOS AS S, TIPO_SERVICIOS AS T where S.id_tipo_servicios = T.id_tipo_servicios and s.id_servicios=@ID", mi_conexion);
+            llenar_campos = new SqlDataAdapter("SELECT S.precios, T.descripcion, T.ID_TIPO_SERVICIOS FROM SERVICIOS AS S, TIPO_SERVICIOS AS T where S.id_tipo_servicios = T.id_tipo_servicios and s.id_servicios=@ID", mi_conexion);
             llenar_campos.SelectCommand.Parameters.AddWithValue("@ID", id);
             //RELLENA LA VARIABLE DEL COMBO BOX
             llenar_campos.Fill(datacampos);
@@ -180,6 +212,7 @@ namespace Equipo1
             {
                 txt_precio.Text = Convert.ToString(datacampos.Rows[0][0]);
                 txt_tipo.Text = Convert.ToString(datacampos.Rows[0][1]);
+                cbx_tipo.SelectedIndex = (Convert.ToInt32(datacampos.Rows[0][2]))-1;
             }
             //Cierra la conexion
             mi_conexion.Close();
@@ -193,11 +226,6 @@ namespace Equipo1
             txt_tipo.Text = "";
         }
 
-        private void cbx_descripcion_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            mostrar_campos(cbx_descripcion.SelectedValue.ToString());
-        }
-
-
+        
     }
 }
