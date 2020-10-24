@@ -78,6 +78,12 @@
     <Compile Include="PROVINCIAS.Designer.cs">
       <DependentUpon>PROVINCIAS.cs</DependentUpon>
     </Compile>
+    <Compile Include="REPORTES.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="REPORTES.Designer.cs">
+      <DependentUpon>REPORTES.cs</DependentUpon>
+    </Compile>
     <Compile Include="SERVICIOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </Compile>
     <EmbeddedResource Include="PROVINCIAS.resx">
       <DependentUpon>PROVINCIAS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REPORTES.resx">
+      <DependentUpon>REPORTES.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SERVICIOS.resx">
       <DependentUpon>SERVICIOS.cs</DependentUpon>

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.btn_salir = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_titulo = new System.Windows.Forms.Label();
             this.gpx_CRUD = new System.Windows.Forms.GroupBox();
-            this.rbn_crear = new System.Windows.Forms.RadioButton();
-            this.rbn_leer = new System.Windows.Forms.RadioButton();
-            this.rbn_actualizar = new System.Windows.Forms.RadioButton();
             this.rbn_borrar = new System.Windows.Forms.RadioButton();
+            this.rbn_actualizar = new System.Windows.Forms.RadioButton();
+            this.rbn_leer = new System.Windows.Forms.RadioButton();
+            this.rbn_crear = new System.Windows.Forms.RadioButton();
             this.txt_fecha = new System.Windows.Forms.TextBox();
             this.lbl_fecha = new System.Windows.Forms.Label();
             this.txt_cliente = new System.Windows.Forms.TextBox();
@@ -62,15 +62,15 @@
             this.btn_salir.UseVisualStyleBackColor = true;
             this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
-            // label1
+            // lbl_titulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(128, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 25);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "VENTAS";
+            this.lbl_titulo.AutoSize = true;
+            this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_titulo.Location = new System.Drawing.Point(128, 18);
+            this.lbl_titulo.Name = "lbl_titulo";
+            this.lbl_titulo.Size = new System.Drawing.Size(102, 25);
+            this.lbl_titulo.TabIndex = 16;
+            this.lbl_titulo.Text = "VENTAS";
             // 
             // gpx_CRUD
             // 
@@ -84,27 +84,16 @@
             this.gpx_CRUD.TabIndex = 18;
             this.gpx_CRUD.TabStop = false;
             // 
-            // rbn_crear
+            // rbn_borrar
             // 
-            this.rbn_crear.AutoSize = true;
-            this.rbn_crear.Location = new System.Drawing.Point(10, 16);
-            this.rbn_crear.Name = "rbn_crear";
-            this.rbn_crear.Size = new System.Drawing.Size(62, 17);
-            this.rbn_crear.TabIndex = 0;
-            this.rbn_crear.TabStop = true;
-            this.rbn_crear.Text = "CREAR";
-            this.rbn_crear.UseVisualStyleBackColor = true;
-            // 
-            // rbn_leer
-            // 
-            this.rbn_leer.AutoSize = true;
-            this.rbn_leer.Location = new System.Drawing.Point(102, 16);
-            this.rbn_leer.Name = "rbn_leer";
-            this.rbn_leer.Size = new System.Drawing.Size(53, 17);
-            this.rbn_leer.TabIndex = 1;
-            this.rbn_leer.TabStop = true;
-            this.rbn_leer.Text = "LEER";
-            this.rbn_leer.UseVisualStyleBackColor = true;
+            this.rbn_borrar.AutoSize = true;
+            this.rbn_borrar.Location = new System.Drawing.Point(307, 16);
+            this.rbn_borrar.Name = "rbn_borrar";
+            this.rbn_borrar.Size = new System.Drawing.Size(71, 17);
+            this.rbn_borrar.TabIndex = 3;
+            this.rbn_borrar.TabStop = true;
+            this.rbn_borrar.Text = "BORRAR";
+            this.rbn_borrar.UseVisualStyleBackColor = true;
             // 
             // rbn_actualizar
             // 
@@ -117,16 +106,27 @@
             this.rbn_actualizar.Text = "ACTUALIZAR";
             this.rbn_actualizar.UseVisualStyleBackColor = true;
             // 
-            // rbn_borrar
+            // rbn_leer
             // 
-            this.rbn_borrar.AutoSize = true;
-            this.rbn_borrar.Location = new System.Drawing.Point(307, 16);
-            this.rbn_borrar.Name = "rbn_borrar";
-            this.rbn_borrar.Size = new System.Drawing.Size(71, 17);
-            this.rbn_borrar.TabIndex = 3;
-            this.rbn_borrar.TabStop = true;
-            this.rbn_borrar.Text = "BORRAR";
-            this.rbn_borrar.UseVisualStyleBackColor = true;
+            this.rbn_leer.AutoSize = true;
+            this.rbn_leer.Location = new System.Drawing.Point(102, 16);
+            this.rbn_leer.Name = "rbn_leer";
+            this.rbn_leer.Size = new System.Drawing.Size(53, 17);
+            this.rbn_leer.TabIndex = 1;
+            this.rbn_leer.TabStop = true;
+            this.rbn_leer.Text = "LEER";
+            this.rbn_leer.UseVisualStyleBackColor = true;
+            // 
+            // rbn_crear
+            // 
+            this.rbn_crear.AutoSize = true;
+            this.rbn_crear.Location = new System.Drawing.Point(10, 16);
+            this.rbn_crear.Name = "rbn_crear";
+            this.rbn_crear.Size = new System.Drawing.Size(62, 17);
+            this.rbn_crear.TabIndex = 0;
+            this.rbn_crear.TabStop = true;
+            this.rbn_crear.Text = "CREAR";
+            this.rbn_crear.UseVisualStyleBackColor = true;
             // 
             // txt_fecha
             // 
@@ -259,7 +259,7 @@
             this.Controls.Add(this.lbl_fecha);
             this.Controls.Add(this.gpx_CRUD);
             this.Controls.Add(this.btn_salir);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_titulo);
             this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "VENTAS";
             this.Text = "VENTAS";
@@ -273,7 +273,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_salir;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.GroupBox gpx_CRUD;
         private System.Windows.Forms.RadioButton rbn_crear;
         private System.Windows.Forms.RadioButton rbn_leer;

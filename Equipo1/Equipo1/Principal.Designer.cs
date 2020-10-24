@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btn_actualizar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_titulo = new System.Windows.Forms.Label();
             this.btn_leer = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.btn_consultas_reportes = new System.Windows.Forms.Button();
@@ -47,15 +47,15 @@
             this.btn_actualizar.UseVisualStyleBackColor = true;
             this.btn_actualizar.Click += new System.EventHandler(this.btn_actualizar_Click);
             // 
-            // label1
+            // lbl_titulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "MENU PRINCIPAL";
+            this.lbl_titulo.AutoSize = true;
+            this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_titulo.Location = new System.Drawing.Point(6, 23);
+            this.lbl_titulo.Name = "lbl_titulo";
+            this.lbl_titulo.Size = new System.Drawing.Size(203, 25);
+            this.lbl_titulo.TabIndex = 1;
+            this.lbl_titulo.Text = "MENU PRINCIPAL";
             // 
             // btn_leer
             // 
@@ -119,7 +119,7 @@
             this.Controls.Add(this.btn_consultas_reportes);
             this.Controls.Add(this.btn_eliminar);
             this.Controls.Add(this.btn_leer);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_titulo);
             this.Controls.Add(this.btn_actualizar);
             this.ForeColor = System.Drawing.Color.MediumBlue;
             this.Name = "PRINCIPAL";
@@ -133,7 +133,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_actualizar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.Button btn_leer;
         private System.Windows.Forms.Button btn_eliminar;
         private System.Windows.Forms.Button btn_consultas_reportes;

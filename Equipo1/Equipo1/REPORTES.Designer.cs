@@ -1,6 +1,6 @@
 ﻿namespace Equipo1
 {
-    partial class CLIENTES
+    partial class REPORTES
     {
         /// <summary>
         /// Required designer variable.
@@ -28,42 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_salir = new System.Windows.Forms.Button();
             this.lbl_titulo = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // btn_salir
-            // 
-            this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_salir.Location = new System.Drawing.Point(393, 336);
-            this.btn_salir.Name = "btn_salir";
-            this.btn_salir.Size = new System.Drawing.Size(107, 23);
-            this.btn_salir.TabIndex = 19;
-            this.btn_salir.Text = "SALIR";
-            this.btn_salir.UseVisualStyleBackColor = true;
-            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
             // lbl_titulo
             // 
             this.lbl_titulo.AutoSize = true;
             this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_titulo.Location = new System.Drawing.Point(301, 91);
+            this.lbl_titulo.Location = new System.Drawing.Point(197, 43);
             this.lbl_titulo.Name = "lbl_titulo";
-            this.lbl_titulo.Size = new System.Drawing.Size(122, 25);
-            this.lbl_titulo.TabIndex = 18;
-            this.lbl_titulo.Text = "CLIENTES";
+            this.lbl_titulo.Size = new System.Drawing.Size(135, 25);
+            this.lbl_titulo.TabIndex = 10;
+            this.lbl_titulo.Text = "REPORTES";
             // 
-            // CLIENTES
+            // REPORTES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_salir);
             this.Controls.Add(this.lbl_titulo);
-            this.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.Name = "CLIENTES";
-            this.Text = "CLIENTES";
+            this.ForeColor = System.Drawing.Color.MediumBlue;
+            this.Name = "REPORTES";
+            this.Text = "REPORTES";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,7 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_salir;
         private System.Windows.Forms.Label lbl_titulo;
     }
 }

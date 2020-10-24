@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btn_salir = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_titulo = new System.Windows.Forms.Label();
             this.cbx_cliente = new System.Windows.Forms.ComboBox();
             this.btn_ejecutar = new System.Windows.Forms.Button();
             this.txt_orden = new System.Windows.Forms.TextBox();
@@ -57,15 +57,15 @@
             this.btn_salir.UseVisualStyleBackColor = true;
             this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
-            // label1
+            // lbl_titulo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(152, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(133, 25);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "SERVICIOS";
+            this.lbl_titulo.AutoSize = true;
+            this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_titulo.Location = new System.Drawing.Point(152, 9);
+            this.lbl_titulo.Name = "lbl_titulo";
+            this.lbl_titulo.Size = new System.Drawing.Size(133, 25);
+            this.lbl_titulo.TabIndex = 16;
+            this.lbl_titulo.Text = "SERVICIOS";
             // 
             // cbx_cliente
             // 
@@ -208,7 +208,7 @@
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.gpx_CRUD);
             this.Controls.Add(this.btn_salir);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_titulo);
             this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "SERVICIOS";
             this.Text = "SERVICIOS";
@@ -222,7 +222,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_salir;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.ComboBox cbx_cliente;
         private System.Windows.Forms.Button btn_ejecutar;
         private System.Windows.Forms.TextBox txt_orden;
