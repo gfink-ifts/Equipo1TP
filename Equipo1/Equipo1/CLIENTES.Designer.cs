@@ -35,12 +35,10 @@
             this.rbn_Leer = new System.Windows.Forms.RadioButton();
             this.rbn_Crear = new System.Windows.Forms.RadioButton();
             this.btn_salir = new System.Windows.Forms.Button();
-            this.cbx_descripcion = new System.Windows.Forms.ComboBox();
+            this.cbx_nombre = new System.Windows.Forms.ComboBox();
             this.txt_area = new System.Windows.Forms.TextBox();
             this.lbl_orden = new System.Windows.Forms.Label();
             this.txt_nombre = new System.Windows.Forms.TextBox();
-            this.lbl_servicio = new System.Windows.Forms.Label();
-            this.txt_descripcion = new System.Windows.Forms.TextBox();
             this.lbl_cliente = new System.Windows.Forms.Label();
             this.txt_registro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -129,18 +127,18 @@
             this.btn_salir.UseVisualStyleBackColor = true;
             this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click_1);
             // 
-            // cbx_descripcion
+            // cbx_nombre
             // 
-            this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(208, 137);
-            this.cbx_descripcion.Margin = new System.Windows.Forms.Padding(4);
-            this.cbx_descripcion.Name = "cbx_descripcion";
-            this.cbx_descripcion.Size = new System.Drawing.Size(363, 24);
-            this.cbx_descripcion.TabIndex = 61;
+            this.cbx_nombre.FormattingEnabled = true;
+            this.cbx_nombre.Location = new System.Drawing.Point(192, 137);
+            this.cbx_nombre.Margin = new System.Windows.Forms.Padding(4);
+            this.cbx_nombre.Name = "cbx_nombre";
+            this.cbx_nombre.Size = new System.Drawing.Size(363, 24);
+            this.cbx_nombre.TabIndex = 61;
             // 
             // txt_area
             // 
-            this.txt_area.Location = new System.Drawing.Point(184, 202);
+            this.txt_area.Location = new System.Drawing.Point(184, 173);
             this.txt_area.Margin = new System.Windows.Forms.Padding(4);
             this.txt_area.Name = "txt_area";
             this.txt_area.Size = new System.Drawing.Size(363, 22);
@@ -150,7 +148,7 @@
             // 
             this.lbl_orden.AutoSize = true;
             this.lbl_orden.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_orden.Location = new System.Drawing.Point(128, 207);
+            this.lbl_orden.Location = new System.Drawing.Point(128, 178);
             this.lbl_orden.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_orden.Name = "lbl_orden";
             this.lbl_orden.Size = new System.Drawing.Size(49, 17);
@@ -159,45 +157,26 @@
             // 
             // txt_nombre
             // 
-            this.txt_nombre.Location = new System.Drawing.Point(184, 170);
+            this.txt_nombre.Location = new System.Drawing.Point(184, 138);
             this.txt_nombre.Margin = new System.Windows.Forms.Padding(4);
             this.txt_nombre.Name = "txt_nombre";
             this.txt_nombre.Size = new System.Drawing.Size(363, 22);
-            this.txt_nombre.TabIndex = 57;
-            // 
-            // lbl_servicio
-            // 
-            this.lbl_servicio.AutoSize = true;
-            this.lbl_servicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_servicio.Location = new System.Drawing.Point(105, 175);
-            this.lbl_servicio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_servicio.Name = "lbl_servicio";
-            this.lbl_servicio.Size = new System.Drawing.Size(74, 17);
-            this.lbl_servicio.TabIndex = 58;
-            this.lbl_servicio.Text = "NOMBRE";
-            // 
-            // txt_descripcion
-            // 
-            this.txt_descripcion.Location = new System.Drawing.Point(184, 138);
-            this.txt_descripcion.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_descripcion.Name = "txt_descripcion";
-            this.txt_descripcion.Size = new System.Drawing.Size(363, 22);
-            this.txt_descripcion.TabIndex = 55;
+            this.txt_nombre.TabIndex = 55;
             // 
             // lbl_cliente
             // 
             this.lbl_cliente.AutoSize = true;
             this.lbl_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cliente.Location = new System.Drawing.Point(84, 143);
+            this.lbl_cliente.Location = new System.Drawing.Point(102, 143);
             this.lbl_cliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_cliente.Name = "lbl_cliente";
-            this.lbl_cliente.Size = new System.Drawing.Size(92, 17);
+            this.lbl_cliente.Size = new System.Drawing.Size(74, 17);
             this.lbl_cliente.TabIndex = 56;
-            this.lbl_cliente.Text = "ID CLIENTE";
+            this.lbl_cliente.Text = "NOMBRE";
             // 
             // txt_registro
             // 
-            this.txt_registro.Location = new System.Drawing.Point(184, 264);
+            this.txt_registro.Location = new System.Drawing.Point(184, 235);
             this.txt_registro.Margin = new System.Windows.Forms.Padding(4);
             this.txt_registro.Name = "txt_registro";
             this.txt_registro.Size = new System.Drawing.Size(363, 22);
@@ -207,7 +186,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(89, 269);
+            this.label1.Location = new System.Drawing.Point(89, 240);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 17);
@@ -216,7 +195,7 @@
             // 
             // txt_idcontacto
             // 
-            this.txt_idcontacto.Location = new System.Drawing.Point(184, 232);
+            this.txt_idcontacto.Location = new System.Drawing.Point(184, 203);
             this.txt_idcontacto.Margin = new System.Windows.Forms.Padding(4);
             this.txt_idcontacto.Name = "txt_idcontacto";
             this.txt_idcontacto.Size = new System.Drawing.Size(363, 22);
@@ -226,7 +205,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(68, 237);
+            this.label2.Location = new System.Drawing.Point(68, 208);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 17);
@@ -243,12 +222,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_idcontacto);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cbx_descripcion);
+            this.Controls.Add(this.cbx_nombre);
             this.Controls.Add(this.txt_area);
             this.Controls.Add(this.lbl_orden);
             this.Controls.Add(this.txt_nombre);
-            this.Controls.Add(this.lbl_servicio);
-            this.Controls.Add(this.txt_descripcion);
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.btn_Ejecutar);
             this.Controls.Add(this.rbn_Borrar);
@@ -258,7 +235,7 @@
             this.Controls.Add(this.btn_salir);
             this.Controls.Add(this.lbl_titulo);
             this.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CLIENTES";
             this.Text = "CLIENTES";
             this.Load += new System.EventHandler(this.CLIENTES_Load);
@@ -275,12 +252,10 @@
         private System.Windows.Forms.RadioButton rbn_Leer;
         private System.Windows.Forms.RadioButton rbn_Crear;
         private System.Windows.Forms.Button btn_salir;
-        private System.Windows.Forms.ComboBox cbx_descripcion;
+        private System.Windows.Forms.ComboBox cbx_nombre;
         private System.Windows.Forms.TextBox txt_area;
         private System.Windows.Forms.Label lbl_orden;
         private System.Windows.Forms.TextBox txt_nombre;
-        private System.Windows.Forms.Label lbl_servicio;
-        private System.Windows.Forms.TextBox txt_descripcion;
         private System.Windows.Forms.Label lbl_cliente;
         private System.Windows.Forms.TextBox txt_registro;
         private System.Windows.Forms.Label label1;
