@@ -37,9 +37,7 @@
             this.rbn_crear = new System.Windows.Forms.RadioButton();
             this.txt_fecha = new System.Windows.Forms.TextBox();
             this.lbl_fecha = new System.Windows.Forms.Label();
-            this.txt_cliente = new System.Windows.Forms.TextBox();
             this.lbl_cliente = new System.Windows.Forms.Label();
-            this.txt_servicio = new System.Windows.Forms.TextBox();
             this.lbl_servicio = new System.Windows.Forms.Label();
             this.txt_orden = new System.Windows.Forms.TextBox();
             this.lbl_orden = new System.Windows.Forms.Label();
@@ -48,6 +46,7 @@
             this.btn_ejecutar = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.cbx_cliente = new System.Windows.Forms.ComboBox();
+            this.cbx_servicio = new System.Windows.Forms.ComboBox();
             this.gpx_CRUD.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +93,7 @@
             this.rbn_borrar.TabStop = true;
             this.rbn_borrar.Text = "BORRAR";
             this.rbn_borrar.UseVisualStyleBackColor = true;
+            this.rbn_borrar.CheckedChanged += new System.EventHandler(this.rbn_borrar_CheckedChanged);
             // 
             // rbn_actualizar
             // 
@@ -105,6 +105,7 @@
             this.rbn_actualizar.TabStop = true;
             this.rbn_actualizar.Text = "ACTUALIZAR";
             this.rbn_actualizar.UseVisualStyleBackColor = true;
+            this.rbn_actualizar.CheckedChanged += new System.EventHandler(this.rbn_actualizar_CheckedChanged);
             // 
             // rbn_leer
             // 
@@ -116,6 +117,7 @@
             this.rbn_leer.TabStop = true;
             this.rbn_leer.Text = "LEER";
             this.rbn_leer.UseVisualStyleBackColor = true;
+            this.rbn_leer.CheckedChanged += new System.EventHandler(this.rbn_leer_CheckedChanged);
             // 
             // rbn_crear
             // 
@@ -127,6 +129,7 @@
             this.rbn_crear.TabStop = true;
             this.rbn_crear.Text = "CREAR";
             this.rbn_crear.UseVisualStyleBackColor = true;
+            this.rbn_crear.CheckedChanged += new System.EventHandler(this.rbn_crear_CheckedChanged);
             // 
             // txt_fecha
             // 
@@ -145,13 +148,6 @@
             this.lbl_fecha.TabIndex = 5;
             this.lbl_fecha.Text = "FECHA";
             // 
-            // txt_cliente
-            // 
-            this.txt_cliente.Location = new System.Drawing.Point(147, 133);
-            this.txt_cliente.Name = "txt_cliente";
-            this.txt_cliente.Size = new System.Drawing.Size(253, 20);
-            this.txt_cliente.TabIndex = 19;
-            // 
             // lbl_cliente
             // 
             this.lbl_cliente.AutoSize = true;
@@ -161,13 +157,6 @@
             this.lbl_cliente.Size = new System.Drawing.Size(59, 13);
             this.lbl_cliente.TabIndex = 20;
             this.lbl_cliente.Text = "CLIENTE";
-            // 
-            // txt_servicio
-            // 
-            this.txt_servicio.Location = new System.Drawing.Point(147, 159);
-            this.txt_servicio.Name = "txt_servicio";
-            this.txt_servicio.Size = new System.Drawing.Size(253, 20);
-            this.txt_servicio.TabIndex = 21;
             // 
             // lbl_servicio
             // 
@@ -222,6 +211,7 @@
             this.btn_ejecutar.TabIndex = 27;
             this.btn_ejecutar.Text = "EJECUTAR";
             this.btn_ejecutar.UseVisualStyleBackColor = true;
+            this.btn_ejecutar.Click += new System.EventHandler(this.btn_ejecutar_Click);
             // 
             // dateTimePicker1
             // 
@@ -233,10 +223,20 @@
             // cbx_cliente
             // 
             this.cbx_cliente.FormattingEnabled = true;
-            this.cbx_cliente.Location = new System.Drawing.Point(157, 132);
+            this.cbx_cliente.Location = new System.Drawing.Point(147, 132);
             this.cbx_cliente.Name = "cbx_cliente";
             this.cbx_cliente.Size = new System.Drawing.Size(253, 21);
             this.cbx_cliente.TabIndex = 29;
+            this.cbx_cliente.SelectionChangeCommitted += new System.EventHandler(this.cbx_cliente_SelectionChangeCommitted);
+            // 
+            // cbx_servicio
+            // 
+            this.cbx_servicio.FormattingEnabled = true;
+            this.cbx_servicio.Location = new System.Drawing.Point(147, 159);
+            this.cbx_servicio.Name = "cbx_servicio";
+            this.cbx_servicio.Size = new System.Drawing.Size(253, 21);
+            this.cbx_servicio.TabIndex = 30;
+            this.cbx_servicio.SelectionChangeCommitted += new System.EventHandler(this.cbx_servicio_SelectionChangeCommitted);
             // 
             // VENTAS
             // 
@@ -244,6 +244,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbx_servicio);
             this.Controls.Add(this.cbx_cliente);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btn_ejecutar);
@@ -251,9 +252,7 @@
             this.Controls.Add(this.lbl_cantidad);
             this.Controls.Add(this.txt_orden);
             this.Controls.Add(this.lbl_orden);
-            this.Controls.Add(this.txt_servicio);
             this.Controls.Add(this.lbl_servicio);
-            this.Controls.Add(this.txt_cliente);
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.txt_fecha);
             this.Controls.Add(this.lbl_fecha);
@@ -263,6 +262,7 @@
             this.ForeColor = System.Drawing.Color.MidnightBlue;
             this.Name = "VENTAS";
             this.Text = "VENTAS";
+            this.Load += new System.EventHandler(this.VENTAS_Load);
             this.gpx_CRUD.ResumeLayout(false);
             this.gpx_CRUD.PerformLayout();
             this.ResumeLayout(false);
@@ -281,9 +281,7 @@
         private System.Windows.Forms.RadioButton rbn_borrar;
         private System.Windows.Forms.TextBox txt_fecha;
         private System.Windows.Forms.Label lbl_fecha;
-        private System.Windows.Forms.TextBox txt_cliente;
         private System.Windows.Forms.Label lbl_cliente;
-        private System.Windows.Forms.TextBox txt_servicio;
         private System.Windows.Forms.Label lbl_servicio;
         private System.Windows.Forms.TextBox txt_orden;
         private System.Windows.Forms.Label lbl_orden;
@@ -292,5 +290,6 @@
         private System.Windows.Forms.Button btn_ejecutar;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox cbx_cliente;
+        private System.Windows.Forms.ComboBox cbx_servicio;
     }
 }
