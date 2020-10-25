@@ -34,15 +34,16 @@ namespace Equipo1
         }
 
         //BOTON: EJECUTAR
-        private void btn_ejecutar_Click(object sender, EventArgs e)
+        private void btn_Ejecutar_Click(object sender, EventArgs e)
         {
             //CRUD: CREAR
             if (rbn_Crear.Checked)
             {
             }
             //CRUD: LEER
-            if (rbn_Crear.Checked)
+            if (rbn_Leer.Checked)
             {
+                mostrar_clientes();
             }
             //CRUD: UPDATE
             if (rbn_Crear.Checked)
@@ -85,5 +86,25 @@ namespace Equipo1
         {
             this.Close();
         }
+
+        //FUNCION MOSTRAR CLIENTES
+        void mostrar_clientes()
+        {
+            SqlDataAdapter mostrar_tipo;
+            DataTable data = new DataTable();
+            //Abro la conexion
+            mi_conexion.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            mostrar_tipo = new SqlDataAdapter("SELECT ID_CLIENTE, NOMBRE FROM CLIENTES", mi_conexion);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            mostrar_tipo.Fill(data);
+            //RELLENA EL COMBO BOX
+            cbx_cliente.DataSource = data;
+            cbx_cliente.ValueMember = "ID_CLIENTE"; //VARIABLE VISIBLE
+            cbx_cliente.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
+            //CIERRA LA CONEXION
+            mi_conexion.Close();
+        }
+
     }
 }

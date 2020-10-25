@@ -35,7 +35,7 @@
             this.rbn_Leer = new System.Windows.Forms.RadioButton();
             this.rbn_Crear = new System.Windows.Forms.RadioButton();
             this.btn_salir = new System.Windows.Forms.Button();
-            this.cbx_nombre = new System.Windows.Forms.ComboBox();
+            this.cbx_cliente = new System.Windows.Forms.ComboBox();
             this.txt_area = new System.Windows.Forms.TextBox();
             this.lbl_orden = new System.Windows.Forms.Label();
             this.txt_nombre = new System.Windows.Forms.TextBox();
@@ -127,14 +127,14 @@
             this.btn_salir.UseVisualStyleBackColor = true;
             this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click_1);
             // 
-            // cbx_nombre
+            // cbx_cliente
             // 
-            this.cbx_nombre.FormattingEnabled = true;
-            this.cbx_nombre.Location = new System.Drawing.Point(192, 137);
-            this.cbx_nombre.Margin = new System.Windows.Forms.Padding(4);
-            this.cbx_nombre.Name = "cbx_nombre";
-            this.cbx_nombre.Size = new System.Drawing.Size(363, 24);
-            this.cbx_nombre.TabIndex = 61;
+            this.cbx_cliente.FormattingEnabled = true;
+            this.cbx_cliente.Location = new System.Drawing.Point(192, 137);
+            this.cbx_cliente.Margin = new System.Windows.Forms.Padding(4);
+            this.cbx_cliente.Name = "cbx_cliente";
+            this.cbx_cliente.Size = new System.Drawing.Size(363, 24);
+            this.cbx_cliente.TabIndex = 61;
             // 
             // txt_area
             // 
@@ -222,7 +222,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_idcontacto);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.cbx_nombre);
+            this.Controls.Add(this.cbx_cliente);
             this.Controls.Add(this.txt_area);
             this.Controls.Add(this.lbl_orden);
             this.Controls.Add(this.txt_nombre);
@@ -252,7 +252,7 @@
         private System.Windows.Forms.RadioButton rbn_Leer;
         private System.Windows.Forms.RadioButton rbn_Crear;
         private System.Windows.Forms.Button btn_salir;
-        private System.Windows.Forms.ComboBox cbx_nombre;
+        private System.Windows.Forms.ComboBox cbx_cliente;
         private System.Windows.Forms.TextBox txt_area;
         private System.Windows.Forms.Label lbl_orden;
         private System.Windows.Forms.TextBox txt_nombre;
