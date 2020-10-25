@@ -101,6 +101,31 @@ namespace Equipo1
             cbx_cliente.DataSource = data;
             cbx_cliente.ValueMember = "ID_CLIENTE"; //VARIABLE VISIBLE
             cbx_cliente.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
+
+            string cliente = cbx_cliente.Text;
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            /*cn.Open();*/
+            string consulta = "select area, id_contacto, fecha_registro from clientes " +
+                " where nombre like @cli ";
+            da = new SqlDataAdapter(consulta, mi_conexion);
+            da.SelectCommand.Parameters.AddWithValue("@cli", "%" + cliente + "%");
+            da.Fill(dt);
+            /*cn.Close();*/
+
+            if (dt.Rows.Count > 0)
+            {
+                txt_area.Text = Convert.ToString(dt.Rows[0][0]);
+                txt_idcontacto.Text = Convert.ToString(dt.Rows[0][1]);
+                txt_registro.Text = Convert.ToString(dt.Rows[0][2]);
+            }
+            else
+            {
+                MessageBox.Show("No existe el producto ");
+            }
+
+
+
             //CIERRA LA CONEXION
             mi_conexion.Close();
         }
