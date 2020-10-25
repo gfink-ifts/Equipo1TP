@@ -48,6 +48,9 @@
             this.cbx_cliente = new System.Windows.Forms.ComboBox();
             this.cbx_servicio = new System.Windows.Forms.ComboBox();
             this.dgw_ventas = new System.Windows.Forms.DataGridView();
+            this.lbl_error_fecha = new System.Windows.Forms.Label();
+            this.lbl_error_servicio = new System.Windows.Forms.Label();
+            this.lbl_error_cliente = new System.Windows.Forms.Label();
             this.gpx_CRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgw_ventas)).BeginInit();
             this.SuspendLayout();
@@ -217,7 +220,7 @@
             // 
             // dtp_fecha
             // 
-            this.dtp_fecha.Location = new System.Drawing.Point(406, 107);
+            this.dtp_fecha.Location = new System.Drawing.Point(479, 72);
             this.dtp_fecha.Name = "dtp_fecha";
             this.dtp_fecha.Size = new System.Drawing.Size(200, 20);
             this.dtp_fecha.TabIndex = 28;
@@ -243,17 +246,53 @@
             // dgw_ventas
             // 
             this.dgw_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgw_ventas.Location = new System.Drawing.Point(417, 157);
+            this.dgw_ventas.Location = new System.Drawing.Point(421, 107);
             this.dgw_ventas.Name = "dgw_ventas";
             this.dgw_ventas.Size = new System.Drawing.Size(367, 175);
             this.dgw_ventas.TabIndex = 31;
+            // 
+            // lbl_error_fecha
+            // 
+            this.lbl_error_fecha.AutoSize = true;
+            this.lbl_error_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_error_fecha.ForeColor = System.Drawing.Color.Crimson;
+            this.lbl_error_fecha.Location = new System.Drawing.Point(402, 108);
+            this.lbl_error_fecha.Name = "lbl_error_fecha";
+            this.lbl_error_fecha.Size = new System.Drawing.Size(15, 20);
+            this.lbl_error_fecha.TabIndex = 32;
+            this.lbl_error_fecha.Text = "*";
+            // 
+            // lbl_error_servicio
+            // 
+            this.lbl_error_servicio.AutoSize = true;
+            this.lbl_error_servicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_error_servicio.ForeColor = System.Drawing.Color.Crimson;
+            this.lbl_error_servicio.Location = new System.Drawing.Point(402, 160);
+            this.lbl_error_servicio.Name = "lbl_error_servicio";
+            this.lbl_error_servicio.Size = new System.Drawing.Size(15, 20);
+            this.lbl_error_servicio.TabIndex = 33;
+            this.lbl_error_servicio.Text = "*";
+            // 
+            // lbl_error_cliente
+            // 
+            this.lbl_error_cliente.AutoSize = true;
+            this.lbl_error_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_error_cliente.ForeColor = System.Drawing.Color.Crimson;
+            this.lbl_error_cliente.Location = new System.Drawing.Point(402, 136);
+            this.lbl_error_cliente.Name = "lbl_error_cliente";
+            this.lbl_error_cliente.Size = new System.Drawing.Size(15, 20);
+            this.lbl_error_cliente.TabIndex = 34;
+            this.lbl_error_cliente.Text = "*";
             // 
             // VENTAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 290);
+            this.Controls.Add(this.lbl_error_cliente);
+            this.Controls.Add(this.lbl_error_servicio);
+            this.Controls.Add(this.lbl_error_fecha);
             this.Controls.Add(this.dgw_ventas);
             this.Controls.Add(this.cbx_servicio);
             this.Controls.Add(this.cbx_cliente);
@@ -304,5 +343,8 @@
         private System.Windows.Forms.ComboBox cbx_cliente;
         private System.Windows.Forms.ComboBox cbx_servicio;
         private System.Windows.Forms.DataGridView dgw_ventas;
+        private System.Windows.Forms.Label lbl_error_fecha;
+        private System.Windows.Forms.Label lbl_error_servicio;
+        private System.Windows.Forms.Label lbl_error_cliente;
     }
 }

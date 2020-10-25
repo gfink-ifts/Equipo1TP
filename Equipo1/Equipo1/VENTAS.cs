@@ -31,6 +31,10 @@ namespace Equipo1
         {
             //VARIABLE QUE ESTABLECERA LA CONEXION
             mi_conexion = new SqlConnection(conectar);
+
+            lbl_error_cliente.Visible = false;
+            lbl_error_fecha.Visible = false;
+            lbl_error_servicio.Visible = false;
         }
 
 
@@ -46,6 +50,8 @@ namespace Equipo1
         //SELECTOR: LEER
         private void rbn_leer_CheckedChanged(object sender, EventArgs e)
         {
+            mostrar_servicios();
+            mostrar_clientes();
             Limpiar();
         }
 
@@ -53,6 +59,7 @@ namespace Equipo1
         private void rbn_actualizar_CheckedChanged(object sender, EventArgs e)
         {
             mostrar_servicios();
+            mostrar_clientes();
             Limpiar();
         }
 
@@ -60,6 +67,7 @@ namespace Equipo1
         private void rbn_borrar_CheckedChanged(object sender, EventArgs e)
         {
             mostrar_servicios();
+            mostrar_clientes();
             Limpiar();
         }
 
@@ -68,31 +76,184 @@ namespace Equipo1
         //BOTON: EJECUTAR
         private void btn_ejecutar_Click(object sender, EventArgs e)
         {
+            
+
             //CRUD: CREAR
             if (rbn_crear.Checked)
             {
 
+
             }
+
             //CRUD: LEER
-            else if (rbn_leer.Checked)
-            {
+            string fecha = Convert.ToString(txt_fecha.Text);
+            int id_cliente = cbx_cliente.SelectedIndex;
+            int id_servicio = cbx_servicio.SelectedIndex;
+            int cliente = id_cliente + 1;
+            int servicio = id_servicio + 1;
 
+
+
+            /*
+             *    MessageBox.Show("TEXT: " + cbx_cliente.SelectedValue);
+            MessageBox.Show("VALUE: " + cbx_cliente.SelectedText);
+            MessageBox.Show("id cliente: " + id_cliente);
+            MessageBox.Show("id servicios: " + id_servicio);
+             *   MessageBox.Show("fecha: " + fecha);
+            MessageBox.Show("cliente: " + cliente);
+            MessageBox.Show("id cliente: " + id_cliente);
+            MessageBox.Show("servicios: " + servicio);
+            MessageBox.Show("id servicios: " + id_servicio);
+                   MessageBox.Show("fecha: " + fecha);
+            MessageBox.Show("cliente: " + cliente);
+            MessageBox.Show("servicios: " + servicio);
+             * 
+            MessageBox.Show("SELECT: " + cbx_cliente.SelectedValue);
+            MessageBox.Show("fecha: " + dtp_fecha);
+            MessageBox.Show("fecha: "+fecha);
+            MessageBox.Show("cliente: " + cliente);
+            MessageBox.Show("servicios: " + servicio);
+            */
+
+            if (rbn_leer.Checked)
+            {
+                //FALTA DE ARGUMENTOS PARA BUSCAR
+                if (fecha == "" && id_cliente == 0 && id_servicio == 0)
+                {
+                    Mensaje(2);
+                    lbl_error_cliente.Visible = true;
+                    lbl_error_fecha.Visible = true;
+                    lbl_error_servicio.Visible = true;
+
+                    mostrar_servicios();
+                    mostrar_clientes();
+
+                    Limpiar();
+
+                    MessageBox.Show("NINGUNA");
+                }
+                //TODOS
+                else if (fecha != "" && cbx_cliente.SelectedText != "" && cbx_servicio.SelectedText != "")
+                {
+                    if (cliente >= 1)
+                    {
+                        SqlDataAdapter mostrar;
+                        DataTable tabla_ventas = new DataTable();
+
+                        //ABRO CONEXION
+                        mi_conexion.Open();
+
+                        //INSTRUCCION SQL
+                        mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_CLIENTE=" + cliente + " AND ID_SERVICIOS=" + servicio +
+                                                     " AND FECHA_VENTA LIKE '%" + fecha + "%'", mi_conexion);
+
+                        //LLENO LA TABLA
+                        mostrar.Fill(tabla_ventas);
+
+                        //CIERRO LA CONEXION
+                        mi_conexion.Close();
+
+                        //LLENO EL DATA GRID VIEW
+                        dgw_ventas.DataSource = tabla_ventas;
+
+                        MessageBox.Show("TODOS");
+                    }
+                    else
+                    {
+                        Mensaje(1);
+                    }
+                    
+                }
+               //POR FECHA
+               else if (fecha != "")
+               {
+                   SqlDataAdapter mostrar;
+                   DataTable tabla_ventas = new DataTable();
+
+                   //ABRO CONEXION
+                   mi_conexion.Open();
+
+                   //INSTRUCCION SQL
+                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE FECHA_VENTA LIKE '%" + fecha + "%'", mi_conexion);
+
+                   //LLENO LA TABLA
+                   mostrar.Fill(tabla_ventas);
+
+                   //CIERRO LA CONEXION
+                   mi_conexion.Close();
+
+                   //LLENO EL DATA GRID VIEW
+                   dgw_ventas.DataSource = tabla_ventas;
+
+                    MessageBox.Show("FECHA");
+               }
+               //POR CLIENTE
+               else if (cliente != 0)
+               {
+                   SqlDataAdapter mostrar;
+                   DataTable tabla_ventas = new DataTable();
+
+                   //ABRO CONEXION
+                   mi_conexion.Open();
+
+                   //INSTRUCCION SQL
+                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_CLIENTE='" + cliente + "'", mi_conexion);
+
+                   //LLENO LA TABLA
+                   mostrar.Fill(tabla_ventas);
+
+                   //CIERRO LA CONEXION
+                   mi_conexion.Close();
+
+                   //LLENO EL DATA GRID VIEW
+                   dgw_ventas.DataSource = tabla_ventas;
+
+                    MessageBox.Show("CLIENTE");
+                }
+               //POR SERVICIO
+               else if (servicio != 0)
+               {
+                   SqlDataAdapter mostrar;
+                   DataTable tabla_ventas = new DataTable();
+
+                   //ABRO CONEXION
+                   mi_conexion.Open();
+
+                   //INSTRUCCION SQL
+                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_SERVICIOS='" + servicio + "'", mi_conexion);
+
+                   //LLENO LA TABLA
+                   mostrar.Fill(tabla_ventas);
+
+                   //CIERRO LA CONEXION
+                   mi_conexion.Close();
+
+                   //LLENO EL DATA GRID VIEW
+                   dgw_ventas.DataSource = tabla_ventas;
+
+                    MessageBox.Show("SERVICIOS");
+                }
+               else
+               {
+                   Mensaje(1);
+               }
             }
+            /*
             //CRUD: ACTUALIZAR
-            else if (rbn_actualizar.Checked)
+            if (rbn_actualizar.Checked)
             {
 
             }
+
             //CRUD: BORRAR
-            else if (rbn_borrar.Checked)
+            if (rbn_borrar.Checked)
             {
 
             }
             //MENSAJE DE ERROR 
-            else
-            {
-                MessageBox.Show("Seleccione una de las \nopciones de arriba");
-            }
+           
+            MessageBox.Show("Seleccione una de las \nopciones de arriba");
+            */
         }
 
         //BOTON: SALIR
@@ -113,6 +274,20 @@ namespace Equipo1
 
 
         //  ******************* FUNCIONES *******************
+        void Mensaje (int id)
+        {
+            switch (id)
+            {
+                case 1: //NO HAY REGISTRO
+                    MessageBox.Show("No encontramos ningún registro.");
+                    break;
+                case 2: //FALTAN CAMPOS
+                    MessageBox.Show("Complete los campos requeridos.");
+                    break;
+            }
+
+        }
+
         //FUNCION LIMPIAR
         void Limpiar()
         {
