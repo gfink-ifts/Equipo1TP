@@ -42,9 +42,12 @@ namespace Equipo1
             //ENCIENDE Y APAGA LOS CONTROLES
             cbx_descripcion.Visible = false;
             txt_descripcion.Visible = true;
-            cbx_tipo.Visible = false;
-            txt_tipo.Visible = true;
+            cbx_tipo.Visible = true;
+            txt_tipo.Visible = false;
+            btn_ejecutar.Enabled = true;
 
+            mostrar_servicios();
+            mostrar_tipo();
             Limpiar();
         }
 
@@ -56,6 +59,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = false;
             txt_tipo.Visible = true;
+            btn_ejecutar.Enabled = false;
 
             mostrar_servicios();
             Limpiar();
@@ -69,6 +73,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = true;
             txt_tipo.Visible = false;
+            btn_ejecutar.Enabled = true;
 
             mostrar_servicios();
             mostrar_tipo();
@@ -84,6 +89,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = false;
             txt_tipo.Visible = true;
+            btn_ejecutar.Enabled = true;
 
             mostrar_servicios();
             Limpiar();
@@ -100,27 +106,92 @@ namespace Equipo1
             //CRUD: CREAR
             if (rbn_crear.Checked)
             {
+                //DECLARACION DE VARIABLES
+                string descripcion = Convert.ToString(txt_descripcion.Text);
+                string precio = Convert.ToString(txt_precio.Text);
+                int index = cbx_tipo.SelectedIndex;
+                string provincia = (index + 1).ToString();
                 
+                //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
+                SqlCommand nuevo_registro = new SqlCommand();
+
+                //MATCHEO VARIABLE A LA CONEXION
+                nuevo_registro = mi_conexion.CreateCommand();
+
+                //INSTRUCCION SQL
+                nuevo_registro.CommandText = "INSERT INTO SERVICIOS (DESCRIPCION, PRECIOS, ID_TIPO_SERVICIOS)" +
+                                             "VALUES (@DESCRIPCION, @PRECIO, @PROVINCIAS)";
+
+                //VINCULACION DE PARAMETROS
+                nuevo_registro.Parameters.AddWithValue("@DESCRIPCION", descripcion);
+                nuevo_registro.Parameters.AddWithValue("@PRECIO", precio);
+                nuevo_registro.Parameters.AddWithValue("@PROVINCIAS", provincia);
+
+                //ABRO LA CONEXION
+                mi_conexion.Open();
+
+                //EJECUTO LA INSTRUCCION SQL
+                nuevo_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                mi_conexion.Close();
+
+                Limpiar();
+
+                MessageBox.Show("Agrego un registro satisfactoriamente");
             }
             //CRUD: LEER
             else if (rbn_leer.Checked)
             {
-                
+                int index = cbx_descripcion.SelectedIndex;
+                string id = (index + 1).ToString();
+
+                SqlDataAdapter leer_registro;
+                DataTable data = new DataTable();
+
+                //ABRO LA CONEXION
+                mi_conexion.Open();
+
+                //VARIABLE DONDE ALMACENO LA INSTRUCCION
+                leer_registro = new SqlDataAdapter("SELECT S.DESCRIPCION, S.PRECIOS, T.DESCRIPCION" +
+                                                   "FROM SERVICIOS AS S, TIPO_SERVICIOS AS T" +
+                                                   "WHERE ID_SERVICIOS='"+id+"'", mi_conexion);
+
+                //COMPLETAMOS LA MATRIZ
+                leer_registro.Fill(data);
+
+                //CIERRO LA CONEXION
+                mi_conexion.Close();
+
+                if (data.Rows.Count > 0)
+                {
+                    txt_descripcion.Text = Convert.ToString(data.Rows[0][0]);
+                    txt_precio.Text = Convert.ToString(data.Rows[0][1]);
+                    txt_tipo.Text = Convert.ToString(data.Rows[0][2]);
+                }
+                else
+                {
+                    MessageBox.Show("No existe el registro.");
+                }
+
+                Limpiar();
             }
             //CRUD: UPDATE
             else if (rbn_actualizar.Checked)
             {
                 string precio = Convert.ToString(txt_precio.Text);
-                int index = (cbx_descripcion.SelectedIndex);
+                int index = cbx_descripcion.SelectedIndex;
                 string id = (index + 1).ToString();
-                MessageBox.Show(id);
-
+                int index_tipo = cbx_tipo.SelectedIndex;
+                string id_tipo = (index_tipo + 1).ToString();
+                
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
-                SqlCommand actualizar_registro = new SqlCommand ("UPDATE SERVICIOS SET PRECIOS=@precio WHERE id_servicios=@id", mi_conexion);
+                SqlCommand actualizar_registro = new SqlCommand ("UPDATE SERVICIOS SET PRECIOS=@precio, ID_TIPO_SERVICIOS=@id_tipo WHERE id_servicios=@id", mi_conexion);
 
                 //VINCULACION DE PARAMETROS
                 actualizar_registro.Parameters.AddWithValue("@precio", precio);
                 actualizar_registro.Parameters.AddWithValue("@id", id);
+                actualizar_registro.Parameters.AddWithValue("@id_tipo", id_tipo);
 
                 //ABRO LA CONEXION
                 mi_conexion.Open();
@@ -138,7 +209,37 @@ namespace Equipo1
             //CRUD: DELETE
             else if (rbn_borrar.Checked)
             {
-                
+                //DECLARACION DE VARIABLES
+                string id = cbx_descripcion.SelectedValue.ToString();
+
+                //int index = cbx_descripcion.SelectedIndex;
+                //string id = (index + 1).ToString();
+
+                MessageBox.Show(id);
+
+                //CREACION DE LA VARIABLE: BORRAR
+                SqlCommand borrar_registro = new SqlCommand();
+
+                //VARIABLE + CONEXION
+                borrar_registro = mi_conexion.CreateCommand();
+
+                //INSTRUCCION SQL
+                borrar_registro.CommandText = "DELETE FROM SERVICIOS WHERE ID_SERVICIOS=@ID";
+
+                //VINCULACION DE PARAMETROS
+                borrar_registro.Parameters.AddWithValue("@ID", id);
+
+                //ABRO LA CONEXION
+                mi_conexion.Open();
+
+                //EJECUTO LA INSTRUCION SQL
+                borrar_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                mi_conexion.Close();
+
+                //MENSAJE DE VERIFICACION
+                MessageBox.Show("Borro el registro");
             }
             else
             {
@@ -204,7 +305,10 @@ namespace Equipo1
             //Abro la conexion
             mi_conexion.Open();
             //VARIABLE DONDE ALMACENO LA INSTRUCCION
-            llenar_campos = new SqlDataAdapter("SELECT S.precios, T.descripcion, T.ID_TIPO_SERVICIOS FROM SERVICIOS AS S, TIPO_SERVICIOS AS T where S.id_tipo_servicios = T.id_tipo_servicios and s.id_servicios=@ID", mi_conexion);
+            llenar_campos = new SqlDataAdapter("SELECT S.precios, T.descripcion, T.ID_TIPO_SERVICIOS " +
+                                               "FROM SERVICIOS AS S, TIPO_SERVICIOS AS T " +
+                                               "where S.id_tipo_servicios = T.id_tipo_servicios and " +
+                                               "s.id_servicios=@ID", mi_conexion);
             llenar_campos.SelectCommand.Parameters.AddWithValue("@ID", id);
             //RELLENA LA VARIABLE DEL COMBO BOX
             llenar_campos.Fill(datacampos);
@@ -212,7 +316,7 @@ namespace Equipo1
             {
                 txt_precio.Text = Convert.ToString(datacampos.Rows[0][0]);
                 txt_tipo.Text = Convert.ToString(datacampos.Rows[0][1]);
-                cbx_tipo.SelectedIndex = (Convert.ToInt32(datacampos.Rows[0][2]))-1;
+                cbx_tipo.SelectedIndex = (Convert.ToInt32(datacampos.Rows[0][2])-1);
             }
             //Cierra la conexion
             mi_conexion.Close();
