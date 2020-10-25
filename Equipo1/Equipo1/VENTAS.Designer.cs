@@ -44,10 +44,12 @@
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.lbl_cantidad = new System.Windows.Forms.Label();
             this.btn_ejecutar = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtp_fecha = new System.Windows.Forms.DateTimePicker();
             this.cbx_cliente = new System.Windows.Forms.ComboBox();
             this.cbx_servicio = new System.Windows.Forms.ComboBox();
+            this.dgw_ventas = new System.Windows.Forms.DataGridView();
             this.gpx_CRUD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgw_ventas)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_salir
@@ -213,12 +215,12 @@
             this.btn_ejecutar.UseVisualStyleBackColor = true;
             this.btn_ejecutar.Click += new System.EventHandler(this.btn_ejecutar_Click);
             // 
-            // dateTimePicker1
+            // dtp_fecha
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(406, 107);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 28;
+            this.dtp_fecha.Location = new System.Drawing.Point(406, 107);
+            this.dtp_fecha.Name = "dtp_fecha";
+            this.dtp_fecha.Size = new System.Drawing.Size(200, 20);
+            this.dtp_fecha.TabIndex = 28;
             // 
             // cbx_cliente
             // 
@@ -238,15 +240,24 @@
             this.cbx_servicio.TabIndex = 30;
             this.cbx_servicio.SelectionChangeCommitted += new System.EventHandler(this.cbx_servicio_SelectionChangeCommitted);
             // 
+            // dgw_ventas
+            // 
+            this.dgw_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgw_ventas.Location = new System.Drawing.Point(417, 157);
+            this.dgw_ventas.Name = "dgw_ventas";
+            this.dgw_ventas.Size = new System.Drawing.Size(367, 175);
+            this.dgw_ventas.TabIndex = 31;
+            // 
             // VENTAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dgw_ventas);
             this.Controls.Add(this.cbx_servicio);
             this.Controls.Add(this.cbx_cliente);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtp_fecha);
             this.Controls.Add(this.btn_ejecutar);
             this.Controls.Add(this.txt_cantidad);
             this.Controls.Add(this.lbl_cantidad);
@@ -265,6 +276,7 @@
             this.Load += new System.EventHandler(this.VENTAS_Load);
             this.gpx_CRUD.ResumeLayout(false);
             this.gpx_CRUD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgw_ventas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,8 +300,9 @@
         private System.Windows.Forms.TextBox txt_cantidad;
         private System.Windows.Forms.Label lbl_cantidad;
         private System.Windows.Forms.Button btn_ejecutar;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtp_fecha;
         private System.Windows.Forms.ComboBox cbx_cliente;
         private System.Windows.Forms.ComboBox cbx_servicio;
+        private System.Windows.Forms.DataGridView dgw_ventas;
     }
 }

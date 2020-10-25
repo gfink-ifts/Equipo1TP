@@ -44,6 +44,7 @@ namespace Equipo1
             txt_descripcion.Visible = true;
             cbx_tipo.Visible = true;
             txt_tipo.Visible = false;
+            btn_ejecutar.Enabled = true;
 
             mostrar_servicios();
             mostrar_tipo();
@@ -58,6 +59,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = false;
             txt_tipo.Visible = true;
+            btn_ejecutar.Enabled = false;
 
             mostrar_servicios();
             Limpiar();
@@ -71,6 +73,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = true;
             txt_tipo.Visible = false;
+            btn_ejecutar.Enabled = true;
 
             mostrar_servicios();
             mostrar_tipo();
@@ -86,6 +89,7 @@ namespace Equipo1
             txt_descripcion.Visible = false;
             cbx_tipo.Visible = false;
             txt_tipo.Visible = true;
+            btn_ejecutar.Enabled = true;
 
             mostrar_servicios();
             Limpiar();
