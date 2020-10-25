@@ -16,7 +16,7 @@ namespace Equipo1
     {
 
         // CONEXION A LA BASE DE DATOS (patch / BBDD / seguridad)
-        string conectar = @"data source=P528853\SQLEXPRESS; initial catalog= OUTSOURCING; integrated security= SSPI";
+        string conectar = @"data source=DESKTOP-6NP4PUO\SQLEXPRESS; initial catalog= OUTSOURCING; integrated security= SSPI";
         //DEFINIMOS LA VARIABLE DE SqlConnection
         SqlConnection mi_conexion;
 
