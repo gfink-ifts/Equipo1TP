@@ -46,7 +46,7 @@
             // 
             this.lbl_titulo.AutoSize = true;
             this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_titulo.Location = new System.Drawing.Point(303, 22);
+            this.lbl_titulo.Location = new System.Drawing.Point(149, 20);
             this.lbl_titulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_titulo.Name = "lbl_titulo";
             this.lbl_titulo.Size = new System.Drawing.Size(296, 31);
@@ -56,7 +56,7 @@
             // cbx_descripcion
             // 
             this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(410, 263);
+            this.cbx_descripcion.Location = new System.Drawing.Point(169, 154);
             this.cbx_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_descripcion.Name = "cbx_descripcion";
             this.cbx_descripcion.Size = new System.Drawing.Size(363, 24);
@@ -65,7 +65,7 @@
             // btn_ejecutar
             // 
             this.btn_ejecutar.ForeColor = System.Drawing.Color.MediumBlue;
-            this.btn_ejecutar.Location = new System.Drawing.Point(364, 388);
+            this.btn_ejecutar.Location = new System.Drawing.Point(123, 230);
             this.btn_ejecutar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ejecutar.Name = "btn_ejecutar";
             this.btn_ejecutar.Size = new System.Drawing.Size(121, 28);
@@ -75,7 +75,7 @@
             // 
             // txt_descripcion
             // 
-            this.txt_descripcion.Location = new System.Drawing.Point(406, 265);
+            this.txt_descripcion.Location = new System.Drawing.Point(165, 156);
             this.txt_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txt_descripcion.Name = "txt_descripcion";
             this.txt_descripcion.Size = new System.Drawing.Size(363, 22);
@@ -85,7 +85,7 @@
             // 
             this.lbl_cliente.AutoSize = true;
             this.lbl_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cliente.Location = new System.Drawing.Point(258, 270);
+            this.lbl_cliente.Location = new System.Drawing.Point(17, 161);
             this.lbl_cliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_cliente.Name = "lbl_cliente";
             this.lbl_cliente.Size = new System.Drawing.Size(111, 17);
@@ -98,7 +98,7 @@
             this.gpx_CRUD.Controls.Add(this.rbn_actualizar);
             this.gpx_CRUD.Controls.Add(this.rbn_leer);
             this.gpx_CRUD.Controls.Add(this.rbn_crear);
-            this.gpx_CRUD.Location = new System.Drawing.Point(274, 189);
+            this.gpx_CRUD.Location = new System.Drawing.Point(33, 80);
             this.gpx_CRUD.Margin = new System.Windows.Forms.Padding(4);
             this.gpx_CRUD.Name = "gpx_CRUD";
             this.gpx_CRUD.Padding = new System.Windows.Forms.Padding(4);
@@ -157,7 +157,7 @@
             // btn_salir
             // 
             this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_salir.Location = new System.Drawing.Point(630, 388);
+            this.btn_salir.Location = new System.Drawing.Point(389, 230);
             this.btn_salir.Margin = new System.Windows.Forms.Padding(4);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(143, 28);
@@ -171,7 +171,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(891, 492);
+            this.ClientSize = new System.Drawing.Size(641, 334);
             this.Controls.Add(this.cbx_descripcion);
             this.Controls.Add(this.btn_ejecutar);
             this.Controls.Add(this.txt_descripcion);
