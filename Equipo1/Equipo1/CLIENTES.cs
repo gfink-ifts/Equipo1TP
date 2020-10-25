@@ -34,7 +34,7 @@ namespace Equipo1
         }
 
         //BOTON: EJECUTAR
-        private void btn_Ejecutar_Click(object sender, EventArgs e)
+        private void btn_Ejecutar_Click_1(object sender, EventArgs e)
         {
             //CRUD: CREAR
             if (rbn_Crear.Checked)
@@ -69,9 +69,8 @@ namespace Equipo1
             if (rbn_Crear.Checked)
             {
             }
-
         }
-              
+
 
         //FUNCION LIMPIAR
         void Limpiar()
@@ -106,5 +105,6 @@ namespace Equipo1
             mi_conexion.Close();
         }
 
+       
     }
 }

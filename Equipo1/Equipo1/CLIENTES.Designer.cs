@@ -66,6 +66,7 @@
             this.btn_Ejecutar.TabIndex = 38;
             this.btn_Ejecutar.Text = "EJECUTAR";
             this.btn_Ejecutar.UseVisualStyleBackColor = true;
+            this.btn_Ejecutar.Click += new System.EventHandler(this.btn_Ejecutar_Click_1);
             // 
             // rbn_Borrar
             // 
