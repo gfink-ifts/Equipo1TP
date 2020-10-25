@@ -31,7 +31,7 @@
             this.lbl_titulo = new System.Windows.Forms.Label();
             this.cbx_descripcion = new System.Windows.Forms.ComboBox();
             this.btn_ejecutar = new System.Windows.Forms.Button();
-            this.txt_descripcion = new System.Windows.Forms.TextBox();
+            this.txt_descripcion1 = new System.Windows.Forms.TextBox();
             this.lbl_cliente = new System.Windows.Forms.Label();
             this.gpx_CRUD = new System.Windows.Forms.GroupBox();
             this.rbn_borrar = new System.Windows.Forms.RadioButton();
@@ -56,7 +56,7 @@
             // cbx_descripcion
             // 
             this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(169, 154);
+            this.cbx_descripcion.Location = new System.Drawing.Point(169, 156);
             this.cbx_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_descripcion.Name = "cbx_descripcion";
             this.cbx_descripcion.Size = new System.Drawing.Size(363, 24);
@@ -73,13 +73,13 @@
             this.btn_ejecutar.Text = "EJECUTAR";
             this.btn_ejecutar.UseVisualStyleBackColor = true;
             // 
-            // txt_descripcion
+            // txt_descripcion1
             // 
-            this.txt_descripcion.Location = new System.Drawing.Point(165, 156);
-            this.txt_descripcion.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_descripcion.Name = "txt_descripcion";
-            this.txt_descripcion.Size = new System.Drawing.Size(363, 22);
-            this.txt_descripcion.TabIndex = 47;
+            this.txt_descripcion1.Location = new System.Drawing.Point(165, 156);
+            this.txt_descripcion1.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_descripcion1.Name = "txt_descripcion1";
+            this.txt_descripcion1.Size = new System.Drawing.Size(363, 22);
+            this.txt_descripcion1.TabIndex = 47;
             // 
             // lbl_cliente
             // 
@@ -174,7 +174,7 @@
             this.ClientSize = new System.Drawing.Size(641, 334);
             this.Controls.Add(this.cbx_descripcion);
             this.Controls.Add(this.btn_ejecutar);
-            this.Controls.Add(this.txt_descripcion);
+            this.Controls.Add(this.txt_descripcion1);
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.gpx_CRUD);
             this.Controls.Add(this.btn_salir);
@@ -195,7 +195,7 @@
         private System.Windows.Forms.Label lbl_titulo;
         private System.Windows.Forms.ComboBox cbx_descripcion;
         private System.Windows.Forms.Button btn_ejecutar;
-        private System.Windows.Forms.TextBox txt_descripcion;
+        private System.Windows.Forms.TextBox txt_descripcion1;
         private System.Windows.Forms.Label lbl_cliente;
         private System.Windows.Forms.GroupBox gpx_CRUD;
         private System.Windows.Forms.RadioButton rbn_borrar;
