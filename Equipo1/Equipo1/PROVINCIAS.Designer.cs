@@ -91,6 +91,7 @@
 			this.rbn_Leer.TabStop = true;
 			this.rbn_Leer.Text = "Leer";
 			this.rbn_Leer.UseVisualStyleBackColor = true;
+			this.rbn_Leer.CheckedChanged += new System.EventHandler(this.rbn_Leer_CheckedChanged);
 			// 
 			// rbn_Actualizar
 			// 

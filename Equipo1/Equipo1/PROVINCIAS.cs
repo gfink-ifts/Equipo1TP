@@ -14,9 +14,10 @@ namespace Equipo1
 {
     public partial class PROVINCIAS : Form
     {
-        string cadenaConnex = @"data source=DESKTOP-E2DA7HR\SQLEXPRESS; initial catalog='ejercitacion segundo cuatri'; integrated security=SSPI";
+        string cadenaConnex = @"data source=DESKTOP-E2DA7HR\SQLEXPRESS; initial catalog='outsourcingv01'; integrated security=SSPI";
         SqlConnection cn;
 
+        //FUNCIONES
         void Limpiar()
         {
             txt_Provincias.Text = "";
@@ -30,7 +31,7 @@ namespace Equipo1
             //Abro la conexion
             cn.Open();
             //VARIABLE DONDE ALMACENO LA INSTRUCCION
-            mostrar_tipo = new SqlDataAdapter("SELECT * FROM PROVINCIAS ", cn);
+            mostrar_tipo = new SqlDataAdapter("SELECT id_provicia, nombre FROM PROVINCIAS", cn);
             //RELLENA LA VARIABLE DEL COMBO BOX
             mostrar_tipo.Fill(data);
             //RELLENA EL COMBO BOX
@@ -40,20 +41,24 @@ namespace Equipo1
             //CIERRA LA CONEXION
             cn.Close();
         }
+        
+        //FORMULARIO
         public PROVINCIAS()
         {
             InitializeComponent();
         }
 
-        private void btn_salir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void PROVINCIAS_Load(object sender, EventArgs e)
         {
             cn = new SqlConnection(cadenaConnex);
-            mostrar_provincias();
+
+        }
+
+
+        //BOTONES
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 		private void btn_Ejecutar_Click(object sender, EventArgs e)
@@ -90,6 +95,7 @@ namespace Equipo1
 
             if (rbn_Leer.Checked)
             {
+               
                 if (txt_Provincias.Text == "")
                 {
                     MessageBox.Show("Por favor ingresar un dato para leer");
@@ -133,8 +139,6 @@ namespace Equipo1
 
 
             }
-
-
             if (rbn_Borrar.Checked)
             {
                 if (txt_Provincias.Text == "")
@@ -160,5 +164,11 @@ namespace Equipo1
                 }
             }
         }
-    }
+
+        //SELECTOR
+		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
+		{
+            mostrar_provincias();
+        }
+	}
 }
