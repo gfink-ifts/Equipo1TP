@@ -212,11 +212,6 @@ namespace Equipo1
                 //DECLARACION DE VARIABLES
                 string id = cbx_descripcion.SelectedValue.ToString();
 
-                //int index = cbx_descripcion.SelectedIndex;
-                //string id = (index + 1).ToString();
-
-                MessageBox.Show(id);
-
                 //CREACION DE LA VARIABLE: BORRAR
                 SqlCommand borrar_registro = new SqlCommand();
 

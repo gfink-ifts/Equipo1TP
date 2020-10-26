@@ -92,22 +92,31 @@ namespace Equipo1
             int cliente = id_cliente + 1;
             int servicio = id_servicio + 1;
 
+            MessageBox.Show("VALUE: " + cbx_cliente.SelectedValue + "\n TEXT: " + cbx_cliente.SelectedText +
+                            "\n INDEX: " + cbx_cliente.SelectedIndex +
+                            "\n ITEM: " + cbx_cliente.SelectedItem +
+                            "\n SELECIONT START: " + cbx_cliente.SelectionStart +
+                            "\n CAPTURE: " + cbx_cliente.Capture);
 
-
+           
             /*
-             *    MessageBox.Show("TEXT: " + cbx_cliente.SelectedValue);
+            MessageBox.Show("TEXT: " + cbx_cliente.SelectedValue);
             MessageBox.Show("VALUE: " + cbx_cliente.SelectedText);
+            MessageBox.Show("TEXT: " + cbx_cliente.SelectedText);
+            MessageBox.Show("INDEX: " + cbx_cliente.SelectedIndex);
+            MessageBox.Show("ITEM: " + cbx_cliente.SelectedItem);
+            MessageBox.Show("SELECIONT START: " + cbx_cliente.SelectionStart);
+            MessageBox.Show("CAPTURE: " + cbx_cliente.Capture);
             MessageBox.Show("id cliente: " + id_cliente);
             MessageBox.Show("id servicios: " + id_servicio);
-             *   MessageBox.Show("fecha: " + fecha);
+            MessageBox.Show("fecha: " + fecha);
             MessageBox.Show("cliente: " + cliente);
             MessageBox.Show("id cliente: " + id_cliente);
             MessageBox.Show("servicios: " + servicio);
             MessageBox.Show("id servicios: " + id_servicio);
-                   MessageBox.Show("fecha: " + fecha);
+            MessageBox.Show("fecha: " + fecha);
             MessageBox.Show("cliente: " + cliente);
             MessageBox.Show("servicios: " + servicio);
-             * 
             MessageBox.Show("SELECT: " + cbx_cliente.SelectedValue);
             MessageBox.Show("fecha: " + dtp_fecha);
             MessageBox.Show("fecha: "+fecha);
