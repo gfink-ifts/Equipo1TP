@@ -39,11 +39,15 @@ namespace Equipo1
             //CRUD: CREAR
             if (rbn_Crear.Checked)
             {
+                cbx_cliente.Visible = false;
+                alta_clientes();
+
             }
             //CRUD: LEER
             if (rbn_Leer.Checked)
             {
                 mostrar_clientes();
+                llenar_clientes();
             }
             //CRUD: UPDATE
             if (rbn_Crear.Checked)
@@ -102,16 +106,28 @@ namespace Equipo1
             cbx_cliente.ValueMember = "ID_CLIENTE"; //VARIABLE VISIBLE
             cbx_cliente.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
 
+
+
+
+
+            //CIERRA LA CONEXION
+            mi_conexion.Close();
+        }
+
+        //FUNCION llenar CLIENTES
+        void llenar_clientes()
+
+        {
             string cliente = cbx_cliente.Text;
             SqlDataAdapter da;
             DataTable dt = new DataTable();
-            /*cn.Open();*/
+            mi_conexion.Open();
             string consulta = "select area, id_contacto, fecha_registro from clientes " +
                 " where nombre like @cli ";
             da = new SqlDataAdapter(consulta, mi_conexion);
             da.SelectCommand.Parameters.AddWithValue("@cli", "%" + cliente + "%");
             da.Fill(dt);
-            /*cn.Close();*/
+            mi_conexion.Close();
 
             if (dt.Rows.Count > 0)
             {
@@ -125,11 +141,84 @@ namespace Equipo1
             }
 
 
-
-            //CIERRA LA CONEXION
-            mi_conexion.Close();
         }
 
-       
+        //FUNCION llenar CLIENTES
+        void alta_clientes()
+        {
+            if (validarTextBoxes())
+            {
+                string nombre, area, id_contacto,registro;
+               
+                
+                nombre = txt_nombre.Text;
+                area = txt_area.Text;
+                id_contacto = txt_idcontacto.Text;
+                registro = txt_registro.Text;
+
+                string cmd = "insert into Clientes (nombre,area,id_contacto,fecha_registro) " +
+                                "values ( @nombre, @area,@id_contacto , @fecha_registro )";
+
+                SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+
+                comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@area", area);
+                comando.Parameters.AddWithValue("@id_contacto", id_contacto);
+                comando.Parameters.AddWithValue("@fecha_registro", registro);
+
+               // mi_conexion.Open();
+                //comando.ExecuteNonQuery();
+                //mi_conexion.Close();
+
+                ejecutarQuery(mi_conexion, comando);
+                mostrarMensaje("Usuario creado correctamente");
+
+                limpiarForm();
+            }
+            else
+            {
+                mostrarMensaje("Por favor completar todos los campos");
+            }
+        }
+
+        private bool validarTextBoxes()
+        {
+            bool respuesta = true;
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if ((c as TextBox).Text == "")
+                    {
+                        respuesta = false;
+                    }
+                }
+            }
+            return respuesta;
+
+        }
+
+        private void ejecutarQuery(SqlConnection conex, SqlCommand comando)
+        {
+            conex.Open();
+            comando.ExecuteNonQuery();
+            conex.Close();
+        }
+
+        private void mostrarMensaje(string mensaje)
+        {
+            MessageBox.Show(mensaje);
+        }
+
+        private void limpiarForm()
+        {
+            foreach (Control variable in this.Controls)
+            {
+                if (variable is TextBox)
+                {
+                    (variable as TextBox).Clear();
+                }
+            }
+        }
     }
 }
