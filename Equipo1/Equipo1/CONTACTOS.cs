@@ -45,9 +45,77 @@ namespace Equipo1
 
         private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
+            if (rbn_Crear.Checked)
+			{
+                if (txt_Nombre.Text == ""||txt_Domicilio.Text == ""||txt_Telefono.Text == ""||txt_Mail.Text=="")
+				{
+                    MessageBox.Show ("Por favor completar todos los campos");
+                }
+				else 
+                {
+                    string nombre = txt_Nombre.Text;
+                    string domicilio = txt_Domicilio.Text;
+                    string telefono = txt_Telefono.Text;
+                    string mail = txt_Mail.Text;
+
+                    string cmd = "insert into CONTACTOS  (nombre,domicilio,telefono,mail) " + "values (@nom, @dom, @tel, @mail)";
+                    SqlCommand comando = new SqlCommand(cmd, cn);
+
+                    comando.Parameters.AddWithValue("@nom", nombre);
+                    comando.Parameters.AddWithValue("@dom", domicilio);
+                    comando.Parameters.AddWithValue("@tel", telefono);
+                    comando.Parameters.AddWithValue("@mail", mail);
+
+                    cn.Open();
+                    comando.ExecuteNonQuery();
+                    cn.Close();
+                    MessageBox.Show("contacto creado correctamente");
+                    Limpiar();
+                }   
+            }
+            if (rbn_Leer.Checked)
+			{
+                string nombre = txt_Nombre.Text;
+                string domicilio = txt_Domicilio.Text;
+                string telefono = txt_Telefono.Text;
+                string mail = txt_Mail.Text;
+
+                string cmd = "insert into CONTACTOS  (nombre,domicilio,telefono,mail) " + "values (@nom, @dom, @tel, @mail)";
+                SqlCommand comando = new SqlCommand(cmd, cn);
+
+                comando.Parameters.AddWithValue("@nom", nombre);
+                comando.Parameters.AddWithValue("@dom", domicilio);
+                comando.Parameters.AddWithValue("@tel", telefono);
+                comando.Parameters.AddWithValue("@mail", mail);
+
+                cn.Open();
+                comando.ExecuteNonQuery();
+                cn.Close();
+                MessageBox.Show("contacto creado correctamente");
+                Limpiar()
+
+            }
+
+        }
+
+		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
+		{
+            cbx_Nombre.Enabled = false;
+		}
+
+		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
+		{
+            cbx_Id_Provincia.Enabled = false;
+		}
+
+		private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
+		{
 
 		}
 
-		
+		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
+		{
+            cbx_Id_Provincia.Enabled = false;
+        }
 	}
 }

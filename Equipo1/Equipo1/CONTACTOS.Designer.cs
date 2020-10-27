@@ -36,23 +36,23 @@
 			this.rbn_Actualizar = new System.Windows.Forms.RadioButton();
 			this.rbn_Borrar = new System.Windows.Forms.RadioButton();
 			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.txt_Nombre = new System.Windows.Forms.TextBox();
-			this.txt_Apellido = new System.Windows.Forms.TextBox();
 			this.txt_Domicilio = new System.Windows.Forms.TextBox();
 			this.txt_Id_Provincia = new System.Windows.Forms.TextBox();
 			this.txt_Telefono = new System.Windows.Forms.TextBox();
 			this.txt_Mail = new System.Windows.Forms.TextBox();
+			this.cbx_Nombre = new System.Windows.Forms.ComboBox();
+			this.cbx_Id_Provincia = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// btn_salir
 			// 
 			this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-			this.btn_salir.Location = new System.Drawing.Point(275, 368);
+			this.btn_salir.Location = new System.Drawing.Point(275, 330);
 			this.btn_salir.Name = "btn_salir";
 			this.btn_salir.Size = new System.Drawing.Size(107, 23);
 			this.btn_salir.TabIndex = 19;
@@ -72,7 +72,7 @@
 			// 
 			// btn_Ejecutar
 			// 
-			this.btn_Ejecutar.Location = new System.Drawing.Point(24, 368);
+			this.btn_Ejecutar.Location = new System.Drawing.Point(24, 330);
 			this.btn_Ejecutar.Name = "btn_Ejecutar";
 			this.btn_Ejecutar.Size = new System.Drawing.Size(75, 23);
 			this.btn_Ejecutar.TabIndex = 20;
@@ -90,6 +90,7 @@
 			this.rbn_Crear.TabStop = true;
 			this.rbn_Crear.Text = "Crear";
 			this.rbn_Crear.UseVisualStyleBackColor = true;
+			this.rbn_Crear.CheckedChanged += new System.EventHandler(this.rbn_Crear_CheckedChanged);
 			// 
 			// rbn_Leer
 			// 
@@ -101,6 +102,7 @@
 			this.rbn_Leer.TabStop = true;
 			this.rbn_Leer.Text = "Leer";
 			this.rbn_Leer.UseVisualStyleBackColor = true;
+			this.rbn_Leer.CheckedChanged += new System.EventHandler(this.rbn_Leer_CheckedChanged);
 			// 
 			// rbn_Actualizar
 			// 
@@ -112,6 +114,7 @@
 			this.rbn_Actualizar.TabStop = true;
 			this.rbn_Actualizar.Text = "Actualizar";
 			this.rbn_Actualizar.UseVisualStyleBackColor = true;
+			this.rbn_Actualizar.CheckedChanged += new System.EventHandler(this.rbn_Actualizar_CheckedChanged);
 			// 
 			// rbn_Borrar
 			// 
@@ -123,6 +126,7 @@
 			this.rbn_Borrar.TabStop = true;
 			this.rbn_Borrar.Text = "Borrar";
 			this.rbn_Borrar.UseVisualStyleBackColor = true;
+			this.rbn_Borrar.CheckedChanged += new System.EventHandler(this.rbn_Borrar_CheckedChanged);
 			// 
 			// label1
 			// 
@@ -133,19 +137,10 @@
 			this.label1.TabIndex = 25;
 			this.label1.Text = "Nombre";
 			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(35, 159);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(44, 13);
-			this.label2.TabIndex = 26;
-			this.label2.Text = "Apellido";
-			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(35, 201);
+			this.label3.Location = new System.Drawing.Point(35, 163);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(49, 13);
 			this.label3.TabIndex = 27;
@@ -154,7 +149,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(35, 243);
+			this.label4.Location = new System.Drawing.Point(35, 205);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(66, 13);
 			this.label4.TabIndex = 28;
@@ -163,7 +158,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(35, 285);
+			this.label5.Location = new System.Drawing.Point(35, 247);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(49, 13);
 			this.label5.TabIndex = 29;
@@ -172,7 +167,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(35, 327);
+			this.label6.Location = new System.Drawing.Point(35, 289);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(26, 13);
 			this.label6.TabIndex = 30;
@@ -185,40 +180,49 @@
 			this.txt_Nombre.Size = new System.Drawing.Size(221, 20);
 			this.txt_Nombre.TabIndex = 31;
 			// 
-			// txt_Apellido
-			// 
-			this.txt_Apellido.Location = new System.Drawing.Point(115, 156);
-			this.txt_Apellido.Name = "txt_Apellido";
-			this.txt_Apellido.Size = new System.Drawing.Size(221, 20);
-			this.txt_Apellido.TabIndex = 32;
-			// 
 			// txt_Domicilio
 			// 
-			this.txt_Domicilio.Location = new System.Drawing.Point(115, 198);
+			this.txt_Domicilio.Location = new System.Drawing.Point(115, 160);
 			this.txt_Domicilio.Name = "txt_Domicilio";
 			this.txt_Domicilio.Size = new System.Drawing.Size(221, 20);
 			this.txt_Domicilio.TabIndex = 33;
 			// 
 			// txt_Id_Provincia
 			// 
-			this.txt_Id_Provincia.Location = new System.Drawing.Point(115, 240);
+			this.txt_Id_Provincia.Location = new System.Drawing.Point(115, 202);
 			this.txt_Id_Provincia.Name = "txt_Id_Provincia";
 			this.txt_Id_Provincia.Size = new System.Drawing.Size(221, 20);
 			this.txt_Id_Provincia.TabIndex = 34;
 			// 
 			// txt_Telefono
 			// 
-			this.txt_Telefono.Location = new System.Drawing.Point(115, 282);
+			this.txt_Telefono.Location = new System.Drawing.Point(115, 244);
 			this.txt_Telefono.Name = "txt_Telefono";
 			this.txt_Telefono.Size = new System.Drawing.Size(221, 20);
 			this.txt_Telefono.TabIndex = 35;
 			// 
 			// txt_Mail
 			// 
-			this.txt_Mail.Location = new System.Drawing.Point(115, 324);
+			this.txt_Mail.Location = new System.Drawing.Point(115, 286);
 			this.txt_Mail.Name = "txt_Mail";
 			this.txt_Mail.Size = new System.Drawing.Size(221, 20);
 			this.txt_Mail.TabIndex = 36;
+			// 
+			// cbx_Nombre
+			// 
+			this.cbx_Nombre.FormattingEnabled = true;
+			this.cbx_Nombre.Location = new System.Drawing.Point(115, 102);
+			this.cbx_Nombre.Name = "cbx_Nombre";
+			this.cbx_Nombre.Size = new System.Drawing.Size(221, 21);
+			this.cbx_Nombre.TabIndex = 37;
+			// 
+			// cbx_Id_Provincia
+			// 
+			this.cbx_Id_Provincia.FormattingEnabled = true;
+			this.cbx_Id_Provincia.Location = new System.Drawing.Point(116, 190);
+			this.cbx_Id_Provincia.Name = "cbx_Id_Provincia";
+			this.cbx_Id_Provincia.Size = new System.Drawing.Size(220, 21);
+			this.cbx_Id_Provincia.TabIndex = 38;
 			// 
 			// CONTACTOS
 			// 
@@ -226,17 +230,17 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.LightSteelBlue;
 			this.ClientSize = new System.Drawing.Size(409, 408);
+			this.Controls.Add(this.cbx_Id_Provincia);
+			this.Controls.Add(this.cbx_Nombre);
 			this.Controls.Add(this.txt_Mail);
 			this.Controls.Add(this.txt_Telefono);
 			this.Controls.Add(this.txt_Id_Provincia);
 			this.Controls.Add(this.txt_Domicilio);
-			this.Controls.Add(this.txt_Apellido);
 			this.Controls.Add(this.txt_Nombre);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.rbn_Borrar);
 			this.Controls.Add(this.rbn_Actualizar);
@@ -264,16 +268,16 @@
 		private System.Windows.Forms.RadioButton rbn_Actualizar;
 		private System.Windows.Forms.RadioButton rbn_Borrar;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox txt_Nombre;
-		private System.Windows.Forms.TextBox txt_Apellido;
 		private System.Windows.Forms.TextBox txt_Domicilio;
 		private System.Windows.Forms.TextBox txt_Id_Provincia;
 		private System.Windows.Forms.TextBox txt_Telefono;
 		private System.Windows.Forms.TextBox txt_Mail;
+		private System.Windows.Forms.ComboBox cbx_Nombre;
+		private System.Windows.Forms.ComboBox cbx_Id_Provincia;
 	}
 }
