@@ -206,12 +206,12 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(68, 208);
+            this.label2.Location = new System.Drawing.Point(83, 208);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 17);
+            this.label2.Size = new System.Drawing.Size(93, 17);
             this.label2.TabIndex = 63;
-            this.label2.Text = "ID CONTACTO";
+            this.label2.Text = "CONTACTO";
             // 
             // CLIENTES
             // 
