@@ -47,7 +47,7 @@ namespace Equipo1
             if (rbn_Leer.Checked)
             {
                 mostrar_clientes();
-                llenar_clientes();
+               llenar_clientes();
             }
             //CRUD: UPDATE
             if (rbn_Crear.Checked)
@@ -81,7 +81,7 @@ namespace Equipo1
         {
             txt_nombre.Text = "";
             txt_area.Text = "";
-            txt_idcontacto.Text = "";
+            txt_nombrecontacto.Text = "";
             txt_registro.Text = "";
         }
 
@@ -132,7 +132,7 @@ namespace Equipo1
             if (dt.Rows.Count > 0)
             {
                 txt_area.Text = Convert.ToString(dt.Rows[0][0]);
-                txt_idcontacto.Text = Convert.ToString(dt.Rows[0][1]);
+                txt_nombrecontacto.Text = Convert.ToString(dt.Rows[0][1]);
                 txt_registro.Text = Convert.ToString(dt.Rows[0][2]);
             }
             else
@@ -153,7 +153,7 @@ namespace Equipo1
                 
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
-                id_contacto = txt_idcontacto.Text;
+                id_contacto = txt_nombrecontacto.Text;
                 registro = txt_registro.Text;
 
                 string cmd = "insert into Clientes (nombre,area,id_contacto,fecha_registro) " +
@@ -219,6 +219,35 @@ namespace Equipo1
                     (variable as TextBox).Clear();
                 }
             }
+        }
+
+        private void cbx_cliente_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            mostrar_campos(cbx_cliente.SelectedValue.ToString());
+        }
+
+        //FUNCION LLENA LOS CAMPOS
+        void mostrar_campos(string id)
+        {
+            SqlDataAdapter llenar_campos;
+            DataTable datacampos = new DataTable();
+            //Abro la conexion
+            mi_conexion.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            llenar_campos = new SqlDataAdapter("SELECT c.area, co.nombre, c.fecha_registro " + "FROM clientes AS c, contactos AS co " +
+                                               "WHERE c.ID_contacto = co.ID_contacto AND ID_cliente=@ID", mi_conexion);
+            llenar_campos.SelectCommand.Parameters.AddWithValue("@ID", id);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            llenar_campos.Fill(datacampos);
+            if (datacampos.Rows.Count > 0)
+            {
+                txt_area.Text = Convert.ToString(datacampos.Rows[0][0]);
+                txt_nombrecontacto.Text = Convert.ToString(datacampos.Rows[0][1]);
+                txt_registro.Text = Convert.ToString(datacampos.Rows[0][2]);
+                
+            }
+            //Cierra la conexion
+            mi_conexion.Close();
         }
     }
 }

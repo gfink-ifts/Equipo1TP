@@ -42,7 +42,7 @@
             this.lbl_cliente = new System.Windows.Forms.Label();
             this.txt_registro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_idcontacto = new System.Windows.Forms.TextBox();
+            this.txt_nombrecontacto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -136,6 +136,7 @@
             this.cbx_cliente.Name = "cbx_cliente";
             this.cbx_cliente.Size = new System.Drawing.Size(363, 24);
             this.cbx_cliente.TabIndex = 61;
+            this.cbx_cliente.SelectionChangeCommitted += new System.EventHandler(this.cbx_cliente_SelectionChangeCommitted);
             // 
             // txt_area
             // 
@@ -194,13 +195,13 @@
             this.label1.TabIndex = 65;
             this.label1.Text = "REGISTRO";
             // 
-            // txt_idcontacto
+            // txt_nombrecontacto
             // 
-            this.txt_idcontacto.Location = new System.Drawing.Point(184, 203);
-            this.txt_idcontacto.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_idcontacto.Name = "txt_idcontacto";
-            this.txt_idcontacto.Size = new System.Drawing.Size(363, 22);
-            this.txt_idcontacto.TabIndex = 62;
+            this.txt_nombrecontacto.Location = new System.Drawing.Point(184, 203);
+            this.txt_nombrecontacto.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_nombrecontacto.Name = "txt_nombrecontacto";
+            this.txt_nombrecontacto.Size = new System.Drawing.Size(363, 22);
+            this.txt_nombrecontacto.TabIndex = 62;
             // 
             // label2
             // 
@@ -221,7 +222,7 @@
             this.ClientSize = new System.Drawing.Size(746, 371);
             this.Controls.Add(this.txt_registro);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txt_idcontacto);
+            this.Controls.Add(this.txt_nombrecontacto);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbx_cliente);
             this.Controls.Add(this.txt_area);
@@ -260,7 +261,7 @@
         private System.Windows.Forms.Label lbl_cliente;
         private System.Windows.Forms.TextBox txt_registro;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_idcontacto;
+        private System.Windows.Forms.TextBox txt_nombrecontacto;
         private System.Windows.Forms.Label label2;
     }
 }
