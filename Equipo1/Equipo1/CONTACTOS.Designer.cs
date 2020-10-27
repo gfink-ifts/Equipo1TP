@@ -78,6 +78,7 @@
 			this.btn_Ejecutar.TabIndex = 20;
 			this.btn_Ejecutar.Text = "EJECUTAR";
 			this.btn_Ejecutar.UseVisualStyleBackColor = true;
+			this.btn_Ejecutar.Click += new System.EventHandler(this.btn_Ejecutar_Click);
 			// 
 			// rbn_Crear
 			// 
@@ -247,6 +248,7 @@
 			this.ForeColor = System.Drawing.Color.MidnightBlue;
 			this.Name = "CONTACTOS";
 			this.Text = "CONTACTOS";
+			this.Load += new System.EventHandler(this.CONTACTOS_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
