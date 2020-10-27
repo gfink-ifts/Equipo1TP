@@ -63,9 +63,10 @@ namespace Equipo1
 
 		private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
-
             if (rbn_Crear.Checked)
             {
+                
+
                 if (txt_Provincias.Text == "")
                 {
                     MessageBox.Show("Por favor completar todos los campos");
@@ -91,16 +92,8 @@ namespace Equipo1
                 }
 
             }
-
-
             if (rbn_Leer.Checked)
             {
-               
-                if (txt_Provincias.Text == "")
-                {
-                    MessageBox.Show("Por favor ingresar un dato para leer");
-                }
-                else
                 {
                     string Provincia = txt_Provincias.Text;
                     string cmd = "select * from  PROVINCIAS (provincia) " + "values (  @prov)";
@@ -128,7 +121,6 @@ namespace Equipo1
                     string query = "UPDATE PROVINCIA SET nombre = @prov WHERE nombre like @prov";
                     SqlCommand comando = new SqlCommand(query, cn);
                     comando.Parameters.AddWithValue("@prov", Provincia);
-
 
                     cn.Open();
                     comando.ExecuteNonQuery();
@@ -168,7 +160,23 @@ namespace Equipo1
         //SELECTOR
 		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
 		{
+            txt_Provincias.Enabled = false;
             mostrar_provincias();
+        }
+
+		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
+		{
+            cbx_Provincias.Enabled = false;
+		}
+
+		private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
+		{
+            txt_Provincias.Enabled = false;
         }
 	}
 }

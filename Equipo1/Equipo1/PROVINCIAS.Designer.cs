@@ -80,6 +80,7 @@
 			this.rbn_Crear.TabStop = true;
 			this.rbn_Crear.Text = "Crear";
 			this.rbn_Crear.UseVisualStyleBackColor = true;
+			this.rbn_Crear.CheckedChanged += new System.EventHandler(this.rbn_Crear_CheckedChanged);
 			// 
 			// rbn_Leer
 			// 
@@ -103,6 +104,7 @@
 			this.rbn_Actualizar.TabStop = true;
 			this.rbn_Actualizar.Text = "Actualizar";
 			this.rbn_Actualizar.UseVisualStyleBackColor = true;
+			this.rbn_Actualizar.CheckedChanged += new System.EventHandler(this.rbn_Actualizar_CheckedChanged);
 			// 
 			// rbn_Borrar
 			// 
@@ -114,6 +116,7 @@
 			this.rbn_Borrar.TabStop = true;
 			this.rbn_Borrar.Text = "Borrar";
 			this.rbn_Borrar.UseVisualStyleBackColor = true;
+			this.rbn_Borrar.CheckedChanged += new System.EventHandler(this.rbn_Borrar_CheckedChanged);
 			// 
 			// txt_Provincias
 			// 
