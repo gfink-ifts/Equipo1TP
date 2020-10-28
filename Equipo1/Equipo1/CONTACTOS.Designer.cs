@@ -211,15 +211,16 @@
 			// cbx_Nombre
 			// 
 			this.cbx_Nombre.FormattingEnabled = true;
-			this.cbx_Nombre.Location = new System.Drawing.Point(115, 102);
+			this.cbx_Nombre.Location = new System.Drawing.Point(352, 113);
 			this.cbx_Nombre.Name = "cbx_Nombre";
 			this.cbx_Nombre.Size = new System.Drawing.Size(221, 21);
 			this.cbx_Nombre.TabIndex = 37;
+			this.cbx_Nombre.SelectedIndexChanged += new System.EventHandler(this.cbx_Nombre_SelectedIndexChanged);
 			// 
 			// cbx_Id_Provincia
 			// 
 			this.cbx_Id_Provincia.FormattingEnabled = true;
-			this.cbx_Id_Provincia.Location = new System.Drawing.Point(116, 190);
+			this.cbx_Id_Provincia.Location = new System.Drawing.Point(353, 201);
 			this.cbx_Id_Provincia.Name = "cbx_Id_Provincia";
 			this.cbx_Id_Provincia.Size = new System.Drawing.Size(220, 21);
 			this.cbx_Id_Provincia.TabIndex = 38;
@@ -229,7 +230,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.LightSteelBlue;
-			this.ClientSize = new System.Drawing.Size(409, 408);
+			this.ClientSize = new System.Drawing.Size(787, 374);
 			this.Controls.Add(this.cbx_Id_Provincia);
 			this.Controls.Add(this.cbx_Nombre);
 			this.Controls.Add(this.txt_Mail);
