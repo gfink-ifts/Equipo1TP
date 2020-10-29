@@ -14,7 +14,7 @@ namespace Equipo1
 {
     public partial class PROVINCIAS : Form
     {
-        string cadenaConnex = @"data source=DESKTOP-E2DA7HR\SQLEXPRESS; initial catalog='outsourcingv01'; integrated security=SSPI";
+        string cadenaConnex = @"data source=DESKTOP-E2DA7HR\SQLEXPRESS; initial catalog='outsourcing'; integrated security=SSPI";
         SqlConnection cn;
 
         //FUNCIONES
@@ -23,7 +23,7 @@ namespace Equipo1
             txt_Provincias.Text = "";
 
         }
-
+        //carga de combobox
         void mostrar_provincias()
         {
             SqlDataAdapter mostrar_tipo;
@@ -31,13 +31,13 @@ namespace Equipo1
             //Abro la conexion
             cn.Open();
             //VARIABLE DONDE ALMACENO LA INSTRUCCION
-            mostrar_tipo = new SqlDataAdapter("SELECT id_provicia, nombre FROM PROVINCIAS", cn);
+            mostrar_tipo = new SqlDataAdapter("SELECT id_provincia,provincia FROM PROVINCIAS", cn);
             //RELLENA LA VARIABLE DEL COMBO BOX
             mostrar_tipo.Fill(data);
             //RELLENA EL COMBO BOX
             cbx_Provincias.DataSource = data;
-            cbx_Provincias.ValueMember = "id_provicia"; //VARIABLE VISIBLE
-            cbx_Provincias.DisplayMember = "nombre"; //VARIABLE DESPLEGADA
+            cbx_Provincias.ValueMember = "id_provincia"; //VARIABLE VISIBLE
+            cbx_Provincias.DisplayMember = "provincia"; //VARIABLE DESPLEGADA
             //CIERRA LA CONEXION
             cn.Close();
         }
@@ -63,10 +63,9 @@ namespace Equipo1
 
 		private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
+            //este anda
             if (rbn_Crear.Checked)
             {
-                
-
                 if (txt_Provincias.Text == "")
                 {
                     MessageBox.Show("Por favor completar todos los campos");
@@ -81,19 +80,18 @@ namespace Equipo1
 
                     comando.Parameters.AddWithValue("@prov", Provincia);
 
-
                     cn.Open();
                     comando.ExecuteNonQuery();
                     cn.Close();
-
-
                     MessageBox.Show("Provincia creada correctamente");
                     Limpiar();
                 }
 
             }
+            //este no estaria mas hay que borrarlo(rbn_leer)
             if (rbn_Leer.Checked)
             {
+                
                 {
                     string Provincia = txt_Provincias.Text;
                     string cmd = "select * from  PROVINCIAS (provincia) " + "values (  @prov)";
@@ -111,49 +109,58 @@ namespace Equipo1
             }
             if (rbn_Actualizar.Checked)
             {
-                if (txt_Provincias.Text == "")
-                {
-                    MessageBox.Show("Por favor ingresar un dato para poder actualizar");
-                }
-                else
-                {
-                    string Provincia = txt_Provincias.Text;
-                    string query = "UPDATE PROVINCIA SET nombre = @prov WHERE nombre like @prov";
-                    SqlCommand comando = new SqlCommand(query, cn);
-                    comando.Parameters.AddWithValue("@prov", Provincia);
+                string provincia = Convert.ToString(txt_Provincias.Text);
+                
+               // int index = cbx_Provincias.SelectedIndex;
+                //VARIABLE DONDE ALMACENO LA INSTRUCCION
+                SqlCommand actualizar_registro = new SqlCommand("UPDATE provincias SET provincia=@prov where id_provincia like provincia ", cn);
 
-                    cn.Open();
-                    comando.ExecuteNonQuery();
-                    cn.Close();
-                    Limpiar();
-                    MessageBox.Show("actualizacion exitosa");
-                }
+                //VINCULACION DE PARAMETROS
+                actualizar_registro.Parameters.AddWithValue("@prov", provincia);
+                
 
+                //ABRO LA CONEXION
+                cn.Open();
+
+                //EJECUTO LA QUERY
+                actualizar_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                cn.Close();
+
+                MessageBox.Show("se actualizo el registro correctamente.");
+
+                Limpiar();
 
             }
             if (rbn_Borrar.Checked)
             {
-                if (txt_Provincias.Text == "")
-                {
-                    MessageBox.Show("Por favor ingrese la provincia que desea eliminar ");
-                }
-                else
-                {
-                    string Provincia = txt_Provincias.Text;
-                    if (txt_Provincias.Text != "")
-                    {
-                        int id_cliente = Convert.ToInt32(txt_Provincias.Text);
-                        string instruccion = "DELETE clientes WHERE id_cliente = @id";
-                        SqlCommand comando = new SqlCommand(instruccion, cn);
-                        comando.Parameters.AddWithValue("@prov", Provincia);
-                        cn.Open();
-                        comando.ExecuteNonQuery();
-                        cn.Close();
-                        Limpiar();
+                ///DECLARACION DE VARIABLES
+                string id = cbx_Provincias.SelectedValue.ToString();
 
-                        MessageBox.Show("provincia eliminada correctamente ");
-                    }
-                }
+                //CREACION DE LA VARIABLE: BORRAR
+                SqlCommand borrar_registro = new SqlCommand();
+
+                //VARIABLE + CONEXION
+                borrar_registro = cn.CreateCommand();
+
+                //INSTRUCCION SQL
+                borrar_registro.CommandText = "DELETE FROM provincias WHERE id_provincia=@ID";
+
+                //VINCULACION DE PARAMETROS
+                borrar_registro.Parameters.AddWithValue("@ID", id);
+
+                //ABRO LA CONEXION
+                cn.Open();
+
+                //EJECUTO LA INSTRUCION SQL
+                borrar_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                cn.Close();
+
+                //MENSAJE DE VERIFICACION
+                MessageBox.Show("se borro el registro correctamente");
             }
         }
 
@@ -161,22 +168,27 @@ namespace Equipo1
 		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
 		{
             txt_Provincias.Enabled = false;
+            cbx_Provincias.Enabled = true;
             mostrar_provincias();
         }
 
 		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
 		{
             cbx_Provincias.Enabled = false;
-		}
+            txt_Provincias.Enabled = true;
+        }
 
 		private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
 		{
-
-		}
+            cbx_Provincias.Enabled = true;
+            txt_Provincias.Enabled = true;
+            mostrar_provincias();
+        }
 
 		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
 		{
             txt_Provincias.Enabled = false;
+            mostrar_provincias();
         }
 	}
 }
