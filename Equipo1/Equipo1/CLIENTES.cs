@@ -40,14 +40,18 @@ namespace Equipo1
             if (rbn_Crear.Checked)
             {
                 cbx_cliente.Visible = false;
+                txt_nombrecontacto.Visible = false;
                 alta_clientes();
+                llenar_datagrid();
+                Limpiar();
 
             }
             //CRUD: LEER
             if (rbn_Leer.Checked)
             {
                 mostrar_clientes();
-               llenar_clientes();
+                llenar_clientes();
+                llenar_datagrid();
             }
             //CRUD: UPDATE
             if (rbn_Crear.Checked)
@@ -143,34 +147,38 @@ namespace Equipo1
 
         }
 
-        //FUNCION llenar CLIENTES
+        //FUNCION Alta CLIENTES
         void alta_clientes()
         {
-            if (validarTextBoxes())
+            if (validartextbox())
             {
-                string nombre, area, id_contacto,registro;
-               
-                
+                string nombre, area, nombre_contacto, registro;
+
+
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
-                id_contacto = txt_nombrecontacto.Text;
+               // nombre_contacto = txt_nombrecontacto.Text;
                 registro = txt_registro.Text;
 
-                string cmd = "insert into Clientes (nombre,area,id_contacto,fecha_registro) " +
-                                "values ( @nombre, @area,@id_contacto , @fecha_registro )";
+                string cmd = "insert into Clientes (nombre,area,fecha_registro) " +
+                                "values ( @nombre, @area , @fecha_registro )";
+               // string cmd1 = "insert into Contacto (contacto)" + "values(@contacto)";
 
-                SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+                SqlCommand comando = new SqlCommand(cmd, mi_conexion );
+                //SqlCommand comando1 = new SqlCommand(cmd1, mi_conexion);
 
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
-                comando.Parameters.AddWithValue("@id_contacto", id_contacto);
+                //comando.Parameters.AddWithValue("@contacto", nombre_contacto);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
 
-               // mi_conexion.Open();
+                // mi_conexion.Open();
                 //comando.ExecuteNonQuery();
                 //mi_conexion.Close();
 
                 ejecutarQuery(mi_conexion, comando);
+                //ejecutarQuery(mi_conexion, comando1);
+
                 mostrarMensaje("Usuario creado correctamente");
 
                 limpiarForm();
@@ -179,8 +187,30 @@ namespace Equipo1
             {
                 mostrarMensaje("Por favor completar todos los campos");
             }
+            llenar_datagrid();
+
         }
 
+        //FUNCION VALIDAS TEXBOX
+        private bool validartextbox()
+        {
+            bool respuesta = true;
+
+
+            if (txt_nombre.Text == "" || txt_area.Text == "" || txt_registro.Text == "")
+            {
+                respuesta = false;
+            }
+            else
+            {
+                
+            }
+
+
+            return respuesta;
+        }
+
+        //FUNCION VALIDAS TEXBOX
         private bool validarTextBoxes()
         {
             bool respuesta = true;
@@ -244,10 +274,31 @@ namespace Equipo1
                 txt_area.Text = Convert.ToString(datacampos.Rows[0][0]);
                 txt_nombrecontacto.Text = Convert.ToString(datacampos.Rows[0][1]);
                 txt_registro.Text = Convert.ToString(datacampos.Rows[0][2]);
-                
+
             }
             //Cierra la conexion
             mi_conexion.Close();
+        }
+
+        void llenar_datagrid()
+        {
+
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
+
+
+
+            mi_conexion.Open();
+
+            da = new SqlDataAdapter(query, mi_conexion);
+
+            da.Fill(dt);
+
+            mi_conexion.Close();
+
+            dataGridView1.DataSource = dt;
+
         }
     }
 }
