@@ -36,15 +36,16 @@ namespace Equipo1
         //BOTON: EJECUTAR
         private void btn_Ejecutar_Click_1(object sender, EventArgs e)
         {
-                       
-                {
+            llenar_datagrid();
+
+            {
                 //CRUD: CREAR
                 if (rbn_Crear.Checked)
                 {
                     cbx_cliente.Visible = false;
                     txt_nombrecontacto.Visible = false;
                     alta_clientes();
-                    llenar_datagrid();
+                    
                     Limpiar();
 
                 }
@@ -61,6 +62,8 @@ namespace Equipo1
                 //CRUD: UPDATE
                 if (rbn_Actualizar.Checked)
                 {
+                    cbx_cliente.Visible = false;
+                    txt_nombrecontacto.Visible = false;
                     llenar_datagrid();
 
 
@@ -70,6 +73,9 @@ namespace Equipo1
                 //CRUD: DELETE
                 if (rbn_Borrar.Checked)
                 {
+                    cbx_cliente.Visible = false;
+                    txt_nombrecontacto.Visible = false;
+                    eliminar();
                     llenar_datagrid();
 
                 }
@@ -89,6 +95,23 @@ namespace Equipo1
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
+
+            da = new SqlDataAdapter(query, mi_conexion);
+
+            da.Fill(dt);
+
+            mi_conexion.Close();
+
+            dataGridView1.DataSource = dt;
+        }
+        //FUNCIONES
+        //**********************************************************************************************************
 
         //FUNCION LIMPIAR
         void Limpiar()
@@ -161,32 +184,20 @@ namespace Equipo1
         {
             if (validartextbox())
             {
-                string nombre, area, nombre_contacto, registro;
-
+                string nombre, area, registro;
 
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
-               // nombre_contacto = txt_nombrecontacto.Text;
                 registro = txt_registro.Text;
 
                 string cmd = "insert into Clientes (nombre,area,fecha_registro) " +
                                 "values ( @nombre, @area , @fecha_registro )";
-               // string cmd1 = "insert into Contacto (contacto)" + "values(@contacto)";
+               
 
-                SqlCommand comando = new SqlCommand(cmd, mi_conexion );
-                //SqlCommand comando1 = new SqlCommand(cmd1, mi_conexion);
-
+                SqlCommand comando = new SqlCommand(cmd, mi_conexion);
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
-                //comando.Parameters.AddWithValue("@contacto", nombre_contacto);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
-
-                // mi_conexion.Open();
-                //comando.ExecuteNonQuery();
-                //mi_conexion.Close();
-
-                ejecutarQuery(mi_conexion, comando);
-                //ejecutarQuery(mi_conexion, comando1);
 
                 mostrarMensaje("Usuario creado correctamente");
 
@@ -296,7 +307,7 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
+            string query = "select nombre, area, fecha_registro from clientes" ;
                      
             da = new SqlDataAdapter(query, mi_conexion);
 
@@ -307,5 +318,31 @@ namespace Equipo1
             dataGridView1.DataSource = dt;
 
         }
+
+       
+
+        //FUNCION ELIMINAR
+
+        void eliminar()
+        {
+            if (validartextbox())
+            {
+                string nombre = txt_nombre.Text;
+                string instruccion = "DELETE clientes WHERE nombre = @nom";
+                SqlCommand cmd = new SqlCommand(instruccion, mi_conexion);
+                cmd.Parameters.AddWithValue("@nom", nombre);
+                ejecutarQuery(mi_conexion, cmd);
+
+                mostrarMensaje("Usuario eliminado correctamente");
+
+                limpiarForm();
+            }
+            else
+            {
+                mostrarMensaje("Por favor completar todos los campos");
+            }
+            llenar_datagrid();
+        }
+
     }
 }
