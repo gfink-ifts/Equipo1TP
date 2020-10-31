@@ -36,46 +36,56 @@ namespace Equipo1
         //BOTON: EJECUTAR
         private void btn_Ejecutar_Click_1(object sender, EventArgs e)
         {
-            //CRUD: CREAR
-            if (rbn_Crear.Checked)
-            {
-                cbx_cliente.Visible = false;
-                txt_nombrecontacto.Visible = false;
-                alta_clientes();
-                llenar_datagrid();
-                Limpiar();
+                       
+                {
+                //CRUD: CREAR
+                if (rbn_Crear.Checked)
+                {
+                    cbx_cliente.Visible = false;
+                    txt_nombrecontacto.Visible = false;
+                    alta_clientes();
+                    llenar_datagrid();
+                    Limpiar();
 
-            }
-            //CRUD: LEER
-            if (rbn_Leer.Checked)
-            {
-                mostrar_clientes();
-                llenar_clientes();
-                llenar_datagrid();
-            }
-            //CRUD: UPDATE
-            if (rbn_Crear.Checked)
-            {
-                /*
-
-                SqlDataAdapter llenar_combo;
-
-                DataTable tabla_cat_cliente = new DataTable();
-
-                mi_conexion.Open();
-
-                mostrar_por = new SqlDataAdapter("select * from clientes where direccion LIKE '%" + buscar + "%'", mi_conexion);
-
-                mostrar_por.Fill(tabla_cat_cliente);
-
-                mi_conexion.Close();
-                */
+                }
 
 
-            }
-            //CRUD: DELETE
-            if (rbn_Crear.Checked)
-            {
+                //CRUD: LEER
+                if (rbn_Leer.Checked)
+                {
+                    mostrar_clientes();
+                    llenar_clientes();
+                    llenar_datagrid();
+                }
+
+                //CRUD: UPDATE
+                if (rbn_Actualizar.Checked)
+                {
+                    llenar_datagrid();
+
+
+
+                }
+
+                //CRUD: DELETE
+                if (rbn_Borrar.Checked)
+                {
+                    llenar_datagrid();
+
+                }
+
+
+                //VERIFICAR CHECKED
+
+                if (rbn_Crear.Checked == false || rbn_Leer.Checked == false || rbn_Actualizar.Checked == false || rbn_Borrar.Checked == false)
+                {
+                    MessageBox.Show("Elija/Chequee una de las opciones: Crear, Leer, Actualizar o Borrar ");
+                }
+
+
+
+
+
             }
         }
 
@@ -85,7 +95,6 @@ namespace Equipo1
         {
             txt_nombre.Text = "";
             txt_area.Text = "";
-            txt_nombrecontacto.Text = "";
             txt_registro.Text = "";
         }
 
@@ -280,17 +289,15 @@ namespace Equipo1
             mi_conexion.Close();
         }
 
+        //FUNCION LLENAR DATAGRID
         void llenar_datagrid()
         {
 
             SqlDataAdapter da;
             DataTable dt = new DataTable();
-            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
-
-
-
             mi_conexion.Open();
-
+            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
+                     
             da = new SqlDataAdapter(query, mi_conexion);
 
             da.Fill(dt);
