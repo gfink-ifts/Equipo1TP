@@ -185,7 +185,7 @@ namespace Equipo1
             if (validartextbox())
             {
                 string nombre, area, registro;
-
+                
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
                 registro = txt_registro.Text;
@@ -198,7 +198,7 @@ namespace Equipo1
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
-
+              
                 mostrarMensaje("Usuario creado correctamente");
 
                 limpiarForm();
@@ -231,22 +231,7 @@ namespace Equipo1
         }
 
         //FUNCION VALIDAS TEXBOX
-        private bool validarTextBoxes()
-        {
-            bool respuesta = true;
-            foreach (Control c in this.Controls)
-            {
-                if (c is TextBox)
-                {
-                    if ((c as TextBox).Text == "")
-                    {
-                        respuesta = false;
-                    }
-                }
-            }
-            return respuesta;
-
-        }
+       
 
         private void ejecutarQuery(SqlConnection conex, SqlCommand comando)
         {
