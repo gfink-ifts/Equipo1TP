@@ -319,16 +319,17 @@ namespace Equipo1
 
         }
 
-       
+             
 
         //FUNCION ELIMINAR
 
         void eliminar()
         {
+            
             if (validartextbox())
             {
                 string nombre = txt_nombre.Text;
-                string instruccion = "DELETE clientes WHERE nombre = @nom";
+                string instruccion = "DELETE clientes WHERE nombre like @nom";
                 SqlCommand cmd = new SqlCommand(instruccion, mi_conexion);
                 cmd.Parameters.AddWithValue("@nom", nombre);
                 ejecutarQuery(mi_conexion, cmd);
@@ -344,5 +345,13 @@ namespace Equipo1
             llenar_datagrid();
         }
 
+//FUNCION LLENAR TEXBOX A MEDIDA QUE SELECCIONO EL DATAGRID
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow dataGridView = dataGridView1.Rows[e.RowIndex];
+            txt_nombre.Text = dataGridView.Cells[0].Value.ToString();
+            txt_area.Text = dataGridView.Cells[1].Value.ToString();
+            txt_registro.Text = dataGridView.Cells[2].Value.ToString();
+        }
     }
 }
