@@ -35,6 +35,8 @@ namespace Equipo1
             lbl_error_cliente.Visible = false;
             lbl_error_fecha.Visible = false;
             lbl_error_servicio.Visible = false;
+            rbn_borrar.Enabled = false;
+
         }
 
 
@@ -44,6 +46,16 @@ namespace Equipo1
         {
             mostrar_servicios();
             mostrar_clientes();
+
+            //ENABLE CAMPOS
+            lbl_oc.Enabled = true;
+            txt_oc.Enabled = true;
+            lbl_cantidad.Enabled = true;
+            txt_cantidad.Enabled = true;
+            chx_cliente.Enabled = false;
+            chx_fecha.Enabled = false;
+            chx_servicios.Enabled = false;
+
             Limpiar();
         }
 
@@ -52,6 +64,13 @@ namespace Equipo1
         {
             mostrar_servicios();
             mostrar_clientes();
+
+            //ENABLE CAMPOS
+            lbl_oc.Enabled = false;
+            txt_oc.Enabled = false;
+            lbl_cantidad.Enabled = false;
+            txt_cantidad.Enabled = false;
+
             Limpiar();
         }
 
@@ -63,206 +82,98 @@ namespace Equipo1
             Limpiar();
         }
 
-        //SELECTOR: BORRAR
-        private void rbn_borrar_CheckedChanged(object sender, EventArgs e)
-        {
-            mostrar_servicios();
-            mostrar_clientes();
-            Limpiar();
-        }
-
-
         //  ******************* BOTONES *******************
         //BOTON: EJECUTAR
         private void btn_ejecutar_Click(object sender, EventArgs e)
         {
-            
+
+            string fecha = Convert.ToString(txt_fecha.Text);
+            string id_cliente = cbx_cliente.SelectedValue.ToString();
+            string id_servicio = cbx_servicio.SelectedValue.ToString();
+            string consulta = "";
+            string orden_compra = Convert.ToString(txt_oc.Text);
+            string cantidad = Convert.ToString(txt_cantidad.Text);
 
             //CRUD: CREAR
             if (rbn_crear.Checked)
             {
+                //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
+                SqlCommand nuevo_registro = new SqlCommand();
+
+                //MATCHEO VARIABLE A LA CONEXION
+                nuevo_registro = mi_conexion.CreateCommand();
+
+                //INSTRUCCION SQL
+                nuevo_registro.CommandText = "INSERT INTO VENTAS (FECHA_VENTA, ID_CLIENTE, ID_SERVICIOS, ORDEN_DE_COMPRA, CANTIDAD)" +
+                                             "VALUES (@FECHA_VENTA, @ID_CLIENTE, @ID_SERVICIOS, @ORDEN_DE_COMPRA, @CANTIDAD)";
+
+                //VINCULACION DE PARAMETROS
+                nuevo_registro.Parameters.AddWithValue("@FECHA_VENTA", fecha);
+                nuevo_registro.Parameters.AddWithValue("@ID_CLIENTE", id_cliente);
+                nuevo_registro.Parameters.AddWithValue("@ID_SERVICIOS", id_servicio);
+                nuevo_registro.Parameters.AddWithValue("@ORDEN_DE_COMPRA", orden_compra);
+                nuevo_registro.Parameters.AddWithValue("@CANTIDAD", cantidad);
 
 
+                //ABRO LA CONEXION
+                mi_conexion.Open();
+
+                //EJECUTO LA INSTRUCCION SQL
+                nuevo_registro.ExecuteNonQuery();
+
+                //CIERRO LA CONEXION
+                mi_conexion.Close();
+
+                Limpiar();
+
+                MessageBox.Show("Agrego un registro satisfactoriamente");
             }
 
             //CRUD: LEER
-            string fecha = Convert.ToString(txt_fecha.Text);
-            int id_cliente = cbx_cliente.SelectedIndex;
-            int id_servicio = cbx_servicio.SelectedIndex;
-            int cliente = id_cliente + 1;
-            int servicio = id_servicio + 1;
-
-            MessageBox.Show("VALUE: " + cbx_cliente.SelectedValue + "\n TEXT: " + cbx_cliente.SelectedText +
-                            "\n INDEX: " + cbx_cliente.SelectedIndex +
-                            "\n ITEM: " + cbx_cliente.SelectedItem +
-                            "\n SELECIONT START: " + cbx_cliente.SelectionStart +
-                            "\n CAPTURE: " + cbx_cliente.Capture);
-
-           
-            /*
-            MessageBox.Show("TEXT: " + cbx_cliente.SelectedValue);
-            MessageBox.Show("VALUE: " + cbx_cliente.SelectedText);
-            MessageBox.Show("TEXT: " + cbx_cliente.SelectedText);
-            MessageBox.Show("INDEX: " + cbx_cliente.SelectedIndex);
-            MessageBox.Show("ITEM: " + cbx_cliente.SelectedItem);
-            MessageBox.Show("SELECIONT START: " + cbx_cliente.SelectionStart);
-            MessageBox.Show("CAPTURE: " + cbx_cliente.Capture);
-            MessageBox.Show("id cliente: " + id_cliente);
-            MessageBox.Show("id servicios: " + id_servicio);
-            MessageBox.Show("fecha: " + fecha);
-            MessageBox.Show("cliente: " + cliente);
-            MessageBox.Show("id cliente: " + id_cliente);
-            MessageBox.Show("servicios: " + servicio);
-            MessageBox.Show("id servicios: " + id_servicio);
-            MessageBox.Show("fecha: " + fecha);
-            MessageBox.Show("cliente: " + cliente);
-            MessageBox.Show("servicios: " + servicio);
-            MessageBox.Show("SELECT: " + cbx_cliente.SelectedValue);
-            MessageBox.Show("fecha: " + dtp_fecha);
-            MessageBox.Show("fecha: "+fecha);
-            MessageBox.Show("cliente: " + cliente);
-            MessageBox.Show("servicios: " + servicio);
-            */
-
-            if (rbn_leer.Checked)
+            //VERIFICA CAMPOS DE BUSQUEDA
+            if (chx_servicios.Checked || chx_fecha.Checked || chx_cliente.Checked)
             {
-                //FALTA DE ARGUMENTOS PARA BUSCAR
-                if (fecha == "" && id_cliente == 0 && id_servicio == 0)
-                {
-                    Mensaje(2);
-                    lbl_error_cliente.Visible = true;
-                    lbl_error_fecha.Visible = true;
-                    lbl_error_servicio.Visible = true;
+                if (rbn_leer.Checked) {
 
-                    mostrar_servicios();
-                    mostrar_clientes();
+                    if (chx_fecha.Checked)
+                    {
+                        consulta = "SELECT * FROM VENTAS WHERE FECHA_VENTA LIKE '%" + fecha + "%'";
+                    }
+                    if (chx_cliente.Checked)
+                    {
+                        consulta = "SELECT * FROM VENTAS WHERE ID_CLIENTE='" + id_cliente + "'";
+                    }
+                    if (chx_servicios.Checked)
+                    {
+                        consulta = "SELECT * FROM VENTAS WHERE ID_SERVICIOS='" + id_servicio + "'";
+                    }
+
+                    //CARGA EL DATAGRID CON LA BUSQUEDA
+                    SqlDataAdapter mostrar;
+                    DataTable tabla = new DataTable();
+
+                    //ABRO CONEXION
+                    mi_conexion.Open();
+
+                    //INSTRUCCION SQL
+                    mostrar = new SqlDataAdapter (consulta, mi_conexion);
+                    //LLENO LA TABLA
+                    mostrar.Fill(tabla);
+
+                    //CIERRO LA CONEXION
+                    mi_conexion.Close();
+
+                    //LLENO EL DATA GRID VIEW
+                    dgw_ventas.DataSource = tabla;
 
                     Limpiar();
-
-                    MessageBox.Show("NINGUNA");
                 }
-                //TODOS
-                else if (fecha != "" && cbx_cliente.SelectedText != "" && cbx_servicio.SelectedText != "")
-                {
-                    if (cliente >= 1)
-                    {
-                        SqlDataAdapter mostrar;
-                        DataTable tabla_ventas = new DataTable();
-
-                        //ABRO CONEXION
-                        mi_conexion.Open();
-
-                        //INSTRUCCION SQL
-                        mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_CLIENTE=" + cliente + " AND ID_SERVICIOS=" + servicio +
-                                                     " AND FECHA_VENTA LIKE '%" + fecha + "%'", mi_conexion);
-
-                        //LLENO LA TABLA
-                        mostrar.Fill(tabla_ventas);
-
-                        //CIERRO LA CONEXION
-                        mi_conexion.Close();
-
-                        //LLENO EL DATA GRID VIEW
-                        dgw_ventas.DataSource = tabla_ventas;
-
-                        MessageBox.Show("TODOS");
-                    }
-                    else
-                    {
-                        Mensaje(1);
-                    }
-                    
-                }
-               //POR FECHA
-               else if (fecha != "")
-               {
-                   SqlDataAdapter mostrar;
-                   DataTable tabla_ventas = new DataTable();
-
-                   //ABRO CONEXION
-                   mi_conexion.Open();
-
-                   //INSTRUCCION SQL
-                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE FECHA_VENTA LIKE '%" + fecha + "%'", mi_conexion);
-
-                   //LLENO LA TABLA
-                   mostrar.Fill(tabla_ventas);
-
-                   //CIERRO LA CONEXION
-                   mi_conexion.Close();
-
-                   //LLENO EL DATA GRID VIEW
-                   dgw_ventas.DataSource = tabla_ventas;
-
-                    MessageBox.Show("FECHA");
-               }
-               //POR CLIENTE
-               else if (cliente != 0)
-               {
-                   SqlDataAdapter mostrar;
-                   DataTable tabla_ventas = new DataTable();
-
-                   //ABRO CONEXION
-                   mi_conexion.Open();
-
-                   //INSTRUCCION SQL
-                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_CLIENTE='" + cliente + "'", mi_conexion);
-
-                   //LLENO LA TABLA
-                   mostrar.Fill(tabla_ventas);
-
-                   //CIERRO LA CONEXION
-                   mi_conexion.Close();
-
-                   //LLENO EL DATA GRID VIEW
-                   dgw_ventas.DataSource = tabla_ventas;
-
-                    MessageBox.Show("CLIENTE");
-                }
-               //POR SERVICIO
-               else if (servicio != 0)
-               {
-                   SqlDataAdapter mostrar;
-                   DataTable tabla_ventas = new DataTable();
-
-                   //ABRO CONEXION
-                   mi_conexion.Open();
-
-                   //INSTRUCCION SQL
-                   mostrar = new SqlDataAdapter("SELECT * FROM VENTAS WHERE ID_SERVICIOS='" + servicio + "'", mi_conexion);
-
-                   //LLENO LA TABLA
-                   mostrar.Fill(tabla_ventas);
-
-                   //CIERRO LA CONEXION
-                   mi_conexion.Close();
-
-                   //LLENO EL DATA GRID VIEW
-                   dgw_ventas.DataSource = tabla_ventas;
-
-                    MessageBox.Show("SERVICIOS");
-                }
-               else
-               {
-                   Mensaje(1);
-               }
             }
-            /*
-            //CRUD: ACTUALIZAR
-            if (rbn_actualizar.Checked)
+            //NO COMPLETO NINGUNO DE LOS CAMPOS REQUERIDOS
+            else
             {
-
+                Mensaje(2);
             }
-
-            //CRUD: BORRAR
-            if (rbn_borrar.Checked)
-            {
-
-            }
-            //MENSAJE DE ERROR 
-           
-            MessageBox.Show("Seleccione una de las \nopciones de arriba");
-            */
         }
 
         //BOTON: SALIR
@@ -292,6 +203,9 @@ namespace Equipo1
                     break;
                 case 2: //FALTAN CAMPOS
                     MessageBox.Show("Complete los campos requeridos.");
+                    lbl_error_cliente.Visible = true;
+                    lbl_error_fecha.Visible = true;
+                    lbl_error_servicio.Visible = true;
                     break;
             }
 
@@ -300,11 +214,18 @@ namespace Equipo1
         //FUNCION LIMPIAR
         void Limpiar()
         {
-            txt_cantidad.Text = "";
             txt_fecha.Text = "";
-            txt_orden.Text = "";
+            txt_cantidad.Text = "";
+            txt_oc.Text = "";
             cbx_cliente.Text = "";
             cbx_servicio.Text = "";
+            chx_cliente.Checked = false;
+            chx_fecha.Checked = false;
+            chx_servicios.Checked = false;
+            lbl_error_cliente.Visible = false;
+            lbl_error_fecha.Visible = false;
+            lbl_error_servicio.Visible = false;
+
         }
 
         //FUNCION MOSTRAR SERVICIOS
@@ -345,31 +266,12 @@ namespace Equipo1
             mi_conexion.Close();
         }
 
-        /*
-        //FUNCION LLENA LOS CAMPOS
-        void mostrar_campos(string id)
+        private void btn_reportes_Click(object sender, EventArgs e)
         {
-            SqlDataAdapter llenar_campos;
-            DataTable datacampos = new DataTable();
-            //Abro la conexion
-            mi_conexion.Open();
-            //VARIABLE DONDE ALMACENO LA INSTRUCCION
-            llenar_campos = new SqlDataAdapter("SELECT V.FECHA_VENTA, S.DESCRIPCION, V.ORDEN_DE_COMPRA, V.CANTIDAD " +
-                                               "FROM VENTAS AS V, SERVICIOS AS S " +
-                                               "WHERE V.ID_CLIENTE = S.ID_SERVICIOS AND ID_VENTAS=@ID", mi_conexion);
-            llenar_campos.SelectCommand.Parameters.AddWithValue("@ID", id);
-            //RELLENA LA VARIABLE DEL COMBO BOX
-            llenar_campos.Fill(datacampos);
-            if (datacampos.Rows.Count > 0)
-            {
-                txt_fecha.Text = Convert.ToString(datacampos.Rows[0][0]);
-                cbx_servicio.SelectedIndex = (Convert.ToInt32(datacampos.Rows[0][1]) - 1);
-                txt_orden.Text = Convert.ToString(datacampos.Rows[0][2]);
-                txt_cantidad.Text = Convert.ToString(datacampos.Rows[0][3]);
-            }
-            //Cierra la conexion
-            mi_conexion.Close();
+            //DECLARACION DE LOS FORMULARIOS
+            REPORTES reportes = new REPORTES();
+            //LLAMA AL FORMULARIO
+            reportes.Show();
         }
-        */
     }
 }

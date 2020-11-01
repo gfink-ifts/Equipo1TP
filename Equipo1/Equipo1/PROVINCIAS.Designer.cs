@@ -120,7 +120,7 @@
 			// 
 			// txt_Provincias
 			// 
-			this.txt_Provincias.Location = new System.Drawing.Point(148, 120);
+			this.txt_Provincias.Location = new System.Drawing.Point(140, 127);
 			this.txt_Provincias.Name = "txt_Provincias";
 			this.txt_Provincias.Size = new System.Drawing.Size(196, 20);
 			this.txt_Provincias.TabIndex = 29;
@@ -138,7 +138,7 @@
 			// cbx_Provincias
 			// 
 			this.cbx_Provincias.FormattingEnabled = true;
-			this.cbx_Provincias.Location = new System.Drawing.Point(148, 100);
+			this.cbx_Provincias.Location = new System.Drawing.Point(140, 126);
 			this.cbx_Provincias.Name = "cbx_Provincias";
 			this.cbx_Provincias.Size = new System.Drawing.Size(196, 21);
 			this.cbx_Provincias.TabIndex = 31;

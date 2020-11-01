@@ -45,13 +45,16 @@ namespace Equipo1
         //FORMULARIO
         public PROVINCIAS()
         {
+
             InitializeComponent();
         }
 
         private void PROVINCIAS_Load(object sender, EventArgs e)
         {
             cn = new SqlConnection(cadenaConnex);
-
+            rbn_Crear.Enabled = false;
+            rbn_Actualizar.Enabled = false;
+            rbn_Borrar.Enabled = false;
         }
 
 
@@ -63,7 +66,7 @@ namespace Equipo1
 
 		private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
-            //este anda
+
             if (rbn_Crear.Checked)
             {
                 if (txt_Provincias.Text == "")
@@ -88,7 +91,7 @@ namespace Equipo1
                 }
 
             }
-            //este no estaria mas hay que borrarlo(rbn_leer)
+           
             if (rbn_Leer.Checked)
             {
                 
@@ -109,28 +112,26 @@ namespace Equipo1
             }
             if (rbn_Actualizar.Checked)
             {
-                string provincia = Convert.ToString(txt_Provincias.Text);
+                string provincia = txt_Provincias.Text;
                 
                // int index = cbx_Provincias.SelectedIndex;
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
-                SqlCommand actualizar_registro = new SqlCommand("UPDATE provincias SET provincia=@prov where id_provincia like provincia ", cn);
+                SqlCommand actualizar = new SqlCommand("UPDATE provincias SET provincia=@prov where id_provincia like provincia ", cn);
 
                 //VINCULACION DE PARAMETROS
-                actualizar_registro.Parameters.AddWithValue("@prov", provincia);
+                actualizar.Parameters.AddWithValue("@prov", provincia);
                 
 
                 //ABRO LA CONEXION
                 cn.Open();
 
                 //EJECUTO LA QUERY
-                actualizar_registro.ExecuteNonQuery();
+                actualizar.ExecuteNonQuery();
 
                 //CIERRO LA CONEXION
                 cn.Close();
 
                 MessageBox.Show("se actualizo el registro correctamente.");
-
-                Limpiar();
 
             }
             if (rbn_Borrar.Checked)
@@ -167,27 +168,28 @@ namespace Equipo1
         //SELECTOR
 		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
 		{
-            txt_Provincias.Enabled = false;
-            cbx_Provincias.Enabled = true;
+            txt_Provincias.Visible = false;
+            cbx_Provincias.Visible = true;
             mostrar_provincias();
         }
 
 		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
 		{
-            cbx_Provincias.Enabled = false;
-            txt_Provincias.Enabled = true;
+            cbx_Provincias.Visible  = false;
+            txt_Provincias.Visible = true;
         }
 
 		private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
 		{
-            cbx_Provincias.Enabled = true;
-            txt_Provincias.Enabled = true;
+            cbx_Provincias.Visible = true;
+            txt_Provincias.Visible = true;
             mostrar_provincias();
         }
 
 		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
 		{
-            txt_Provincias.Enabled = false;
+            cbx_Provincias.Visible  = true;
+            txt_Provincias.Visible  = false;
             mostrar_provincias();
         }
 	}

@@ -39,18 +39,21 @@
             this.lbl_fecha = new System.Windows.Forms.Label();
             this.lbl_cliente = new System.Windows.Forms.Label();
             this.lbl_servicio = new System.Windows.Forms.Label();
-            this.txt_orden = new System.Windows.Forms.TextBox();
-            this.lbl_orden = new System.Windows.Forms.Label();
-            this.txt_cantidad = new System.Windows.Forms.TextBox();
-            this.lbl_cantidad = new System.Windows.Forms.Label();
             this.btn_ejecutar = new System.Windows.Forms.Button();
-            this.dtp_fecha = new System.Windows.Forms.DateTimePicker();
             this.cbx_cliente = new System.Windows.Forms.ComboBox();
             this.cbx_servicio = new System.Windows.Forms.ComboBox();
             this.dgw_ventas = new System.Windows.Forms.DataGridView();
             this.lbl_error_fecha = new System.Windows.Forms.Label();
             this.lbl_error_servicio = new System.Windows.Forms.Label();
             this.lbl_error_cliente = new System.Windows.Forms.Label();
+            this.chx_fecha = new System.Windows.Forms.CheckBox();
+            this.chx_cliente = new System.Windows.Forms.CheckBox();
+            this.chx_servicios = new System.Windows.Forms.CheckBox();
+            this.txt_oc = new System.Windows.Forms.TextBox();
+            this.lbl_oc = new System.Windows.Forms.Label();
+            this.txt_cantidad = new System.Windows.Forms.TextBox();
+            this.lbl_cantidad = new System.Windows.Forms.Label();
+            this.btn_reportes = new System.Windows.Forms.Button();
             this.gpx_CRUD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgw_ventas)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +61,7 @@
             // btn_salir
             // 
             this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_salir.Location = new System.Drawing.Point(293, 259);
+            this.btn_salir.Location = new System.Drawing.Point(293, 388);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(107, 23);
             this.btn_salir.TabIndex = 17;
@@ -70,7 +73,7 @@
             // 
             this.lbl_titulo.AutoSize = true;
             this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_titulo.Location = new System.Drawing.Point(128, 18);
+            this.lbl_titulo.Location = new System.Drawing.Point(155, 18);
             this.lbl_titulo.Name = "lbl_titulo";
             this.lbl_titulo.Size = new System.Drawing.Size(102, 25);
             this.lbl_titulo.TabIndex = 16;
@@ -91,6 +94,7 @@
             // rbn_borrar
             // 
             this.rbn_borrar.AutoSize = true;
+            this.rbn_borrar.Enabled = false;
             this.rbn_borrar.Location = new System.Drawing.Point(307, 16);
             this.rbn_borrar.Name = "rbn_borrar";
             this.rbn_borrar.Size = new System.Drawing.Size(71, 17);
@@ -98,7 +102,6 @@
             this.rbn_borrar.TabStop = true;
             this.rbn_borrar.Text = "BORRAR";
             this.rbn_borrar.UseVisualStyleBackColor = true;
-            this.rbn_borrar.CheckedChanged += new System.EventHandler(this.rbn_borrar_CheckedChanged);
             // 
             // rbn_actualizar
             // 
@@ -138,16 +141,16 @@
             // 
             // txt_fecha
             // 
-            this.txt_fecha.Location = new System.Drawing.Point(147, 107);
+            this.txt_fecha.Location = new System.Drawing.Point(99, 106);
             this.txt_fecha.Name = "txt_fecha";
-            this.txt_fecha.Size = new System.Drawing.Size(253, 20);
+            this.txt_fecha.Size = new System.Drawing.Size(301, 20);
             this.txt_fecha.TabIndex = 4;
             // 
             // lbl_fecha
             // 
             this.lbl_fecha.AutoSize = true;
             this.lbl_fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_fecha.Location = new System.Drawing.Point(95, 111);
+            this.lbl_fecha.Location = new System.Drawing.Point(31, 110);
             this.lbl_fecha.Name = "lbl_fecha";
             this.lbl_fecha.Size = new System.Drawing.Size(47, 13);
             this.lbl_fecha.TabIndex = 5;
@@ -157,7 +160,7 @@
             // 
             this.lbl_cliente.AutoSize = true;
             this.lbl_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cliente.Location = new System.Drawing.Point(83, 137);
+            this.lbl_cliente.Location = new System.Drawing.Point(19, 136);
             this.lbl_cliente.Name = "lbl_cliente";
             this.lbl_cliente.Size = new System.Drawing.Size(59, 13);
             this.lbl_cliente.TabIndex = 20;
@@ -167,50 +170,16 @@
             // 
             this.lbl_servicio.AutoSize = true;
             this.lbl_servicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_servicio.Location = new System.Drawing.Point(77, 163);
+            this.lbl_servicio.Location = new System.Drawing.Point(13, 162);
             this.lbl_servicio.Name = "lbl_servicio";
             this.lbl_servicio.Size = new System.Drawing.Size(65, 13);
             this.lbl_servicio.TabIndex = 22;
             this.lbl_servicio.Text = "SERVICIO";
             // 
-            // txt_orden
-            // 
-            this.txt_orden.Location = new System.Drawing.Point(147, 185);
-            this.txt_orden.Name = "txt_orden";
-            this.txt_orden.Size = new System.Drawing.Size(253, 20);
-            this.txt_orden.TabIndex = 23;
-            // 
-            // lbl_orden
-            // 
-            this.lbl_orden.AutoSize = true;
-            this.lbl_orden.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_orden.Location = new System.Drawing.Point(14, 189);
-            this.lbl_orden.Name = "lbl_orden";
-            this.lbl_orden.Size = new System.Drawing.Size(128, 13);
-            this.lbl_orden.TabIndex = 24;
-            this.lbl_orden.Text = "ORDEN DE COMPRA";
-            // 
-            // txt_cantidad
-            // 
-            this.txt_cantidad.Location = new System.Drawing.Point(147, 211);
-            this.txt_cantidad.Name = "txt_cantidad";
-            this.txt_cantidad.Size = new System.Drawing.Size(253, 20);
-            this.txt_cantidad.TabIndex = 25;
-            // 
-            // lbl_cantidad
-            // 
-            this.lbl_cantidad.AutoSize = true;
-            this.lbl_cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cantidad.Location = new System.Drawing.Point(72, 215);
-            this.lbl_cantidad.Name = "lbl_cantidad";
-            this.lbl_cantidad.Size = new System.Drawing.Size(70, 13);
-            this.lbl_cantidad.TabIndex = 26;
-            this.lbl_cantidad.Text = "CANTIDAD";
-            // 
             // btn_ejecutar
             // 
             this.btn_ejecutar.ForeColor = System.Drawing.Color.MediumBlue;
-            this.btn_ejecutar.Location = new System.Drawing.Point(80, 259);
+            this.btn_ejecutar.Location = new System.Drawing.Point(10, 388);
             this.btn_ejecutar.Name = "btn_ejecutar";
             this.btn_ejecutar.Size = new System.Drawing.Size(107, 23);
             this.btn_ejecutar.TabIndex = 27;
@@ -218,37 +187,28 @@
             this.btn_ejecutar.UseVisualStyleBackColor = true;
             this.btn_ejecutar.Click += new System.EventHandler(this.btn_ejecutar_Click);
             // 
-            // dtp_fecha
-            // 
-            this.dtp_fecha.Location = new System.Drawing.Point(479, 72);
-            this.dtp_fecha.Name = "dtp_fecha";
-            this.dtp_fecha.Size = new System.Drawing.Size(200, 20);
-            this.dtp_fecha.TabIndex = 28;
-            // 
             // cbx_cliente
             // 
             this.cbx_cliente.FormattingEnabled = true;
-            this.cbx_cliente.Location = new System.Drawing.Point(147, 132);
+            this.cbx_cliente.Location = new System.Drawing.Point(99, 132);
             this.cbx_cliente.Name = "cbx_cliente";
-            this.cbx_cliente.Size = new System.Drawing.Size(253, 21);
+            this.cbx_cliente.Size = new System.Drawing.Size(301, 21);
             this.cbx_cliente.TabIndex = 29;
-            this.cbx_cliente.SelectionChangeCommitted += new System.EventHandler(this.cbx_cliente_SelectionChangeCommitted);
             // 
             // cbx_servicio
             // 
             this.cbx_servicio.FormattingEnabled = true;
-            this.cbx_servicio.Location = new System.Drawing.Point(147, 159);
+            this.cbx_servicio.Location = new System.Drawing.Point(99, 158);
             this.cbx_servicio.Name = "cbx_servicio";
-            this.cbx_servicio.Size = new System.Drawing.Size(253, 21);
+            this.cbx_servicio.Size = new System.Drawing.Size(301, 21);
             this.cbx_servicio.TabIndex = 30;
-            this.cbx_servicio.SelectionChangeCommitted += new System.EventHandler(this.cbx_servicio_SelectionChangeCommitted);
             // 
             // dgw_ventas
             // 
             this.dgw_ventas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgw_ventas.Location = new System.Drawing.Point(421, 107);
+            this.dgw_ventas.Location = new System.Drawing.Point(12, 240);
             this.dgw_ventas.Name = "dgw_ventas";
-            this.dgw_ventas.Size = new System.Drawing.Size(367, 175);
+            this.dgw_ventas.Size = new System.Drawing.Size(388, 142);
             this.dgw_ventas.TabIndex = 31;
             // 
             // lbl_error_fecha
@@ -284,24 +244,99 @@
             this.lbl_error_cliente.TabIndex = 34;
             this.lbl_error_cliente.Text = "*";
             // 
+            // chx_fecha
+            // 
+            this.chx_fecha.AutoSize = true;
+            this.chx_fecha.Location = new System.Drawing.Point(81, 109);
+            this.chx_fecha.Name = "chx_fecha";
+            this.chx_fecha.Size = new System.Drawing.Size(15, 14);
+            this.chx_fecha.TabIndex = 37;
+            this.chx_fecha.UseVisualStyleBackColor = true;
+            // 
+            // chx_cliente
+            // 
+            this.chx_cliente.AutoSize = true;
+            this.chx_cliente.Location = new System.Drawing.Point(81, 135);
+            this.chx_cliente.Name = "chx_cliente";
+            this.chx_cliente.Size = new System.Drawing.Size(15, 14);
+            this.chx_cliente.TabIndex = 38;
+            this.chx_cliente.UseVisualStyleBackColor = true;
+            // 
+            // chx_servicios
+            // 
+            this.chx_servicios.AutoSize = true;
+            this.chx_servicios.Location = new System.Drawing.Point(81, 161);
+            this.chx_servicios.Name = "chx_servicios";
+            this.chx_servicios.Size = new System.Drawing.Size(15, 14);
+            this.chx_servicios.TabIndex = 39;
+            this.chx_servicios.UseVisualStyleBackColor = true;
+            // 
+            // txt_oc
+            // 
+            this.txt_oc.Location = new System.Drawing.Point(99, 185);
+            this.txt_oc.Name = "txt_oc";
+            this.txt_oc.Size = new System.Drawing.Size(301, 20);
+            this.txt_oc.TabIndex = 40;
+            // 
+            // lbl_oc
+            // 
+            this.lbl_oc.AutoSize = true;
+            this.lbl_oc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_oc.Location = new System.Drawing.Point(14, 189);
+            this.lbl_oc.Name = "lbl_oc";
+            this.lbl_oc.Size = new System.Drawing.Size(85, 13);
+            this.lbl_oc.TabIndex = 41;
+            this.lbl_oc.Text = "OR. COMPRA";
+            // 
+            // txt_cantidad
+            // 
+            this.txt_cantidad.Location = new System.Drawing.Point(99, 211);
+            this.txt_cantidad.Name = "txt_cantidad";
+            this.txt_cantidad.Size = new System.Drawing.Size(301, 20);
+            this.txt_cantidad.TabIndex = 43;
+            // 
+            // lbl_cantidad
+            // 
+            this.lbl_cantidad.AutoSize = true;
+            this.lbl_cantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cantidad.Location = new System.Drawing.Point(29, 215);
+            this.lbl_cantidad.Name = "lbl_cantidad";
+            this.lbl_cantidad.Size = new System.Drawing.Size(70, 13);
+            this.lbl_cantidad.TabIndex = 44;
+            this.lbl_cantidad.Text = "CANTIDAD";
+            // 
+            // btn_reportes
+            // 
+            this.btn_reportes.ForeColor = System.Drawing.Color.Green;
+            this.btn_reportes.Location = new System.Drawing.Point(150, 388);
+            this.btn_reportes.Name = "btn_reportes";
+            this.btn_reportes.Size = new System.Drawing.Size(107, 23);
+            this.btn_reportes.TabIndex = 45;
+            this.btn_reportes.Text = "REPORTES";
+            this.btn_reportes.UseVisualStyleBackColor = true;
+            this.btn_reportes.Click += new System.EventHandler(this.btn_reportes_Click);
+            // 
             // VENTAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(800, 290);
+            this.ClientSize = new System.Drawing.Size(417, 408);
+            this.Controls.Add(this.btn_reportes);
+            this.Controls.Add(this.txt_cantidad);
+            this.Controls.Add(this.lbl_cantidad);
+            this.Controls.Add(this.txt_oc);
+            this.Controls.Add(this.lbl_oc);
+            this.Controls.Add(this.chx_servicios);
+            this.Controls.Add(this.chx_cliente);
+            this.Controls.Add(this.chx_fecha);
             this.Controls.Add(this.lbl_error_cliente);
             this.Controls.Add(this.lbl_error_servicio);
             this.Controls.Add(this.lbl_error_fecha);
             this.Controls.Add(this.dgw_ventas);
             this.Controls.Add(this.cbx_servicio);
             this.Controls.Add(this.cbx_cliente);
-            this.Controls.Add(this.dtp_fecha);
             this.Controls.Add(this.btn_ejecutar);
-            this.Controls.Add(this.txt_cantidad);
-            this.Controls.Add(this.lbl_cantidad);
-            this.Controls.Add(this.txt_orden);
-            this.Controls.Add(this.lbl_orden);
             this.Controls.Add(this.lbl_servicio);
             this.Controls.Add(this.lbl_cliente);
             this.Controls.Add(this.txt_fecha);
@@ -334,17 +369,20 @@
         private System.Windows.Forms.Label lbl_fecha;
         private System.Windows.Forms.Label lbl_cliente;
         private System.Windows.Forms.Label lbl_servicio;
-        private System.Windows.Forms.TextBox txt_orden;
-        private System.Windows.Forms.Label lbl_orden;
-        private System.Windows.Forms.TextBox txt_cantidad;
-        private System.Windows.Forms.Label lbl_cantidad;
         private System.Windows.Forms.Button btn_ejecutar;
-        private System.Windows.Forms.DateTimePicker dtp_fecha;
         private System.Windows.Forms.ComboBox cbx_cliente;
         private System.Windows.Forms.ComboBox cbx_servicio;
         private System.Windows.Forms.DataGridView dgw_ventas;
         private System.Windows.Forms.Label lbl_error_fecha;
         private System.Windows.Forms.Label lbl_error_servicio;
         private System.Windows.Forms.Label lbl_error_cliente;
+        private System.Windows.Forms.CheckBox chx_fecha;
+        private System.Windows.Forms.CheckBox chx_cliente;
+        private System.Windows.Forms.CheckBox chx_servicios;
+        private System.Windows.Forms.TextBox txt_oc;
+        private System.Windows.Forms.Label lbl_oc;
+        private System.Windows.Forms.TextBox txt_cantidad;
+        private System.Windows.Forms.Label lbl_cantidad;
+        private System.Windows.Forms.Button btn_reportes;
     }
 }
