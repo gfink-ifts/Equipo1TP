@@ -71,6 +71,24 @@ namespace Equipo1
             //CIERRA LA CONEXION
             cn.Close();
         }
+        void llenar_datagrid()
+        {
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            cn.Open();
+            string query = "select c.nombre,c.domicilio,p.provincia,c.telefono,c.mail" +
+                " from contactos as c,provincias as p " +
+                " where c.id_provincia=p.id_provincia";
+           
+            da = new SqlDataAdapter(query, cn);
+            da.Fill(dt);
+            cn.Close();
+            dataGridView1.DataSource = dt;
+        }
+        void eliminar()
+        {
+            
+        }
 
         //botones
         private void btn_salir_Click(object sender, EventArgs e)
@@ -80,6 +98,7 @@ namespace Equipo1
 
         private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
+            //listo
             if (rbn_Crear.Checked)
 			{
                 if (txt_Nombre.Text == ""||txt_Domicilio.Text == ""||txt_Telefono.Text == ""||txt_Mail.Text=="")
@@ -88,17 +107,15 @@ namespace Equipo1
                 }
 				else 
                 {
-                  
-                    //DECLARACION DE VARIABLES
 
                     string nombre =txt_Nombre.Text;
                     string domicilio = txt_Domicilio.Text;
-                    string id_provincia = txt_Domicilio.Text;
+                    string id = cbx_Id_Provincia.SelectedValue.ToString();
                     int telefono = Convert.ToInt32(txt_Telefono.Text);
                     string mail = txt_Mail.Text;
 
                     string cmd = "insert into CONTACTOS  (nombre,domicilio,id_provincia,telefono,mail) " 
-                        + "values (@nom, @dom,@id_prov, @tel, @mail)";
+                        + "values (@nom, @dom,@id, @tel, @mail)";
 
 
                     //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
@@ -106,7 +123,7 @@ namespace Equipo1
 
                     comando.Parameters.AddWithValue("@nom", nombre);
                     comando.Parameters.AddWithValue("@dom", domicilio);
-                    comando.Parameters.AddWithValue("@id_prov", id_provincia);
+                    comando.Parameters.AddWithValue("@id", id);
                     comando.Parameters.AddWithValue("@tel", telefono);
                     comando.Parameters.AddWithValue("@mail", mail);
 
@@ -117,12 +134,13 @@ namespace Equipo1
                     cn.Close();
                    
                     MessageBox.Show("contacto creado correctamente");
+                    llenar_datagrid();
                 } 
             }
-            //rbn_leer se borraria
+            //listo
             if (rbn_Leer.Checked)
 			{
-                /*
+                
                 string nombre = txt_Nombre.Text;
                 string domicilio = txt_Domicilio.Text;
                 string telefono = txt_Telefono.Text;
@@ -141,48 +159,78 @@ namespace Equipo1
                 cn.Close();
                 MessageBox.Show("contacto creado correctamente");
                 Limpiar();
-                */
+                
             }
             if (rbn_Actualizar.Checked)
 			{
-               
-                string nombre = Convert.ToString(txt_Nombre.Text);
-                string domicilio = Convert.ToString(txt_Domicilio.Text);
-                string telefono = Convert.ToString(txt_Telefono.Text);
-                string mail = Convert.ToString(txt_Mail.Text);
+
+                string nombre = cbx_Nombre.SelectedValue.ToString();
+                string domicilio = txt_Domicilio.Text;
+                string id = cbx_Id_Provincia.SelectedValue.ToString();
+                int telefono = Convert.ToInt32(txt_Telefono.Text);
+                string mail = txt_Mail.Text;
 
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
-                SqlCommand actualizar_registro = new SqlCommand("UPDATE contactos SET nombre=@nom, domicilio=@dom, telefono=@tel, mail=@mail" +
+                SqlCommand actualizar_registro = new SqlCommand("UPDATE contactos SET nombre=@nom, domicilio=@dom,id=@id telefono=@tel, mail=@mail" +
                 "WHERE id_contactos=@id", cn);
 
                 //VINCULACION DE PARAMETROS
                 actualizar_registro.Parameters.AddWithValue("@nom", nombre);
                 actualizar_registro.Parameters.AddWithValue("@dom", domicilio);
+                actualizar_registro.Parameters.AddWithValue("@id", id);
                 actualizar_registro.Parameters.AddWithValue("@tel", telefono);
                 actualizar_registro.Parameters.AddWithValue("@mail", mail);
+                
+                cn.Open();
+                //EJECUTO LA QUERY
+                actualizar_registro.ExecuteNonQuery();
+                cn.Close();
+                MessageBox.Show("Actualizo el registro.");
+                Limpiar();
+            }
+            //listo
+            if (rbn_Borrar.Checked)
+			{
+               
+                ///DECLARACION DE VARIABLES
+                string id = cbx_Nombre.SelectedValue.ToString();
+
+                //CREACION DE LA VARIABLE: BORRAR
+                SqlCommand borrar = new SqlCommand();
+
+                //VARIABLE + CONEXION
+                borrar = cn.CreateCommand();
+
+                //INSTRUCCION SQL
+                borrar.CommandText = "DELETE FROM contactos WHERE id_contacto=@ID";
+
+                //VINCULACION DE PARAMETROS
+                borrar.Parameters.AddWithValue("@ID", id);
+
                 //ABRO LA CONEXION
                 cn.Open();
 
-                //EJECUTO LA QUERY
-                actualizar_registro.ExecuteNonQuery();
+                //EJECUTO LA INSTRUCION SQL
+                borrar.ExecuteNonQuery();
 
                 //CIERRO LA CONEXION
                 cn.Close();
 
-                MessageBox.Show("Actualizo el registro.");
-
-                Limpiar();
+                //MENSAJE DE VERIFICACION
+                MessageBox.Show("se borro el registro correctamente");
             }
            
         }
         //carga los cbx segun combo box
 		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
 		{
-            txt_Nombre.Enabled = true;
-            txt_Domicilio.Enabled = true;
-            txt_Telefono.Enabled = true;
+            txt_Nombre.Visible = true;
+            txt_Id_Provincia.Visible = false;
+            txt_Domicilio.Visible = true;
+            txt_Telefono.Visible = true;
             txt_Mail.Enabled = true;
             cbx_Nombre.Visible  =false;
+            cbx_Id_Provincia.Visible = true;
             mostrar_provincia();
 
             
@@ -190,29 +238,47 @@ namespace Equipo1
 
 		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
 		{
-            cbx_Id_Provincia.Enabled = false;
+            txt_Nombre.Enabled = true;
+            txt_Id_Provincia.Enabled = true;
+            txt_Domicilio.Enabled = true;
+            txt_Telefono.Enabled = true;
+            txt_Mail.Enabled = true;
+            txt_Nombre.Visible = true;
+            txt_Id_Provincia.Visible = true;
+            txt_Domicilio.Visible = true;
+            txt_Telefono.Visible = true;
+            txt_Mail.Visible  = true;
+            cbx_Nombre.Visible = false;
+            cbx_Id_Provincia.Visible = false;
+            llenar_datagrid();
 		}
 
 		private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
 		{
-            txt_Nombre.Enabled = false;
-            txt_Domicilio.Enabled = true;
-            txt_Telefono.Enabled = true;
+            txt_Nombre.Visible = false;
+            txt_Id_Provincia.Visible = false;
+            txt_Domicilio.Visible = true;
+            txt_Telefono.Visible = true;
             txt_Mail.Enabled = true;
-            cbx_Id_Provincia.Enabled = true;
-            cbx_Nombre.Enabled = true;
+            cbx_Nombre.Visible = true ;
+            cbx_Id_Provincia.Visible = false;
             mostrar_nombre();
             mostrar_provincia();
+            llenar_datagrid();
         }
 
 		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
 		{
-            txt_Nombre.Enabled = false;
-            txt_Domicilio.Enabled = false;
-            txt_Telefono.Enabled = false;
+            txt_Nombre.Visible = false;
+            txt_Id_Provincia.Visible = false;
+            txt_Domicilio.Visible = false;
+            txt_Telefono.Visible =false;
             txt_Mail.Enabled = false;
-            cbx_Id_Provincia.Enabled = false;
-            cbx_Nombre.Enabled = true;
+            cbx_Nombre.Visible = true;
+            cbx_Id_Provincia.Visible = false;
+            mostrar_nombre();
+            llenar_datagrid();
+
         }
 
 		private void cbx_Nombre_SelectedIndexChanged(object sender, EventArgs e)

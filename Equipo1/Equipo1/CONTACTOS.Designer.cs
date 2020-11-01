@@ -213,7 +213,7 @@
 			// cbx_Nombre
 			// 
 			this.cbx_Nombre.FormattingEnabled = true;
-			this.cbx_Nombre.Location = new System.Drawing.Point(115, 113);
+			this.cbx_Nombre.Location = new System.Drawing.Point(115, 114);
 			this.cbx_Nombre.Name = "cbx_Nombre";
 			this.cbx_Nombre.Size = new System.Drawing.Size(221, 21);
 			this.cbx_Nombre.TabIndex = 37;
@@ -222,7 +222,7 @@
 			// cbx_Id_Provincia
 			// 
 			this.cbx_Id_Provincia.FormattingEnabled = true;
-			this.cbx_Id_Provincia.Location = new System.Drawing.Point(115, 201);
+			this.cbx_Id_Provincia.Location = new System.Drawing.Point(115, 202);
 			this.cbx_Id_Provincia.Name = "cbx_Id_Provincia";
 			this.cbx_Id_Provincia.Size = new System.Drawing.Size(220, 21);
 			this.cbx_Id_Provincia.TabIndex = 38;
