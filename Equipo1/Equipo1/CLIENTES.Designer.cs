@@ -82,6 +82,7 @@
             this.rbn_Borrar.TabStop = true;
             this.rbn_Borrar.Text = "Borrar";
             this.rbn_Borrar.UseVisualStyleBackColor = true;
+            this.rbn_Borrar.CheckedChanged += new System.EventHandler(this.rbn_Borrar_CheckedChanged);
             // 
             // rbn_Actualizar
             // 
@@ -94,11 +95,12 @@
             this.rbn_Actualizar.TabStop = true;
             this.rbn_Actualizar.Text = "Actualizar";
             this.rbn_Actualizar.UseVisualStyleBackColor = true;
+            this.rbn_Actualizar.CheckedChanged += new System.EventHandler(this.rbn_Actualizar_CheckedChanged);
             // 
             // rbn_Leer
             // 
             this.rbn_Leer.AutoSize = true;
-            this.rbn_Leer.Location = new System.Drawing.Point(124, 109);
+            this.rbn_Leer.Location = new System.Drawing.Point(124, 110);
             this.rbn_Leer.Margin = new System.Windows.Forms.Padding(4);
             this.rbn_Leer.Name = "rbn_Leer";
             this.rbn_Leer.Size = new System.Drawing.Size(58, 21);
@@ -106,6 +108,7 @@
             this.rbn_Leer.TabStop = true;
             this.rbn_Leer.Text = "Leer";
             this.rbn_Leer.UseVisualStyleBackColor = true;
+            this.rbn_Leer.CheckedChanged += new System.EventHandler(this.rbn_Leer_CheckedChanged);
             // 
             // rbn_Crear
             // 
@@ -118,6 +121,7 @@
             this.rbn_Crear.TabStop = true;
             this.rbn_Crear.Text = "Crear";
             this.rbn_Crear.UseVisualStyleBackColor = true;
+            this.rbn_Crear.CheckedChanged += new System.EventHandler(this.rbn_Crear_CheckedChanged);
             // 
             // btn_salir
             // 

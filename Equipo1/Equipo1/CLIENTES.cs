@@ -35,66 +35,40 @@ namespace Equipo1
 
         //BOTON: EJECUTAR
         private void btn_Ejecutar_Click_1(object sender, EventArgs e)
-        {
-            llenar_datagrid();
+        { 
 
             {
                 //CRUD: CREAR
                 if (rbn_Crear.Checked)
                 {
-                    cbx_cliente.Visible = false;
-                    txt_nombrecontacto.Visible = false;
                     alta_clientes();
-                    
                     Limpiar();
-
                 }
 
 
                 //CRUD: LEER
                 if (rbn_Leer.Checked)
                 {
-                    mostrar_clientes();
-                    llenar_clientes();
-                    llenar_datagrid();
+                   // txt_nombrecontacto.Visible = true;
+                    
                 }
 
                 //CRUD: UPDATE
                 if (rbn_Actualizar.Checked)
                 {
-                    cbx_cliente.Visible = false;
-                    txt_nombrecontacto.Visible = false;
-                    llenar_datagrid();
-
-
-
+                  // cbx_cliente.Visible = false; 
+                    actualizar();
+                   llenar_datagrid();
                 }
 
                 //CRUD: DELETE
                 if (rbn_Borrar.Checked)
-                {
-                    cbx_cliente.Visible = false;
-                    txt_nombrecontacto.Visible = false;
-                    eliminar();
-                    llenar_datagrid();
-
+                {                    
+                    eliminar();                   
                 }
-
-
-                //VERIFICAR CHECKED
-
-                if (rbn_Crear.Checked == false || rbn_Leer.Checked == false || rbn_Actualizar.Checked == false || rbn_Borrar.Checked == false)
-                {
-                    MessageBox.Show("Elija/Chequee una de las opciones: Crear, Leer, Actualizar o Borrar ");
-                }
-
-
-
-
-
             }
         }
-
+        //BOTON PARA MOSTRAR TODOS LOS DATOS DE LOS CLIENTES
         private void button1_Click(object sender, EventArgs e)
         {
             SqlDataAdapter da;
@@ -110,6 +84,48 @@ namespace Equipo1
 
             dataGridView1.DataSource = dt;
         }
+        private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_nombre.Enabled = true;
+            txt_area.Enabled = true;
+            txt_registro.Enabled = true;
+            cbx_cliente.Visible = false;
+            txt_nombrecontacto.Visible = false;
+            llenar_datagrid();
+        }
+        private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_nombrecontacto.Visible = true;
+            txt_nombre.Enabled = false;
+            txt_area.Enabled = false;
+            txt_nombrecontacto.Enabled = false;
+            txt_registro.Enabled = false;
+
+            mostrar_clientes();
+            llenar_clientes();
+            llenar_datagrid();
+        }
+        private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_nombre.Enabled = true;
+            txt_area.Enabled = true;
+            txt_registro.Enabled = true;
+            txt_nombrecontacto.Visible = false;
+            mostrar_clientes();
+            llenar_datagrid();
+        }
+        private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
+        {
+            limpiarForm();
+            txt_nombre.Enabled = true;
+            txt_area.Enabled = true;
+            txt_registro.Enabled = true;
+            cbx_cliente.Visible = false;
+            txt_nombrecontacto.Visible = false;
+            llenar_datagrid();
+        }
+
+
         //FUNCIONES
         //**********************************************************************************************************
 
@@ -173,7 +189,7 @@ namespace Equipo1
             }
             else
             {
-                MessageBox.Show("No existe el producto ");
+                MessageBox.Show("No existe Cliente ");
             }
 
 
@@ -185,7 +201,7 @@ namespace Equipo1
             if (validartextbox())
             {
                 string nombre, area, registro;
-                
+                mi_conexion.Open();
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
                 registro = txt_registro.Text;
@@ -198,8 +214,11 @@ namespace Equipo1
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
-              
-                mostrarMensaje("Usuario creado correctamente");
+
+                
+                comando.ExecuteNonQuery();
+                mi_conexion.Close();
+                mostrarMensaje("Cliente dado de alta correctamente");
 
                 limpiarForm();
             }
@@ -338,5 +357,39 @@ namespace Equipo1
             txt_area.Text = dataGridView.Cells[1].Value.ToString();
             txt_registro.Text = dataGridView.Cells[2].Value.ToString();
         }
+          //FUNCION ACTUALIZAR
+          void actualizar()
+          {
+             // if (validartextbox())
+              //{
+                  string nombre, area, registro;
+                  mi_conexion.Open();
+                  nombre = cbx_cliente.SelectedValue.ToString();
+                  area = txt_area.Text;
+                  registro = txt_registro.Text;
+
+                  string cmd = "update Clientes set area=@area where id_cliente=@nombre";
+
+
+                  SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+                  comando.Parameters.AddWithValue("@area", area);
+                  comando.Parameters.AddWithValue("@nombre", nombre );
+
+
+                  comando.ExecuteNonQuery();
+                  mi_conexion.Close();
+                  mostrarMensaje("Usuario actualizado correctamente");
+
+                  limpiarForm();
+             // }
+             // else
+             // {
+              //    mostrarMensaje("Por favor completar todos los campos");
+             // }
+             // llenar_datagrid();
+
+          }
+
+     
     }
 }
