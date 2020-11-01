@@ -44,13 +44,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txt_nombrecontacto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_titulo
             // 
             this.lbl_titulo.AutoSize = true;
             this.lbl_titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_titulo.Location = new System.Drawing.Point(216, 29);
+            this.lbl_titulo.Location = new System.Drawing.Point(148, 30);
             this.lbl_titulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_titulo.Name = "lbl_titulo";
             this.lbl_titulo.Size = new System.Drawing.Size(156, 31);
@@ -59,7 +62,7 @@
             // 
             // btn_Ejecutar
             // 
-            this.btn_Ejecutar.Location = new System.Drawing.Point(131, 309);
+            this.btn_Ejecutar.Location = new System.Drawing.Point(63, 310);
             this.btn_Ejecutar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Ejecutar.Name = "btn_Ejecutar";
             this.btn_Ejecutar.Size = new System.Drawing.Size(143, 28);
@@ -71,7 +74,7 @@
             // rbn_Borrar
             // 
             this.rbn_Borrar.AutoSize = true;
-            this.rbn_Borrar.Location = new System.Drawing.Point(435, 108);
+            this.rbn_Borrar.Location = new System.Drawing.Point(367, 109);
             this.rbn_Borrar.Margin = new System.Windows.Forms.Padding(4);
             this.rbn_Borrar.Name = "rbn_Borrar";
             this.rbn_Borrar.Size = new System.Drawing.Size(69, 21);
@@ -83,7 +86,7 @@
             // rbn_Actualizar
             // 
             this.rbn_Actualizar.AutoSize = true;
-            this.rbn_Actualizar.Location = new System.Drawing.Point(313, 108);
+            this.rbn_Actualizar.Location = new System.Drawing.Point(245, 109);
             this.rbn_Actualizar.Margin = new System.Windows.Forms.Padding(4);
             this.rbn_Actualizar.Name = "rbn_Actualizar";
             this.rbn_Actualizar.Size = new System.Drawing.Size(91, 21);
@@ -95,7 +98,7 @@
             // rbn_Leer
             // 
             this.rbn_Leer.AutoSize = true;
-            this.rbn_Leer.Location = new System.Drawing.Point(192, 108);
+            this.rbn_Leer.Location = new System.Drawing.Point(124, 109);
             this.rbn_Leer.Margin = new System.Windows.Forms.Padding(4);
             this.rbn_Leer.Name = "rbn_Leer";
             this.rbn_Leer.Size = new System.Drawing.Size(58, 21);
@@ -107,7 +110,7 @@
             // rbn_Crear
             // 
             this.rbn_Crear.AutoSize = true;
-            this.rbn_Crear.Location = new System.Drawing.Point(71, 108);
+            this.rbn_Crear.Location = new System.Drawing.Point(3, 109);
             this.rbn_Crear.Margin = new System.Windows.Forms.Padding(4);
             this.rbn_Crear.Name = "rbn_Crear";
             this.rbn_Crear.Size = new System.Drawing.Size(64, 21);
@@ -119,7 +122,7 @@
             // btn_salir
             // 
             this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-            this.btn_salir.Location = new System.Drawing.Point(417, 309);
+            this.btn_salir.Location = new System.Drawing.Point(349, 310);
             this.btn_salir.Margin = new System.Windows.Forms.Padding(4);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(143, 28);
@@ -131,7 +134,7 @@
             // cbx_cliente
             // 
             this.cbx_cliente.FormattingEnabled = true;
-            this.cbx_cliente.Location = new System.Drawing.Point(192, 137);
+            this.cbx_cliente.Location = new System.Drawing.Point(124, 138);
             this.cbx_cliente.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_cliente.Name = "cbx_cliente";
             this.cbx_cliente.Size = new System.Drawing.Size(363, 24);
@@ -140,7 +143,7 @@
             // 
             // txt_area
             // 
-            this.txt_area.Location = new System.Drawing.Point(184, 173);
+            this.txt_area.Location = new System.Drawing.Point(116, 174);
             this.txt_area.Margin = new System.Windows.Forms.Padding(4);
             this.txt_area.Name = "txt_area";
             this.txt_area.Size = new System.Drawing.Size(363, 22);
@@ -150,7 +153,7 @@
             // 
             this.lbl_orden.AutoSize = true;
             this.lbl_orden.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_orden.Location = new System.Drawing.Point(128, 178);
+            this.lbl_orden.Location = new System.Drawing.Point(60, 179);
             this.lbl_orden.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_orden.Name = "lbl_orden";
             this.lbl_orden.Size = new System.Drawing.Size(49, 17);
@@ -159,7 +162,7 @@
             // 
             // txt_nombre
             // 
-            this.txt_nombre.Location = new System.Drawing.Point(184, 138);
+            this.txt_nombre.Location = new System.Drawing.Point(116, 139);
             this.txt_nombre.Margin = new System.Windows.Forms.Padding(4);
             this.txt_nombre.Name = "txt_nombre";
             this.txt_nombre.Size = new System.Drawing.Size(363, 22);
@@ -169,7 +172,7 @@
             // 
             this.lbl_cliente.AutoSize = true;
             this.lbl_cliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cliente.Location = new System.Drawing.Point(102, 143);
+            this.lbl_cliente.Location = new System.Drawing.Point(34, 144);
             this.lbl_cliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_cliente.Name = "lbl_cliente";
             this.lbl_cliente.Size = new System.Drawing.Size(74, 17);
@@ -178,7 +181,7 @@
             // 
             // txt_registro
             // 
-            this.txt_registro.Location = new System.Drawing.Point(184, 235);
+            this.txt_registro.Location = new System.Drawing.Point(116, 236);
             this.txt_registro.Margin = new System.Windows.Forms.Padding(4);
             this.txt_registro.Name = "txt_registro";
             this.txt_registro.Size = new System.Drawing.Size(363, 22);
@@ -188,7 +191,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(89, 240);
+            this.label1.Location = new System.Drawing.Point(21, 241);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 17);
@@ -197,7 +200,7 @@
             // 
             // txt_nombrecontacto
             // 
-            this.txt_nombrecontacto.Location = new System.Drawing.Point(184, 203);
+            this.txt_nombrecontacto.Location = new System.Drawing.Point(116, 204);
             this.txt_nombrecontacto.Margin = new System.Windows.Forms.Padding(4);
             this.txt_nombrecontacto.Name = "txt_nombrecontacto";
             this.txt_nombrecontacto.Size = new System.Drawing.Size(363, 22);
@@ -207,19 +210,42 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(83, 208);
+            this.label2.Location = new System.Drawing.Point(15, 209);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 17);
             this.label2.TabIndex = 63;
             this.label2.Text = "CONTACTO";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(499, 29);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(746, 435);
+            this.dataGridView1.TabIndex = 66;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(124, 391);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(267, 23);
+            this.button1.TabIndex = 67;
+            this.button1.Text = "Mostrar todo los datos del cliente";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CLIENTES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(746, 371);
+            this.ClientSize = new System.Drawing.Size(1257, 463);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txt_registro);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_nombrecontacto);
@@ -241,6 +267,7 @@
             this.Name = "CLIENTES";
             this.Text = "CLIENTES";
             this.Load += new System.EventHandler(this.CLIENTES_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,5 +290,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_nombrecontacto;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }
