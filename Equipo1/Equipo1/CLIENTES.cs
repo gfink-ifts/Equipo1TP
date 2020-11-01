@@ -107,6 +107,7 @@ namespace Equipo1
         }
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
+            limpiarForm();
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
@@ -360,33 +361,30 @@ namespace Equipo1
           //FUNCION ACTUALIZAR
           void actualizar()
           {
-             // if (validartextbox())
-              //{
-                  string nombre, area, registro;
-                  mi_conexion.Open();
-                  nombre = cbx_cliente.SelectedValue.ToString();
-                  area = txt_area.Text;
-                  registro = txt_registro.Text;
+            if (validartextbox())
+            {
+                  string nombre = txt_nombre.Text;
+                  string area=txt_area.Text;
+              
 
-                  string cmd = "update Clientes set area=@area where id_cliente=@nombre";
+            string cmd = "update Clientes set area=@area where nombre like @id";
+            mi_conexion.Open();
+            SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+             comando.Parameters.AddWithValue("@area", area);
+             comando.Parameters.AddWithValue("@id", nombre );
 
-
-                  SqlCommand comando = new SqlCommand(cmd, mi_conexion);
-                  comando.Parameters.AddWithValue("@area", area);
-                  comando.Parameters.AddWithValue("@nombre", nombre );
-
-
+            
                   comando.ExecuteNonQuery();
                   mi_conexion.Close();
                   mostrarMensaje("Usuario actualizado correctamente");
 
                   limpiarForm();
-             // }
-             // else
-             // {
+              }
+              else
+              {
               //    mostrarMensaje("Por favor completar todos los campos");
-             // }
-             // llenar_datagrid();
+             }
+              llenar_datagrid();
 
           }
 
