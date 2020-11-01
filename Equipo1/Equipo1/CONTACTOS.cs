@@ -153,11 +153,7 @@ namespace Equipo1
 
                 Limpiar();
             }
-            
-            if (rbn_Actualizar.Checked)
-			{
-
-			}
+           
         }
         //carga los cbx segun combo box
 		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
