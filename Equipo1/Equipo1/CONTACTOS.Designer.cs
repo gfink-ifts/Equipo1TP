@@ -47,12 +47,14 @@
 			this.txt_Mail = new System.Windows.Forms.TextBox();
 			this.cbx_Nombre = new System.Windows.Forms.ComboBox();
 			this.cbx_Id_Provincia = new System.Windows.Forms.ComboBox();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btn_salir
 			// 
 			this.btn_salir.ForeColor = System.Drawing.Color.Crimson;
-			this.btn_salir.Location = new System.Drawing.Point(275, 330);
+			this.btn_salir.Location = new System.Drawing.Point(229, 330);
 			this.btn_salir.Name = "btn_salir";
 			this.btn_salir.Size = new System.Drawing.Size(107, 23);
 			this.btn_salir.TabIndex = 19;
@@ -95,7 +97,7 @@
 			// rbn_Leer
 			// 
 			this.rbn_Leer.AutoSize = true;
-			this.rbn_Leer.Location = new System.Drawing.Point(115, 79);
+			this.rbn_Leer.Location = new System.Drawing.Point(104, 79);
 			this.rbn_Leer.Name = "rbn_Leer";
 			this.rbn_Leer.Size = new System.Drawing.Size(46, 17);
 			this.rbn_Leer.TabIndex = 22;
@@ -107,7 +109,7 @@
 			// rbn_Actualizar
 			// 
 			this.rbn_Actualizar.AutoSize = true;
-			this.rbn_Actualizar.Location = new System.Drawing.Point(206, 79);
+			this.rbn_Actualizar.Location = new System.Drawing.Point(177, 79);
 			this.rbn_Actualizar.Name = "rbn_Actualizar";
 			this.rbn_Actualizar.Size = new System.Drawing.Size(71, 17);
 			this.rbn_Actualizar.TabIndex = 23;
@@ -119,7 +121,7 @@
 			// rbn_Borrar
 			// 
 			this.rbn_Borrar.AutoSize = true;
-			this.rbn_Borrar.Location = new System.Drawing.Point(297, 79);
+			this.rbn_Borrar.Location = new System.Drawing.Point(283, 79);
 			this.rbn_Borrar.Name = "rbn_Borrar";
 			this.rbn_Borrar.Size = new System.Drawing.Size(53, 17);
 			this.rbn_Borrar.TabIndex = 24;
@@ -211,7 +213,7 @@
 			// cbx_Nombre
 			// 
 			this.cbx_Nombre.FormattingEnabled = true;
-			this.cbx_Nombre.Location = new System.Drawing.Point(352, 113);
+			this.cbx_Nombre.Location = new System.Drawing.Point(115, 113);
 			this.cbx_Nombre.Name = "cbx_Nombre";
 			this.cbx_Nombre.Size = new System.Drawing.Size(221, 21);
 			this.cbx_Nombre.TabIndex = 37;
@@ -220,10 +222,18 @@
 			// cbx_Id_Provincia
 			// 
 			this.cbx_Id_Provincia.FormattingEnabled = true;
-			this.cbx_Id_Provincia.Location = new System.Drawing.Point(353, 201);
+			this.cbx_Id_Provincia.Location = new System.Drawing.Point(115, 201);
 			this.cbx_Id_Provincia.Name = "cbx_Id_Provincia";
 			this.cbx_Id_Provincia.Size = new System.Drawing.Size(220, 21);
 			this.cbx_Id_Provincia.TabIndex = 38;
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Location = new System.Drawing.Point(378, 79);
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.Size = new System.Drawing.Size(367, 250);
+			this.dataGridView1.TabIndex = 39;
 			// 
 			// CONTACTOS
 			// 
@@ -231,6 +241,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.LightSteelBlue;
 			this.ClientSize = new System.Drawing.Size(787, 374);
+			this.Controls.Add(this.dataGridView1);
 			this.Controls.Add(this.cbx_Id_Provincia);
 			this.Controls.Add(this.cbx_Nombre);
 			this.Controls.Add(this.txt_Mail);
@@ -254,6 +265,7 @@
 			this.Name = "CONTACTOS";
 			this.Text = "CONTACTOS";
 			this.Load += new System.EventHandler(this.CONTACTOS_Load);
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -280,5 +292,6 @@
 		private System.Windows.Forms.TextBox txt_Mail;
 		private System.Windows.Forms.ComboBox cbx_Nombre;
 		private System.Windows.Forms.ComboBox cbx_Id_Provincia;
+		private System.Windows.Forms.DataGridView dataGridView1;
 	}
 }

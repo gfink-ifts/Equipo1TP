@@ -25,6 +25,7 @@ namespace Equipo1
 
         private void CONTACTOS_Load(object sender, EventArgs e)
         {
+           
             cn = new SqlConnection(cadenaConnex);
         }
         //funciones
@@ -53,6 +54,24 @@ namespace Equipo1
             //CIERRA LA CONEXION
             cn.Close();
         }
+        void mostrar_provincia()
+		{
+            SqlDataAdapter mostrar_tipo;
+            DataTable data = new DataTable();
+            //Abro la conexion
+            cn.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            mostrar_tipo = new SqlDataAdapter("SELECT id_provincia,provincia FROM provincias", cn);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            mostrar_tipo.Fill(data);
+            //RELLENA EL COMBO BOX
+            cbx_Id_Provincia.DataSource = data;
+            cbx_Id_Provincia.ValueMember = "id_provincia"; //VARIABLE VISIBLE
+            cbx_Id_Provincia.DisplayMember = "provincia"; //VARIABLE DESPLEGADA
+            //CIERRA LA CONEXION
+            cn.Close();
+        }
+
         //botones
         private void btn_salir_Click(object sender, EventArgs e)
         {
@@ -61,7 +80,6 @@ namespace Equipo1
 
         private void btn_Ejecutar_Click(object sender, EventArgs e)
 		{
-            //deberia eliminar todo lo de id provincia?
             if (rbn_Crear.Checked)
 			{
                 if (txt_Nombre.Text == ""||txt_Domicilio.Text == ""||txt_Telefono.Text == ""||txt_Mail.Text=="")
@@ -73,13 +91,14 @@ namespace Equipo1
                   
                     //DECLARACION DE VARIABLES
 
-                    string nombre =Convert.ToString (txt_Nombre.Text);
-                    string domicilio = Convert.ToString(txt_Domicilio.Text);
-                    string id_provincia = Convert.ToString(txt_Domicilio.Text);
+                    string nombre =txt_Nombre.Text;
+                    string domicilio = txt_Domicilio.Text;
+                    string id_provincia = txt_Domicilio.Text;
                     int telefono = Convert.ToInt32(txt_Telefono.Text);
-                    string mail = Convert.ToString(txt_Mail.Text);
+                    string mail = txt_Mail.Text;
 
-                    string cmd = "insert into CONTACTOS  (nombre,domicilio,id_provincia,telefono,mail) " + "values (@nom, @dom,@id_prov, @tel, @mail)";
+                    string cmd = "insert into CONTACTOS  (nombre,domicilio,id_provincia,telefono,mail) " 
+                        + "values (@nom, @dom,@id_prov, @tel, @mail)";
 
 
                     //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
@@ -103,6 +122,7 @@ namespace Equipo1
             //rbn_leer se borraria
             if (rbn_Leer.Checked)
 			{
+                /*
                 string nombre = txt_Nombre.Text;
                 string domicilio = txt_Domicilio.Text;
                 string telefono = txt_Telefono.Text;
@@ -121,7 +141,7 @@ namespace Equipo1
                 cn.Close();
                 MessageBox.Show("contacto creado correctamente");
                 Limpiar();
-
+                */
             }
             if (rbn_Actualizar.Checked)
 			{
@@ -153,11 +173,7 @@ namespace Equipo1
 
                 Limpiar();
             }
-            
-            if (rbn_Actualizar.Checked)
-			{
-
-			}
+           
         }
         //carga los cbx segun combo box
 		private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
@@ -166,8 +182,10 @@ namespace Equipo1
             txt_Domicilio.Enabled = true;
             txt_Telefono.Enabled = true;
             txt_Mail.Enabled = true;
-            cbx_Id_Provincia.Enabled = false;
-            cbx_Nombre.Enabled =false;
+            cbx_Nombre.Visible  =false;
+            mostrar_provincia();
+
+            
         }
 
 		private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
@@ -184,6 +202,7 @@ namespace Equipo1
             cbx_Id_Provincia.Enabled = true;
             cbx_Nombre.Enabled = true;
             mostrar_nombre();
+            mostrar_provincia();
         }
 
 		private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
