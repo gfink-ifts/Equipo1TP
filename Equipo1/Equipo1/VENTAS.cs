@@ -182,17 +182,6 @@ namespace Equipo1
             this.Close();
         }
 
-        private void cbx_cliente_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-           // mostrar_campos(cbx_cliente.SelectedValue.ToString());
-        }
-
-        private void cbx_servicio_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            //mostrar_campos(cbx_servicio.SelectedValue.ToString());
-        }
-
-
         //  ******************* FUNCIONES *******************
         void Mensaje (int id)
         {
