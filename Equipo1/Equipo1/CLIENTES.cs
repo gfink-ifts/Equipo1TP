@@ -49,7 +49,7 @@ namespace Equipo1
                 //CRUD: LEER
                 if (rbn_Leer.Checked)
                 {
-                   // txt_nombrecontacto.Visible = true;
+                   txt_nombrecontacto.Visible = true;
                     
                 }
 
@@ -86,6 +86,10 @@ namespace Equipo1
         }
         private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
         {
+            limpiarForm();
+            mostrar_contactos();
+            cbx_nombrecontacto.Visible = true;
+            btn_buscarcliente.Visible = false;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
@@ -95,19 +99,24 @@ namespace Equipo1
         }
         private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
         {
+            cbx_nombrecontacto.Visible = false;
+            //cbx_nombrecontacto.Enabled = true;
+            btn_buscarcliente.Visible = false;
             txt_nombrecontacto.Visible = true;
             txt_nombre.Enabled = false;
             txt_area.Enabled = false;
-            txt_nombrecontacto.Enabled = false;
             txt_registro.Enabled = false;
-
             mostrar_clientes();
+            mostrar_contactos();
             llenar_clientes();
             llenar_datagrid();
         }
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
             limpiarForm();
+            cbx_nombrecontacto.Visible = false;
+            btn_buscarcliente.Visible = true;
+            cbx_cliente.Visible = false;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
@@ -118,6 +127,8 @@ namespace Equipo1
         private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
         {
             limpiarForm();
+            cbx_nombrecontacto.Visible = false;
+            btn_buscarcliente.Visible = true;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
@@ -158,6 +169,29 @@ namespace Equipo1
             cbx_cliente.DataSource = data;
             cbx_cliente.ValueMember = "ID_CLIENTE"; //VARIABLE VISIBLE
             cbx_cliente.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
+
+
+
+
+
+            //CIERRA LA CONEXION
+            mi_conexion.Close();
+        }
+        //FUNCION MOSTRAR CONTACTOS
+        void mostrar_contactos()
+        {
+            SqlDataAdapter mostrar_tipo;
+            DataTable data = new DataTable();
+            //Abro la conexion
+            mi_conexion.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            mostrar_tipo = new SqlDataAdapter("SELECT ID_contacto, NOMBRE FROM contactos", mi_conexion);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            mostrar_tipo.Fill(data);
+            //RELLENA EL COMBO BOX
+            cbx_nombrecontacto.DataSource = data;
+            cbx_nombrecontacto.ValueMember = "ID_CONTACTO"; //VARIABLE VISIBLE
+            cbx_nombrecontacto.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
 
 
 
@@ -388,6 +422,20 @@ namespace Equipo1
 
           }
 
-     
+        private void btn_buscarcliente_Click(object sender, EventArgs e)
+        {
+            /*string apellido = txt_cliente.Text;*/
+            string nombre = txt_buscarcliente.Text;
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string consulta = "Select nombre,area,fecha_registro from clientes where nombre like @nombre  ";
+            da = new SqlDataAdapter(consulta, mi_conexion);
+            /*da.SelectCommand.Parameters.AddWithValue("@apell", "%" + apellido + "%" );*/
+            da.SelectCommand.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            mi_conexion.Close();
+        }
     }
 }

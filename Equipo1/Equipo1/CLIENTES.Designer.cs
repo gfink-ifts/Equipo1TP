@@ -46,6 +46,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.btn_buscarcliente = new System.Windows.Forms.Button();
+            this.txt_buscarcliente = new System.Windows.Forms.TextBox();
+            this.cbx_nombrecontacto = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -234,7 +237,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(124, 391);
+            this.button1.Location = new System.Drawing.Point(124, 414);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(267, 23);
             this.button1.TabIndex = 67;
@@ -242,12 +245,41 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btn_buscarcliente
+            // 
+            this.btn_buscarcliente.Location = new System.Drawing.Point(63, 364);
+            this.btn_buscarcliente.Name = "btn_buscarcliente";
+            this.btn_buscarcliente.Size = new System.Drawing.Size(154, 23);
+            this.btn_buscarcliente.TabIndex = 68;
+            this.btn_buscarcliente.Text = "Buscar Cliente";
+            this.btn_buscarcliente.UseVisualStyleBackColor = true;
+            this.btn_buscarcliente.Click += new System.EventHandler(this.btn_buscarcliente_Click);
+            // 
+            // txt_buscarcliente
+            // 
+            this.txt_buscarcliente.Location = new System.Drawing.Point(224, 364);
+            this.txt_buscarcliente.Name = "txt_buscarcliente";
+            this.txt_buscarcliente.Size = new System.Drawing.Size(100, 22);
+            this.txt_buscarcliente.TabIndex = 69;
+            // 
+            // cbx_nombrecontacto
+            // 
+            this.cbx_nombrecontacto.FormattingEnabled = true;
+            this.cbx_nombrecontacto.Location = new System.Drawing.Point(124, 204);
+            this.cbx_nombrecontacto.Margin = new System.Windows.Forms.Padding(4);
+            this.cbx_nombrecontacto.Name = "cbx_nombrecontacto";
+            this.cbx_nombrecontacto.Size = new System.Drawing.Size(363, 24);
+            this.cbx_nombrecontacto.TabIndex = 70;
+            // 
             // CLIENTES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1257, 463);
+            this.Controls.Add(this.cbx_nombrecontacto);
+            this.Controls.Add(this.txt_buscarcliente);
+            this.Controls.Add(this.btn_buscarcliente);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txt_registro);
@@ -296,5 +328,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_buscarcliente;
+        private System.Windows.Forms.TextBox txt_buscarcliente;
+        private System.Windows.Forms.ComboBox cbx_nombrecontacto;
     }
 }
