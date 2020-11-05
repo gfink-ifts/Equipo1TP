@@ -51,7 +51,7 @@
             // 
             // btn_ventas
             // 
-            this.btn_ventas.Location = new System.Drawing.Point(12, 159);
+            this.btn_ventas.Location = new System.Drawing.Point(12, 155);
             this.btn_ventas.Name = "btn_ventas";
             this.btn_ventas.Size = new System.Drawing.Size(202, 23);
             this.btn_ventas.TabIndex = 14;
@@ -61,7 +61,7 @@
             // 
             // btn_productos
             // 
-            this.btn_productos.Location = new System.Drawing.Point(12, 189);
+            this.btn_productos.Location = new System.Drawing.Point(12, 185);
             this.btn_productos.Name = "btn_productos";
             this.btn_productos.Size = new System.Drawing.Size(202, 23);
             this.btn_productos.TabIndex = 13;
@@ -71,7 +71,7 @@
             // 
             // btn_provincias
             // 
-            this.btn_provincias.Location = new System.Drawing.Point(12, 129);
+            this.btn_provincias.Location = new System.Drawing.Point(12, 125);
             this.btn_provincias.Name = "btn_provincias";
             this.btn_provincias.Size = new System.Drawing.Size(202, 23);
             this.btn_provincias.TabIndex = 12;
@@ -81,7 +81,7 @@
             // 
             // btn_contactos
             // 
-            this.btn_contactos.Location = new System.Drawing.Point(12, 99);
+            this.btn_contactos.Location = new System.Drawing.Point(12, 65);
             this.btn_contactos.Name = "btn_contactos";
             this.btn_contactos.Size = new System.Drawing.Size(202, 23);
             this.btn_contactos.TabIndex = 11;
@@ -91,7 +91,7 @@
             // 
             // btn_tipo_productos
             // 
-            this.btn_tipo_productos.Location = new System.Drawing.Point(11, 219);
+            this.btn_tipo_productos.Location = new System.Drawing.Point(11, 215);
             this.btn_tipo_productos.Name = "btn_tipo_productos";
             this.btn_tipo_productos.Size = new System.Drawing.Size(203, 23);
             this.btn_tipo_productos.TabIndex = 10;
@@ -111,7 +111,7 @@
             // 
             // btn_clientes
             // 
-            this.btn_clientes.Location = new System.Drawing.Point(11, 69);
+            this.btn_clientes.Location = new System.Drawing.Point(11, 95);
             this.btn_clientes.Name = "btn_clientes";
             this.btn_clientes.Size = new System.Drawing.Size(203, 23);
             this.btn_clientes.TabIndex = 8;
