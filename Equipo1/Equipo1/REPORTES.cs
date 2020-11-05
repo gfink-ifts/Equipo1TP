@@ -22,11 +22,7 @@ namespace Equipo1
 
         //DECLARACION TABLE
         DataTable tabla = new DataTable();
-        /*
-        string mostrar = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                         "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                         "wHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS";
-                         */
+        
         public REPORTES()
         {
             InitializeComponent();
@@ -35,13 +31,16 @@ namespace Equipo1
         private void REPORTES_Load(object sender, EventArgs e)
         {
             string mostrar = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                 "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                 "wHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS";
+                             "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
+                             "wHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS";
 
             Llenar_dgw(mostrar);
 
             btn_buscar.Visible = false;
             gbx_fecha.Visible = false;
+
+            //VARIABLE QUE ESTABLECERA LA CONEXION
+            mi_conexion = new SqlConnection(conectar);
 
         }
 
@@ -56,6 +55,9 @@ namespace Equipo1
 
         private void rbn_cliente_CheckedChanged(object sender, EventArgs e)
         {
+            Limpiar();
+            tabla = new DataTable();
+
             string mostrar = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
                  "wHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS";
@@ -65,25 +67,26 @@ namespace Equipo1
             gbx_fecha.Visible = false;
 
             Llenar_dgw(mostrar);
-            Max(tabla, 4,1);
+            Max(tabla, 4, 1);
             Min(tabla, 4, 1);
-            Limpiar();
         }
 
         private void rbn_producto_CheckedChanged(object sender, EventArgs e)
         {
-            string mostrar = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                 "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                 "wHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS";
+            Limpiar();
+            tabla = new DataTable();
+            
+            string mostrar = "SELECT S.descripcion, COUNT(CANTIDAD)" +
+                             "FROM VENTAS AS V, SERVICIOS AS S " +
+                             "GROUP BY s.descripcion";
 
             //VISIBILIDAD DE VARIABLES
             btn_buscar.Visible = false;
             gbx_fecha.Visible = false;
 
             Llenar_dgw(mostrar);
-            Max(tabla, 4, 2);
-            Min(tabla, 4, 2);
-            Limpiar();
+            Max(tabla, 1, 0);
+            Min(tabla, 1, 0);
         }
 
 
@@ -96,508 +99,33 @@ namespace Equipo1
             string mes;
             string instruccion = " ";
 
-            if (cbx_mes.SelectedItem is null)
+            if (cbx_mes.SelectedIndex == 0)
             {
-                mes = "0";
+                mes = " ";
+            }
+            else if (cbx_mes.SelectedIndex == 10 || cbx_mes.SelectedIndex == 11 || cbx_mes.SelectedIndex == 12)
+            {
+                mes = cbx_mes.SelectedIndex.ToString();
             }
             else
             {
-                mes = cbx_mes.SelectedItem.ToString();
+                mes = "0" + cbx_mes.SelectedIndex.ToString();
             }
-            //MessageBox.Show(mes);
 
-            //CONSULTA SQL
-            if (ano == "2020")
+            if (rbn_cliente_2.Checked)
             {
-                if (mes == "0")
-                {
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-12-31' " +
-                                  "AND FECHA_VENTA<'2021-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "01")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-12-31' " +
-                                  "AND FECHA_VENTA<'2020-02-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "02")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-01-31' " +
-                                  "AND FECHA_VENTA<'2020-03-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "03")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-02-31' " +
-                                  "AND FECHA_VENTA<'2020-04-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "04")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-03-31' " +
-                                  "AND FECHA_VENTA<'2020-05-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "05")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-04-31' " +
-                                  "AND FECHA_VENTA<'2020-06-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "07")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-06-31' " +
-                                  "AND FECHA_VENTA<'2020-08-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "08")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-07-31' " +
-                                  "AND FECHA_VENTA<'2020-09-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "09")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-08-31' " +
-                                  "AND FECHA_VENTA<'2020-10-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "10")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-09-31' " +
-                                  "AND FECHA_VENTA<'2020-11-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "11")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-10-31' " +
-                                  "AND FECHA_VENTA<'2020-12-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "12")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2020-11-31' " +
-                                  "AND FECHA_VENTA<'2021-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-            }
-            else if (ano == "2019")
-            {
-                if (mes == "0")
-                {
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-12-31' " +
-                                  "AND FECHA_VENTA<'2020-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "01")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-12-31' " +
-                                  "AND FECHA_VENTA<'2019-02-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "02")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-01-31' " +
-                                  "AND FECHA_VENTA<'2019-03-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "03")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-02-31' " +
-                                  "AND FECHA_VENTA<'2019-04-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "04")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-03-31' " +
-                                  "AND FECHA_VENTA<'2019-05-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "05")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-04-31' " +
-                                  "AND FECHA_VENTA<'2019-06-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "07")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-06-31' " +
-                                  "AND FECHA_VENTA<'2019-08-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "08")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-07-31' " +
-                                  "AND FECHA_VENTA<'2019-09-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "09")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-08-31' " +
-                                  "AND FECHA_VENTA<'2019-10-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "10")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-09-31' " +
-                                  "AND FECHA_VENTA<'2019-11-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "11")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-10-31' " +
-                                  "AND FECHA_VENTA<'2019-12-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "12")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2019-11-31' " +
-                                  "AND FECHA_VENTA<'2020-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-
-            }
-            else if (ano == "2018")
-            {
-                if (mes == "0")
-                {
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                       "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                       "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-12-31' " +
-                       "AND FECHA_VENTA<'2019-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "01")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-12-31' " +
-                                  "AND FECHA_VENTA<'2018-02-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "02")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-01-31' " +
-                                  "AND FECHA_VENTA<'2018-03-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "03")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-02-31' " +
-                                  "AND FECHA_VENTA<'2018-04-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "04")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-03-31' " +
-                                  "AND FECHA_VENTA<'2018-05-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "05")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-04-31' " +
-                                  "AND FECHA_VENTA<'2018-06-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "07")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-06-31' " +
-                                  "AND FECHA_VENTA<'2018-08-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "08")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-07-31' " +
-                                  "AND FECHA_VENTA<'2018-09-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "09")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-08-31' " +
-                                  "AND FECHA_VENTA<'2018-10-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "10")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-09-31' " +
-                                  "AND FECHA_VENTA<'2018-11-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "11")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-10-31' " +
-                                  "AND FECHA_VENTA<'2018-12-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "12")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2018-11-31' " +
-                                  "AND FECHA_VENTA<'2019-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-            }
-            else if (ano == "2017")
-            {
-                if (mes == "0")
-                {
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                   "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                   "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-12-31' " +
-                   "AND FECHA_VENTA<'2018-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "01")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-12-31' " +
-                                  "AND FECHA_VENTA<'2017-02-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "02")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-01-31' " +
-                                  "AND FECHA_VENTA<'2017-03-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "03")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-02-31' " +
-                                  "AND FECHA_VENTA<'2017-04-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "04")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-03-31' " +
-                                  "AND FECHA_VENTA<'2017-05-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "05")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-04-31' " +
-                                  "AND FECHA_VENTA<'2017-06-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "07")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-06-31' " +
-                                  "AND FECHA_VENTA<'2017-08-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "08")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-07-31' " +
-                                  "AND FECHA_VENTA<'2017-09-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "09")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-08-31' " +
-                                  "AND FECHA_VENTA<'2017-10-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "10")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-09-31' " +
-                                  "AND FECHA_VENTA<'2017-11-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "11")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-10-31' " +
-                                  "AND FECHA_VENTA<'2017-12-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "12")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2017-11-31' " +
-                                  "AND FECHA_VENTA<'2018-01-01' ORDER BY FECHA_VENTA DESC";
-                }
+                instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
+                              "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
+                              "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND " +
+                              "fecha_venta LIKE '%" + ano + "-" + mes + "%' ORDER BY FECHA_VENTA DESC";
             }
             else
             {
-                if (mes == "0")
-                {
-                        instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                   "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                   "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2015-12-31' " +
-                   "AND FECHA_VENTA<'2017-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "01")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2015-12-31' " +
-                                  "AND FECHA_VENTA<'2016-02-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "02")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-01-31' " +
-                                  "AND FECHA_VENTA<'2016-03-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "03")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-02-31' " +
-                                  "AND FECHA_VENTA<'2016-04-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "04")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-03-31' " +
-                                  "AND FECHA_VENTA<'2016-05-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "05")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-04-31' " +
-                                  "AND FECHA_VENTA<'2016-06-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "07")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-06-31' " +
-                                  "AND FECHA_VENTA<'2016-08-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "08")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-07-31' " +
-                                  "AND FECHA_VENTA<'2016-09-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "09")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-08-31' " +
-                                  "AND FECHA_VENTA<'2016-10-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "10")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-09-31' " +
-                                  "AND FECHA_VENTA<'2016-11-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "11")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-10-31' " +
-                                  "AND FECHA_VENTA<'2016-12-01' ORDER BY FECHA_VENTA DESC";
-                }
-                else if (mes == "12")
-                {
-
-                    instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
-                                  "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
-                                  "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND fecha_venta> '2016-11-31' " +
-                                  "AND FECHA_VENTA<'2017-01-01' ORDER BY FECHA_VENTA DESC";
-                }
-            }
+                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD)" +
+                              "FROM VENTAS AS V, SERVICIOS AS S " +
+                              "WHERE fecha_venta LIKE '%" + ano + "-" + mes + "%'" +
+                              "GROUP BY s.descripcion";
+            }  
 
             //LLAMADO A LA FUNCION
             Llenar_dgw(instruccion);
@@ -610,8 +138,8 @@ namespace Equipo1
             }
             else
             {
-                Max(tabla, 4, 2);
-                Min(tabla, 4, 2);
+                Max(tabla, 1, 0);
+                Min(tabla, 1, 0);
             }
         }
 
@@ -661,6 +189,9 @@ namespace Equipo1
         {
             //VARIABLE QUE ESTABLECERA LA CONEXION
             mi_conexion = new SqlConnection(conectar);
+
+            //GENERO UNA INSTANCIA DE TABLE
+            tabla = new DataTable();
 
             //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
             SqlDataAdapter mostrar;

@@ -31,6 +31,9 @@
             this.lbl_titulo = new System.Windows.Forms.Label();
             this.btn_salir = new System.Windows.Forms.Button();
             this.gpx_selector = new System.Windows.Forms.GroupBox();
+            this.rbn_producto = new System.Windows.Forms.RadioButton();
+            this.rbn_cliente = new System.Windows.Forms.RadioButton();
+            this.rbn_fecha = new System.Windows.Forms.RadioButton();
             this.dgw_reportes = new System.Windows.Forms.DataGridView();
             this.lbl_mejor_nombre = new System.Windows.Forms.Label();
             this.lbl_mejor_total = new System.Windows.Forms.Label();
@@ -38,9 +41,6 @@
             this.lbl_peor_total = new System.Windows.Forms.Label();
             this.lbl_peor = new System.Windows.Forms.Label();
             this.lbl_peor_nombre = new System.Windows.Forms.Label();
-            this.rbn_fecha = new System.Windows.Forms.RadioButton();
-            this.rbn_cliente = new System.Windows.Forms.RadioButton();
-            this.rbn_producto = new System.Windows.Forms.RadioButton();
             this.cbx_mes = new System.Windows.Forms.ComboBox();
             this.cbx_ano = new System.Windows.Forms.ComboBox();
             this.btn_buscar = new System.Windows.Forms.Button();
@@ -83,6 +83,42 @@
             this.gpx_selector.Size = new System.Drawing.Size(340, 53);
             this.gpx_selector.TabIndex = 20;
             this.gpx_selector.TabStop = false;
+            // 
+            // rbn_producto
+            // 
+            this.rbn_producto.AutoSize = true;
+            this.rbn_producto.Location = new System.Drawing.Point(233, 19);
+            this.rbn_producto.Name = "rbn_producto";
+            this.rbn_producto.Size = new System.Drawing.Size(86, 17);
+            this.rbn_producto.TabIndex = 2;
+            this.rbn_producto.TabStop = true;
+            this.rbn_producto.Text = "PRODUCTO";
+            this.rbn_producto.UseVisualStyleBackColor = true;
+            this.rbn_producto.CheckedChanged += new System.EventHandler(this.rbn_producto_CheckedChanged);
+            // 
+            // rbn_cliente
+            // 
+            this.rbn_cliente.AutoSize = true;
+            this.rbn_cliente.Location = new System.Drawing.Point(128, 19);
+            this.rbn_cliente.Name = "rbn_cliente";
+            this.rbn_cliente.Size = new System.Drawing.Size(70, 17);
+            this.rbn_cliente.TabIndex = 1;
+            this.rbn_cliente.TabStop = true;
+            this.rbn_cliente.Text = "CLIENTE";
+            this.rbn_cliente.UseVisualStyleBackColor = true;
+            this.rbn_cliente.CheckedChanged += new System.EventHandler(this.rbn_cliente_CheckedChanged);
+            // 
+            // rbn_fecha
+            // 
+            this.rbn_fecha.AutoSize = true;
+            this.rbn_fecha.Location = new System.Drawing.Point(28, 19);
+            this.rbn_fecha.Name = "rbn_fecha";
+            this.rbn_fecha.Size = new System.Drawing.Size(60, 17);
+            this.rbn_fecha.TabIndex = 0;
+            this.rbn_fecha.TabStop = true;
+            this.rbn_fecha.Text = "FECHA";
+            this.rbn_fecha.UseVisualStyleBackColor = true;
+            this.rbn_fecha.CheckedChanged += new System.EventHandler(this.rbn_fecha_CheckedChanged);
             // 
             // dgw_reportes
             // 
@@ -148,61 +184,26 @@
             this.lbl_peor_nombre.TabIndex = 40;
             this.lbl_peor_nombre.Text = "label1";
             // 
-            // rbn_fecha
-            // 
-            this.rbn_fecha.AutoSize = true;
-            this.rbn_fecha.Location = new System.Drawing.Point(28, 19);
-            this.rbn_fecha.Name = "rbn_fecha";
-            this.rbn_fecha.Size = new System.Drawing.Size(60, 17);
-            this.rbn_fecha.TabIndex = 0;
-            this.rbn_fecha.TabStop = true;
-            this.rbn_fecha.Text = "FECHA";
-            this.rbn_fecha.UseVisualStyleBackColor = true;
-            this.rbn_fecha.CheckedChanged += new System.EventHandler(this.rbn_fecha_CheckedChanged);
-            // 
-            // rbn_cliente
-            // 
-            this.rbn_cliente.AutoSize = true;
-            this.rbn_cliente.Location = new System.Drawing.Point(128, 19);
-            this.rbn_cliente.Name = "rbn_cliente";
-            this.rbn_cliente.Size = new System.Drawing.Size(70, 17);
-            this.rbn_cliente.TabIndex = 1;
-            this.rbn_cliente.TabStop = true;
-            this.rbn_cliente.Text = "CLIENTE";
-            this.rbn_cliente.UseVisualStyleBackColor = true;
-            this.rbn_cliente.CheckedChanged += new System.EventHandler(this.rbn_cliente_CheckedChanged);
-            // 
-            // rbn_producto
-            // 
-            this.rbn_producto.AutoSize = true;
-            this.rbn_producto.Location = new System.Drawing.Point(233, 19);
-            this.rbn_producto.Name = "rbn_producto";
-            this.rbn_producto.Size = new System.Drawing.Size(86, 17);
-            this.rbn_producto.TabIndex = 2;
-            this.rbn_producto.TabStop = true;
-            this.rbn_producto.Text = "PRODUCTO";
-            this.rbn_producto.UseVisualStyleBackColor = true;
-            this.rbn_producto.CheckedChanged += new System.EventHandler(this.rbn_producto_CheckedChanged);
-            // 
             // cbx_mes
             // 
             this.cbx_mes.FormattingEnabled = true;
             this.cbx_mes.Items.AddRange(new object[] {
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12"});
+            "Todo",
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"});
             this.cbx_mes.Location = new System.Drawing.Point(99, 17);
             this.cbx_mes.Name = "cbx_mes";
-            this.cbx_mes.Size = new System.Drawing.Size(60, 21);
+            this.cbx_mes.Size = new System.Drawing.Size(77, 21);
             this.cbx_mes.TabIndex = 53;
             // 
             // cbx_ano
@@ -244,7 +245,7 @@
             // rbn_producto_2
             // 
             this.rbn_producto_2.AutoSize = true;
-            this.rbn_producto_2.Location = new System.Drawing.Point(238, 19);
+            this.rbn_producto_2.Location = new System.Drawing.Point(249, 19);
             this.rbn_producto_2.Name = "rbn_producto_2";
             this.rbn_producto_2.Size = new System.Drawing.Size(86, 17);
             this.rbn_producto_2.TabIndex = 2;
@@ -255,7 +256,7 @@
             // rbn_cliente_2
             // 
             this.rbn_cliente_2.AutoSize = true;
-            this.rbn_cliente_2.Location = new System.Drawing.Point(166, 19);
+            this.rbn_cliente_2.Location = new System.Drawing.Point(182, 19);
             this.rbn_cliente_2.Name = "rbn_cliente_2";
             this.rbn_cliente_2.Size = new System.Drawing.Size(70, 17);
             this.rbn_cliente_2.TabIndex = 1;

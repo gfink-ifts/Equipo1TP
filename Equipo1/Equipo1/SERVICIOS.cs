@@ -109,8 +109,7 @@ namespace Equipo1
                 //DECLARACION DE VARIABLES
                 string descripcion = Convert.ToString(txt_descripcion.Text);
                 string precio = Convert.ToString(txt_precio.Text);
-                int index = cbx_tipo.SelectedIndex;
-                string provincia = (index + 1).ToString();
+                string index = Convert.ToString(cbx_tipo.SelectedValue);
                 
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
                 SqlCommand nuevo_registro = new SqlCommand();
@@ -125,7 +124,7 @@ namespace Equipo1
                 //VINCULACION DE PARAMETROS
                 nuevo_registro.Parameters.AddWithValue("@DESCRIPCION", descripcion);
                 nuevo_registro.Parameters.AddWithValue("@PRECIO", precio);
-                nuevo_registro.Parameters.AddWithValue("@PROVINCIAS", provincia);
+                nuevo_registro.Parameters.AddWithValue("@PROVINCIAS", index);
 
                 //ABRO LA CONEXION
                 mi_conexion.Open();
@@ -143,8 +142,8 @@ namespace Equipo1
             //CRUD: LEER
             else if (rbn_leer.Checked)
             {
-                int index = cbx_descripcion.SelectedIndex;
-                string id = (index + 1).ToString();
+                string index = Convert.ToString(cbx_descripcion.SelectedValue);
+                //string id = (index + 1).ToString();
 
                 SqlDataAdapter leer_registro;
                 DataTable data = new DataTable();
@@ -155,7 +154,7 @@ namespace Equipo1
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
                 leer_registro = new SqlDataAdapter("SELECT S.DESCRIPCION, S.PRECIOS, T.DESCRIPCION" +
                                                    "FROM SERVICIOS AS S, TIPO_SERVICIOS AS T" +
-                                                   "WHERE ID_SERVICIOS='"+id+"'", mi_conexion);
+                                                   "WHERE ID_SERVICIOS='"+index+"'", mi_conexion);
 
                 //COMPLETAMOS LA MATRIZ
                 leer_registro.Fill(data);
@@ -180,18 +179,16 @@ namespace Equipo1
             else if (rbn_actualizar.Checked)
             {
                 string precio = Convert.ToString(txt_precio.Text);
-                int index = cbx_descripcion.SelectedIndex;
-                string id = (index + 1).ToString();
-                int index_tipo = cbx_tipo.SelectedIndex;
-                string id_tipo = (index_tipo + 1).ToString();
+                string index = Convert.ToString(cbx_descripcion.SelectedValue);
+                string index_tipo = Convert.ToString(cbx_tipo.SelectedValue);
                 
                 //VARIABLE DONDE ALMACENO LA INSTRUCCION
                 SqlCommand actualizar_registro = new SqlCommand ("UPDATE SERVICIOS SET PRECIOS=@precio, ID_TIPO_SERVICIOS=@id_tipo WHERE id_servicios=@id", mi_conexion);
 
                 //VINCULACION DE PARAMETROS
                 actualizar_registro.Parameters.AddWithValue("@precio", precio);
-                actualizar_registro.Parameters.AddWithValue("@id", id);
-                actualizar_registro.Parameters.AddWithValue("@id_tipo", id_tipo);
+                actualizar_registro.Parameters.AddWithValue("@id", index);
+                actualizar_registro.Parameters.AddWithValue("@id_tipo", index_tipo);
 
                 //ABRO LA CONEXION
                 mi_conexion.Open();
@@ -311,7 +308,7 @@ namespace Equipo1
             {
                 txt_precio.Text = Convert.ToString(datacampos.Rows[0][0]);
                 txt_tipo.Text = Convert.ToString(datacampos.Rows[0][1]);
-                cbx_tipo.SelectedIndex = (Convert.ToInt32(datacampos.Rows[0][2])-1);
+                cbx_tipo.SelectedValue = Convert.ToInt32(datacampos.Rows[0][2]);
             }
             //Cierra la conexion
             mi_conexion.Close();

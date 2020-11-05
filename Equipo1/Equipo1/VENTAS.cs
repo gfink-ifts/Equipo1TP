@@ -36,6 +36,7 @@ namespace Equipo1
             lbl_error_fecha.Visible = false;
             lbl_error_servicio.Visible = false;
             rbn_borrar.Enabled = false;
+            rbn_actualizar.Enabled = false;
 
         }
 
