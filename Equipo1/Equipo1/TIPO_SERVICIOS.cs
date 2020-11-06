@@ -36,39 +36,41 @@ namespace Equipo1
         //BOTON: EJECUTAR
         private void btn_ejecutar_Click_1(object sender, EventArgs e)
         {
-            //CRUD: CREAR
-            if (rbn_crear.Checked)
             {
-                alta_tiposervicio();
-                //llenar_datagrid();
-            }
-            //CRUD: LEER
-            if (rbn_leer.Checked)
-            {
-            }
-            //CRUD: UPDATE
-            if (rbn_actualizar.Checked)
-            {
-                /*
+                //CRUD: CREAR
+                if (rbn_crear.Checked)
+                {
+                    alta_tiposervicio();
+                    //llenar_datagrid();
+                }
+                //CRUD: LEER
+                if (rbn_leer.Checked)
+                {
+                }
+                //CRUD: UPDATE
+                if (rbn_actualizar.Checked)
+                {
+                    /*
 
-                SqlDataAdapter llenar_combo;
+                    SqlDataAdapter llenar_combo;
 
-                DataTable tabla_cat_cliente = new DataTable();
+                    DataTable tabla_cat_cliente = new DataTable();
 
-                mi_conexion.Open();
+                    mi_conexion.Open();
 
-                mostrar_por = new SqlDataAdapter("select * from clientes where direccion LIKE '%" + buscar + "%'", mi_conexion);
+                    mostrar_por = new SqlDataAdapter("select * from clientes where direccion LIKE '%" + buscar + "%'", mi_conexion);
 
-                mostrar_por.Fill(tabla_cat_cliente);
+                    mostrar_por.Fill(tabla_cat_cliente);
 
-                mi_conexion.Close();
-                */
+                    mi_conexion.Close();
+                    */
 
 
-            }
-            //CRUD: DELETE
-            if (rbn_borrar.Checked)
-            {
+                }
+                //CRUD: DELETE
+                if (rbn_borrar.Checked)
+                {
+                }
             }
         }
 
@@ -159,7 +161,7 @@ namespace Equipo1
             }
             else
             {
-                mostrarMensaje("Por favor completar todos los campos");
+                mostrarMensaje("Por favor completar el campo Tipo de Servicio");
             }
             llenar_datagrid();
             // limpiarForm();
