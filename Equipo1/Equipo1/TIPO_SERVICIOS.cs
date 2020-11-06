@@ -34,18 +34,20 @@ namespace Equipo1
         }
 
         //BOTON: EJECUTAR
-        private void btn_ejecutar_Click(object sender, EventArgs e)
+        private void btn_ejecutar_Click_1(object sender, EventArgs e)
         {
             //CRUD: CREAR
             if (rbn_crear.Checked)
             {
+                alta_tiposervicio();
+                //llenar_datagrid();
             }
             //CRUD: LEER
-            if (rbn_crear.Checked)
+            if (rbn_leer.Checked)
             {
             }
             //CRUD: UPDATE
-            if (rbn_crear.Checked)
+            if (rbn_actualizar.Checked)
             {
                 /*
 
@@ -65,25 +67,129 @@ namespace Equipo1
 
             }
             //CRUD: DELETE
-            if (rbn_crear.Checked)
+            if (rbn_borrar.Checked)
             {
             }
-
         }
+
 
       
-        //FUNCION LIMPIAR
-        void Limpiar()
-        {
-            
-            txt_descripcion1.Text = "";
-            
-        }
 
         private void btn_salir_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
+        {
+            llenar_datagrid();
+            cbx_descripcion.Visible = false;
+            
+        }
+
+        private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
+        {
+            llenar_datagrid();
+        }
+        private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
+        {
+            llenar_datagrid();
+        }
+
+        private void rbn_Eliminar_CheckedChanged(object sender, EventArgs e)
+        {
+            llenar_datagrid();
+        }
+        //FUNCIONES
+        //**********************************************************************************************************
+
+        //FUNCION LIMPIAR
+        void Limpiar()
+        {
+
+            txt_descripcion1.Text = "";
+
+        }
+
+        //FUNCION LLENAR DATAGRID
+        void llenar_datagrid()
+        {
+
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string query = "select t.descripcion,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios ";
+
+            da = new SqlDataAdapter(query, mi_conexion);
+
+            da.Fill(dt);
+
+            mi_conexion.Close();
+
+            dataGridView1.DataSource = dt;
+
+        }
+
+        //FUNCION Alta CLIENTES
+        void alta_tiposervicio()
+        {
+            if (validartextbox())
+            {
+                string descripcion;
+                mi_conexion.Open();
+                descripcion = txt_descripcion1.Text;
+               // area = txt_area.Text;
+                //registro = txt_registro.Text;
+
+                string cmd = "insert into tipo_servicios (descripcion) " +
+                                "values ( @descripcion)";
+
+
+                SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+                comando.Parameters.AddWithValue("@descripcion", descripcion);
+               // comando.Parameters.AddWithValue("@area", area);
+                //comando.Parameters.AddWithValue("@fecha_registro", registro);
+
+
+                comando.ExecuteNonQuery();
+                mi_conexion.Close();
+                mostrarMensaje("Tipo de Servicio dado de alta correctamente");
+
+
+            }
+            else
+            {
+                mostrarMensaje("Por favor completar todos los campos");
+            }
+            llenar_datagrid();
+            // limpiarForm();
+
+        }
+        //FUNCION VALIDAS TEXBOX
+        private bool validartextbox()
+        {
+            bool respuesta = true;
+
+
+            if (txt_descripcion1.Text == "" )
+            {
+                respuesta = false;
+            }
+            else
+            {
+
+            }
+
+
+            return respuesta;
+        }
+
+        private void mostrarMensaje(string mensaje)
+        {
+            MessageBox.Show(mensaje);
+        }
+
+       
     }
 }
 

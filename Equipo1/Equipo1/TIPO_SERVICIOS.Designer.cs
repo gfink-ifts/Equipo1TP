@@ -39,7 +39,12 @@
             this.rbn_leer = new System.Windows.Forms.RadioButton();
             this.rbn_crear = new System.Windows.Forms.RadioButton();
             this.btn_salir = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_mostrartodo = new System.Windows.Forms.Button();
+            this.btn_buscar = new System.Windows.Forms.Button();
+            this.txt_buscar = new System.Windows.Forms.TextBox();
             this.gpx_CRUD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_titulo
@@ -56,7 +61,7 @@
             // cbx_descripcion
             // 
             this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(169, 156);
+            this.cbx_descripcion.Location = new System.Drawing.Point(188, 156);
             this.cbx_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_descripcion.Name = "cbx_descripcion";
             this.cbx_descripcion.Size = new System.Drawing.Size(363, 24);
@@ -72,6 +77,7 @@
             this.btn_ejecutar.TabIndex = 53;
             this.btn_ejecutar.Text = "EJECUTAR";
             this.btn_ejecutar.UseVisualStyleBackColor = true;
+            this.btn_ejecutar.Click += new System.EventHandler(this.btn_ejecutar_Click_1);
             // 
             // txt_descripcion1
             // 
@@ -117,6 +123,7 @@
             this.rbn_borrar.TabStop = true;
             this.rbn_borrar.Text = "BORRAR";
             this.rbn_borrar.UseVisualStyleBackColor = true;
+            this.rbn_borrar.CheckedChanged += new System.EventHandler(this.rbn_Eliminar_CheckedChanged);
             // 
             // rbn_actualizar
             // 
@@ -129,6 +136,7 @@
             this.rbn_actualizar.TabStop = true;
             this.rbn_actualizar.Text = "ACTUALIZAR";
             this.rbn_actualizar.UseVisualStyleBackColor = true;
+            this.rbn_actualizar.CheckedChanged += new System.EventHandler(this.rbn_Actualizar_CheckedChanged);
             // 
             // rbn_leer
             // 
@@ -141,6 +149,7 @@
             this.rbn_leer.TabStop = true;
             this.rbn_leer.Text = "LEER";
             this.rbn_leer.UseVisualStyleBackColor = true;
+            this.rbn_leer.CheckedChanged += new System.EventHandler(this.rbn_Leer_CheckedChanged);
             // 
             // rbn_crear
             // 
@@ -153,6 +162,7 @@
             this.rbn_crear.TabStop = true;
             this.rbn_crear.Text = "CREAR";
             this.rbn_crear.UseVisualStyleBackColor = true;
+            this.rbn_crear.CheckedChanged += new System.EventHandler(this.rbn_Crear_CheckedChanged);
             // 
             // btn_salir
             // 
@@ -166,12 +176,51 @@
             this.btn_salir.UseVisualStyleBackColor = true;
             this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click_1);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(641, 44);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(573, 442);
+            this.dataGridView1.TabIndex = 55;
+            // 
+            // btn_mostrartodo
+            // 
+            this.btn_mostrartodo.Location = new System.Drawing.Point(104, 437);
+            this.btn_mostrartodo.Name = "btn_mostrartodo";
+            this.btn_mostrartodo.Size = new System.Drawing.Size(359, 23);
+            this.btn_mostrartodo.TabIndex = 56;
+            this.btn_mostrartodo.Text = "Mostrar todos lo datos del tipo de producto";
+            this.btn_mostrartodo.UseVisualStyleBackColor = true;
+            // 
+            // btn_buscar
+            // 
+            this.btn_buscar.Location = new System.Drawing.Point(33, 385);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(180, 23);
+            this.btn_buscar.TabIndex = 57;
+            this.btn_buscar.Text = "Buscar tipo de producto";
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            // 
+            // txt_buscar
+            // 
+            this.txt_buscar.Location = new System.Drawing.Point(230, 386);
+            this.txt_buscar.Name = "txt_buscar";
+            this.txt_buscar.Size = new System.Drawing.Size(100, 22);
+            this.txt_buscar.TabIndex = 58;
+            // 
             // TIPO_SERVICIOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(641, 334);
+            this.ClientSize = new System.Drawing.Size(1226, 510);
+            this.Controls.Add(this.txt_buscar);
+            this.Controls.Add(this.btn_buscar);
+            this.Controls.Add(this.btn_mostrartodo);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cbx_descripcion);
             this.Controls.Add(this.btn_ejecutar);
             this.Controls.Add(this.txt_descripcion1);
@@ -186,6 +235,7 @@
             this.Load += new System.EventHandler(this.TIPO_SERVICIOS_Load);
             this.gpx_CRUD.ResumeLayout(false);
             this.gpx_CRUD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +253,9 @@
         private System.Windows.Forms.RadioButton rbn_leer;
         private System.Windows.Forms.RadioButton rbn_crear;
         private System.Windows.Forms.Button btn_salir;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btn_mostrartodo;
+        private System.Windows.Forms.Button btn_buscar;
+        private System.Windows.Forms.TextBox txt_buscar;
     }
 }
