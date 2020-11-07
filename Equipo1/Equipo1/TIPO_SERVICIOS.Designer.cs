@@ -194,6 +194,7 @@
             this.btn_mostrartodo.TabIndex = 56;
             this.btn_mostrartodo.Text = "Mostrar todos lo datos del tipo de producto";
             this.btn_mostrartodo.UseVisualStyleBackColor = true;
+            this.btn_mostrartodo.Click += new System.EventHandler(this.btn_mostrartodo_Click);
             // 
             // btn_buscar
             // 
@@ -203,6 +204,7 @@
             this.btn_buscar.TabIndex = 57;
             this.btn_buscar.Text = "Buscar tipo de producto";
             this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
             // 
             // txt_buscar
             // 

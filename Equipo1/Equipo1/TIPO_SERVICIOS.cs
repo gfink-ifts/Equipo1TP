@@ -50,6 +50,7 @@ namespace Equipo1
                 //CRUD: UPDATE
                 if (rbn_actualizar.Checked)
                 {
+                    actualizar();
                     /*
 
                     SqlDataAdapter llenar_combo;
@@ -74,8 +75,39 @@ namespace Equipo1
             }
         }
 
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            /*string apellido = txt_cliente.Text;*/
+            string nombre = txt_buscar.Text;
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string consulta = "select t.descripcion_tipo_servicio,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios and t.descripcion_tipo_servicio like @nombre";
+            da = new SqlDataAdapter(consulta, mi_conexion);
+            /*da.SelectCommand.Parameters.AddWithValue("@apell", "%" + apellido + "%" );*/
+            da.SelectCommand.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            mi_conexion.Close();
+        }
 
-      
+        private void btn_mostrartodo_Click(object sender, EventArgs e)
+        {
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string query = "select t.descripcion_tipo_servicio,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios";
+
+            da = new SqlDataAdapter(query, mi_conexion);
+
+            da.Fill(dt);
+
+            mi_conexion.Close();
+
+            dataGridView1.DataSource = dt;
+        }
+
+
 
         private void btn_salir_Click_1(object sender, EventArgs e)
         {
@@ -92,10 +124,17 @@ namespace Equipo1
         private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
         {
             llenar_datagrid();
+            btn_ejecutar.Visible = false;
+            cbx_descripcion.Visible = false;
+            txt_descripcion1.Enabled = false;
         }
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
             llenar_datagrid();
+            cbx_descripcion.Visible = false;
+            txt_descripcion1.Enabled = true;
+
+
         }
 
         private void rbn_Eliminar_CheckedChanged(object sender, EventArgs e)
@@ -120,7 +159,7 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string query = "select t.descripcion,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios ";
+            string query = "select t.descripcion_tipo_servicio,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios ";
 
             da = new SqlDataAdapter(query, mi_conexion);
 
@@ -143,12 +182,12 @@ namespace Equipo1
                // area = txt_area.Text;
                 //registro = txt_registro.Text;
 
-                string cmd = "insert into tipo_servicios (descripcion) " +
-                                "values ( @descripcion)";
+                string cmd = "insert into tipo_servicios (descripcion_tipo_servicio) " +
+                                "values ( @descripcion_tipo_servicio)";
 
 
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
-                comando.Parameters.AddWithValue("@descripcion", descripcion);
+                comando.Parameters.AddWithValue("@descripcion_tipo_servicio", descripcion);
                // comando.Parameters.AddWithValue("@area", area);
                 //comando.Parameters.AddWithValue("@fecha_registro", registro);
 
@@ -191,7 +230,47 @@ namespace Equipo1
             MessageBox.Show(mensaje);
         }
 
-       
+        //FUNCION ACTUALIZAR
+        void actualizar()
+        {
+            if (validartextbox())
+            {
+                string nombre = txt_descripcion1.Text;
+                //string area = txt_area.Text;
+
+
+                string cmd = "update tipo_servicios set descripcion_tipo_servicio=@nombre where nombre like @id";
+                mi_conexion.Open();
+                SqlCommand comando = new SqlCommand(cmd, mi_conexion);
+                comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@id", nombre);
+
+
+                comando.ExecuteNonQuery();
+                mi_conexion.Close();
+                mostrarMensaje("Tipo de servicio actualizado correctamente");
+
+               // limpiarForm();
+            }
+            else
+            {
+                //    mostrarMensaje("Por favor completar todos los campos");
+            }
+            llenar_datagrid();
+
+        }
+
+        //FUNCION LLENAR TEXBOX A MEDIDA QUE SELECCIONO EL DATAGRID
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow dataGridView = dataGridView1.Rows[e.RowIndex];
+            txt_descripcion1.Text = dataGridView.Cells[1].Value.ToString();
+            //txt_area.Text = dataGridView.Cells[1].Value.ToString();
+            //txt_registro.Text = dataGridView.Cells[7].Value.ToString();
+            //txt_nombrecontacto.Text = dataGridView.Cells[2].Value.ToString();
+
+        }
+
     }
 }
 
