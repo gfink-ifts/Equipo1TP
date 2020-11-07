@@ -31,6 +31,7 @@ namespace Equipo1
         {
             //VARIABLE QUE ESTABLECERA LA CONEXION
             mi_conexion = new SqlConnection(conectar);
+            rbn_actualizar.Enabled = false;
         }
 
         //BOTON: EJECUTAR
@@ -71,6 +72,7 @@ namespace Equipo1
                 //CRUD: DELETE
                 if (rbn_borrar.Checked)
                 {
+                    eliminar();
                 }
             }
         }
@@ -118,6 +120,9 @@ namespace Equipo1
         {
             llenar_datagrid();
             cbx_descripcion.Visible = false;
+            txt_descripcion1.Enabled = true;
+            btn_ejecutar.Visible = true;
+            Limpiar();
             
         }
 
@@ -132,14 +137,18 @@ namespace Equipo1
         {
             llenar_datagrid();
             cbx_descripcion.Visible = false;
-            txt_descripcion1.Enabled = true;
-
+            txt_descripcion1.Enabled = false;
+            btn_ejecutar.Visible = false;
+            
 
         }
 
         private void rbn_Eliminar_CheckedChanged(object sender, EventArgs e)
         {
             llenar_datagrid();
+            txt_descripcion1.Enabled = true;
+            btn_ejecutar.Visible = true;
+
         }
         //FUNCIONES
         //**********************************************************************************************************
@@ -239,10 +248,10 @@ namespace Equipo1
                 //string area = txt_area.Text;
 
 
-                string cmd = "update tipo_servicios set descripcion_tipo_servicio=@nombre where nombre like @id";
+                string cmd = "update tipo_servicios set descripcion_tipo_servicio=@descripcion_tipo_servicio where descripcion_tipo_servicio like @id";
                 mi_conexion.Open();
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
-                comando.Parameters.AddWithValue("@nombre", nombre);
+                comando.Parameters.AddWithValue("@descripcion_tipo_servicio", nombre);
                 comando.Parameters.AddWithValue("@id", nombre);
 
 
@@ -264,11 +273,51 @@ namespace Equipo1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow dataGridView = dataGridView1.Rows[e.RowIndex];
-            txt_descripcion1.Text = dataGridView.Cells[1].Value.ToString();
+            txt_descripcion1.Text = dataGridView.Cells[0].Value.ToString();
             //txt_area.Text = dataGridView.Cells[1].Value.ToString();
             //txt_registro.Text = dataGridView.Cells[7].Value.ToString();
             //txt_nombrecontacto.Text = dataGridView.Cells[2].Value.ToString();
 
+        }
+
+        //FUNCION ELIMINAR
+
+        void eliminar()
+        {
+
+            if (validartextbox())
+            {
+                string nombre = txt_descripcion1.Text;
+                string instruccion = "DELETE tipo_servicios WHERE descripcion_tipo_servicio like @nom";
+                SqlCommand cmd = new SqlCommand(instruccion, mi_conexion);
+                cmd.Parameters.AddWithValue("@nom", nombre);
+                ejecutarQuery(mi_conexion, cmd);
+
+                mostrarMensaje("Usuario eliminado correctamente");
+
+                limpiarForm();
+            }
+            else
+            {
+                mostrarMensaje("Por favor completar todos los campos");
+            }
+            llenar_datagrid();
+        }
+        private void ejecutarQuery(SqlConnection conex, SqlCommand comando)
+        {
+            conex.Open();
+            comando.ExecuteNonQuery();
+            conex.Close();
+        }
+        private void limpiarForm()
+        {
+            foreach (Control variable in this.Controls)
+            {
+                if (variable is TextBox)
+                {
+                    (variable as TextBox).Clear();
+                }
+            }
         }
 
     }
