@@ -29,54 +29,6 @@ namespace Equipo1
             cn = new SqlConnection(cadenaConnex);
         }
         //funciones
-        //FUNCION ACTUALIZAR
-        void actualizar()
-        {
-            if (verificartextbox())
-            {
-                string nombre = txt_Nombre.Text;
-                string domicilio = txt_Domicilio.Text;
-                string telefono = txt_Telefono.Text;
-                string mail = txt_Mail.Text;
-
-
-                string cmd = "update contactos set domicilio=@dom , telefono=@tel, mail@ail where nombre like @id";
-                cn.Open();
-                SqlCommand comando = new SqlCommand(cmd, cn);
-
-                comando.Parameters.AddWithValue("@dom", domicilio);
-                comando.Parameters.AddWithValue("@tel", telefono);
-                comando.Parameters.AddWithValue("@mail", mail);
-                comando.Parameters.AddWithValue("@id", nombre);
-                /*
-               string nombre = cbx_Nombre.SelectedValue.ToString();
-               string domicilio = txt_Domicilio.Text;
-               string id = cbx_Id_Provincia.SelectedValue.ToString();
-               int telefono = Convert.ToInt32(txt_Telefono.Text);
-               int mail = Convert.ToInt32(txt_Mail.Text);
-
-               //VARIABLE DONDE ALMACENO LA INSTRUCCION
-               //update Productos set id_tipo = 7    where descripcion like 'Yerba'
-               SqlCommand actualizar_registro = new SqlCommand("UPDATE contactos SET nombre=@nom, domicilio=@dom,id=@id , telefono=@tel, mail=@mail" +
-               "WHERE id_contactos=@id", cn);
-
-               //VINCULACION DE PARAMETROS
-               actualizar_registro.Parameters.AddWithValue("@nom", nombre);
-               actualizar_registro.Parameters.AddWithValue("@dom", domicilio);
-               actualizar_registro.Parameters.AddWithValue("@id", id);
-               actualizar_registro.Parameters.AddWithValue("@tel", telefono);
-               actualizar_registro.Parameters.AddWithValue("@mail", mail);
-
-               cn.Open();
-               //EJECUTO LA QUERY
-               actualizar_registro.ExecuteNonQuery();*/
-                cn.Close();
-                MessageBox.Show("Actualizo el registro.");
-                Limpiar();
-                llenar_datagrid();
-
-            }
-        }
         void Limpiar()
         {
             txt_Nombre.Text = "";
@@ -85,7 +37,7 @@ namespace Equipo1
             txt_Telefono.Text = "";
             txt_Mail.Text = "";
         }
-        void cargarNombre_cbx()
+        void CargarNombre_cbx()
         {
             SqlDataAdapter mostrar_tipo;
             DataTable data = new DataTable();
@@ -102,13 +54,13 @@ namespace Equipo1
             //CIERRA LA CONEXION
             cn.Close();
         }
-        void cargarProvincia_cbx()
+        void CargarProvincia_cbx()
 		{
             SqlDataAdapter mostrar_tipo;
             DataTable data = new DataTable();
-            //Abro la conexion
+        
             cn.Open();
-            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            
             mostrar_tipo = new SqlDataAdapter("SELECT id_provincia,provincia FROM provincias", cn);
             //RELLENA LA VARIABLE DEL COMBO BOX
             mostrar_tipo.Fill(data);
@@ -116,15 +68,16 @@ namespace Equipo1
             cbx_Id_Provincia.DataSource = data;
             cbx_Id_Provincia.ValueMember = "id_provincia"; //VARIABLE VISIBLE
             cbx_Id_Provincia.DisplayMember = "provincia"; //VARIABLE DESPLEGADA
-            //CIERRA LA CONEXION
+
             cn.Close();
         }
-        void llenar_datagrid()
+        void Llenar_datagrid()
         {
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             cn.Open();
-            string query = "select nombre,domicilio,telefono,mail from contactos ";
+            string query = "select id_contacto,nombre,domicilio,provincia,telefono,mail " +
+                "from contactos as c,provincias as p where  p.id_provincia=c.id_provincia";
             
            
             da = new SqlDataAdapter(query, cn);
@@ -138,45 +91,8 @@ namespace Equipo1
             comando.ExecuteNonQuery();
             conex.Close();
         }
-        void eliminar()
-
-        { 
-            if (verificartextbox())
-            {
-                string nombre = txt_Nombre.Text;
-                string domicilio = txt_Domicilio.Text;
-                string telefono = txt_Telefono.Text;
-                string mail = txt_Mail.Text;
-                string instruccion = "DELETE clientes WHERE nombre,domicilio,telefono,mail like @nom,@dom,@tel,@mail";
-                SqlCommand cmd = new SqlCommand(instruccion, cn);
-                cmd.Parameters.AddWithValue("@nom", nombre);
-                cmd.Parameters.AddWithValue("@dom", domicilio);
-                cmd.Parameters.AddWithValue("@tel", telefono);
-                cmd.Parameters.AddWithValue("@mail", mail);
-                ejecutarQuery(cn, cmd);
-                MessageBox.Show ("Usuario eliminado correctamente");
-                Limpiar();
-            }
-            else
-            {
-                MessageBox.Show ("Por favor completar todos los campos");
-            }
-        }
-        //FUNCION Verifica TEXBOX
-        private bool verificartextbox()
-            {
-                bool respuesta = true;
-                if (txt_Nombre.Text == "" || txt_Domicilio.Text == "" || txt_Telefono.Text == "" || txt_Mail.Text == "")
-                {
-                    respuesta = false;
-                }
-			    else
-                {
-                MessageBox.Show ("Por favor completar todos los campos");
-                }
-                return respuesta;
-            }
-        
+    
+       
         //FUNCION LLENAR TEXBOX A MEDIDA QUE SELECCIONO EL DATAGRID
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -204,7 +120,7 @@ namespace Equipo1
                 }
                 else
                 {
-
+                    
                     string nombre = txt_Nombre.Text;
                     string domicilio = txt_Domicilio.Text;
                     string id = cbx_Id_Provincia.SelectedValue.ToString();
@@ -214,8 +130,6 @@ namespace Equipo1
                     string cmd = "insert into CONTACTOS  (nombre,domicilio,id_provincia,telefono,mail) "
                         + "values (@nom, @dom,@id, @tel, @mail)";
 
-
-                    //VARIABLE DONDE ALMACENO LA INSTRUCCION SQL
                     SqlCommand comando = new SqlCommand(cmd, cn);
 
                     comando.Parameters.AddWithValue("@nom", nombre);
@@ -231,71 +145,104 @@ namespace Equipo1
                     cn.Close();
 
                     MessageBox.Show("contacto creado correctamente");
-                    llenar_datagrid();
+
+                    Llenar_datagrid();
                 }
             }
             //listo
             if (rbn_Leer.Checked)
             {
+                Limpiar();
+                if (txt_Nombre.Text == "" || txt_Domicilio.Text == "" || txt_Telefono.Text == "" || txt_Mail.Text == "")
+                {
+                    MessageBox.Show("Por favor completar todos los campos");
+                }
+                else
+				{
+                    string nombre = txt_Nombre.Text;
+                    string domicilio = txt_Domicilio.Text;
+                    string telefono = txt_Telefono.Text;
+                    string mail = txt_Mail.Text;
 
-                string nombre = txt_Nombre.Text;
-                string domicilio = txt_Domicilio.Text;
-                string telefono = txt_Telefono.Text;
-                string mail = txt_Mail.Text;
+                    string cmd = "insert into CONTACTOS  (nombre,domicilio,telefono,mail) " + "values (@nom, @dom, @tel, @mail)";
+                    SqlCommand comando = new SqlCommand(cmd, cn);
 
-                string cmd = "insert into CONTACTOS  (nombre,domicilio,telefono,mail) " + "values (@nom, @dom, @tel, @mail)";
+                    comando.Parameters.AddWithValue("@nom", nombre);
+                    comando.Parameters.AddWithValue("@dom", domicilio);
+                    comando.Parameters.AddWithValue("@tel", telefono);
+                    comando.Parameters.AddWithValue("@mail", mail);
+
+                    cn.Open();
+                    comando.ExecuteNonQuery();
+                    cn.Close();
+                    MessageBox.Show("contacto creado correctamente");
+                   
+                    Llenar_datagrid();
+                }
+                
+            }
+            //falta este
+            if (rbn_Actualizar.Checked)
+            {
+                
+                if ( txt_Domicilio.Text == "" || txt_Telefono.Text == "" || txt_Mail.Text == "")
+                {
+                    MessageBox.Show("Por favor completar todos los campos");
+                }
+                else
+				{
+                    string nombre =  cbx_Nombre.SelectedValue.ToString() ;
+                    string domicilio = txt_Domicilio.Text;
+                    string provincia = cbx_Id_Provincia.SelectedValue.ToString();
+                    string telefono = txt_Telefono.Text;
+                    string mail = txt_Mail.Text;
+
+                 
+                    string cmd = "UPDATE contactos SET domicilio=@dom, Id_provincia=@prov, telefono=@tel, mail=@mail" +
+                        " where id_contacto=@nom";
+
+                    SqlCommand comando = new SqlCommand(cmd, cn);
+
+                    comando.Parameters.AddWithValue("@nom", nombre);
+                    comando.Parameters.AddWithValue("@dom", domicilio);
+                    comando.Parameters.AddWithValue("@prov", provincia);
+                    comando.Parameters.AddWithValue("@tel", telefono);
+                    comando.Parameters.AddWithValue("@mail", mail);
+
+                    cn.Open();
+                    comando.ExecuteNonQuery();
+                    cn.Close();
+                    MessageBox.Show("Actualizo el registro.");
+                    Limpiar();
+                    Llenar_datagrid();
+                    
+                }
+                
+            }
+            //listo
+            if (rbn_Borrar.Checked)
+            {
+                string nombre = cbx_Nombre.Text;
+                string cmd = "DELETE  FROM contactos WHERE nombre=@nom";
+
                 SqlCommand comando = new SqlCommand(cmd, cn);
 
                 comando.Parameters.AddWithValue("@nom", nombre);
-                comando.Parameters.AddWithValue("@dom", domicilio);
-                comando.Parameters.AddWithValue("@tel", telefono);
-                comando.Parameters.AddWithValue("@mail", mail);
 
                 cn.Open();
                 comando.ExecuteNonQuery();
                 cn.Close();
-                MessageBox.Show("contacto creado correctamente");
-                Limpiar();
-                llenar_datagrid();
-            }
-            if (rbn_Actualizar.Checked)
-            {
-                actualizar();
-                
-                //listo
-               
-
-            }
-            if (rbn_Borrar.Checked)
-            {
-                eliminar();
-                ///DECLARACION DE VARIABLES
-                string id = cbx_Nombre.SelectedValue.ToString();
-                //CREACION DE LA VARIABLE: BORRAR
-                SqlCommand borrar = new SqlCommand();
-
-                //VARIABLE + CONEXION
-                borrar = cn.CreateCommand();
-
-
-                borrar.CommandText = "DELETE FROM contactos WHERE id_contacto=@ID";
-
-                //VINCULACION DE PARAMETROS
-                borrar.Parameters.AddWithValue("@ID", id);
-                cn.Open();
-                //EJECUTO LA INSTRUCION SQL
-                borrar.ExecuteNonQuery();
-                cn.Close();
 
                 MessageBox.Show("se borro el registro correctamente");
-                llenar_datagrid();
+                Llenar_datagrid();
+                Limpiar();
             }
         }
         private void cbx_Nombre_SelectedIndexChanged(object sender, EventArgs e)
         {
         
 		}
-        //carga los cbx segun combo box
+        //carga los cbx segun el uso de combo box
         private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
         {
             txt_Nombre.Visible = true;
@@ -305,8 +252,8 @@ namespace Equipo1
             txt_Mail.Enabled = true;
             cbx_Nombre.Visible = false;
             cbx_Id_Provincia.Visible = true;
-            cargarProvincia_cbx();
-            llenar_datagrid();
+            CargarProvincia_cbx();
+            Llenar_datagrid();
 
         }
 
@@ -324,25 +271,25 @@ namespace Equipo1
             txt_Mail.Visible = true;
             cbx_Nombre.Visible = false;
             cbx_Id_Provincia.Visible = false;
-            llenar_datagrid();
+            Llenar_datagrid();
         }
 
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
-            txt_Nombre.Visible = true;
+            txt_Nombre.Visible = false;
             txt_Domicilio.Visible = true;
-            txt_Id_Provincia.Visible =true;
+            txt_Id_Provincia.Visible =false;
             txt_Telefono.Visible = true;
-            txt_Mail.Enabled = true;
             cbx_Nombre.Visible = true;
+            cbx_Id_Provincia.Visible = true;
+            txt_Mail.Enabled = true;
             txt_Domicilio.Enabled = true;
-            cbx_Id_Provincia.Visible =false;
             txt_Id_Provincia.Enabled  =false;
             txt_Telefono.Enabled  = true;
             txt_Mail.Enabled  = true;
-            cargarNombre_cbx();
-            cargarProvincia_cbx();
-            llenar_datagrid();
+            CargarNombre_cbx();
+            CargarProvincia_cbx();
+            Llenar_datagrid();
         }
 
         private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
@@ -359,8 +306,8 @@ namespace Equipo1
             txt_Mail.Visible = true;
             cbx_Nombre.Visible = true;
             cbx_Id_Provincia.Visible = false;
-            cargarNombre_cbx();
-            llenar_datagrid();
+            CargarNombre_cbx();
+            Llenar_datagrid();
 
         }
 
