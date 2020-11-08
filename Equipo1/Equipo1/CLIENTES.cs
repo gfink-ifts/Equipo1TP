@@ -148,6 +148,7 @@ namespace Equipo1
             txt_registro.Enabled = true;
             txt_nombrecontacto.Visible = false;
             txt_nombrecontacto.Enabled = false;
+            mostrar_contactos();
             mostrar_clientes();
             llenar_datagrid();
         }
@@ -273,18 +274,16 @@ namespace Equipo1
                 registro = txt_registro.Text;
                 
 
-                string cmd = "insert into Clientes (nombre,area,fecha_registro) " +
-                                "values ( @nombre, @area , @fecha_registro )";
+                string cmd = "insert into Clientes (nombre,area,id_contacto,fecha_registro) " +
+                                "values ( @nombre, @area ,@id, @fecha_registro )";
                
 
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
-                comando.Parameters.AddWithValue("@fecha_registro", registro);
                 comando.Parameters.AddWithValue("@id", id);
-
-
-
+                comando.Parameters.AddWithValue("@fecha_registro", registro);
+            
                 comando.ExecuteNonQuery();
                 mi_conexion.Close();
                 mostrarMensaje("Cliente dado de alta correctamente");
@@ -440,14 +439,15 @@ namespace Equipo1
                 string id = cbx_nombrecontacto.SelectedValue.ToString();
               
 
-            string cmd = "update Clientes  set area=@area,   where nombre like @id";
+            string cmd = "update Clientes  set area=@area, id_contacto=@id  where  nombre=@nombre";
             mi_conexion.Open();
             SqlCommand comando = new SqlCommand(cmd, mi_conexion);
              comando.Parameters.AddWithValue("@area", area);
-             comando.Parameters.AddWithValue("@id", nombre );
+            comando.Parameters.AddWithValue("@nombre", nombre );
+             comando.Parameters.AddWithValue("@id", id);
 
-            
-                  comando.ExecuteNonQuery();
+
+                comando.ExecuteNonQuery();
                   mi_conexion.Close();
                   mostrarMensaje("Usuario actualizado correctamente");
 
