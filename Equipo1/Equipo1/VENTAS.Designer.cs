@@ -321,7 +321,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(417, 408);
+            this.ClientSize = new System.Drawing.Size(417, 417);
             this.Controls.Add(this.btn_reportes);
             this.Controls.Add(this.txt_cantidad);
             this.Controls.Add(this.lbl_cantidad);

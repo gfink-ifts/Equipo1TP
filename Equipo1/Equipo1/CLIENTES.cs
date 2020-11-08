@@ -43,15 +43,16 @@ namespace Equipo1
                 {
                     alta_clientes();
                     Limpiar();
+
                 }
 
 
                 //CRUD: LEER
-                if (rbn_Leer.Checked)
-                {
-                   // txt_nombrecontacto.Visible = true;
+              //  if (rbn_Leer.Checked)
+                //{
+                   //txt_nombrecontacto.Visible = true;
                     
-                }
+               // }
 
                 //CRUD: UPDATE
                 if (rbn_Actualizar.Checked)
@@ -67,6 +68,22 @@ namespace Equipo1
                     eliminar();                   
                 }
             }
+        }
+        //BOTON BUSCAR POR CLIENTE
+        private void btn_buscarcliente_Click(object sender, EventArgs e)
+        {
+            /*string apellido = txt_cliente.Text;*/
+            string nombre = txt_buscarcliente.Text;
+            SqlDataAdapter da;
+            DataTable dt = new DataTable();
+            mi_conexion.Open();
+            string consulta ="select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia  and c.nombre like @nombre"; 
+            da = new SqlDataAdapter(consulta, mi_conexion);
+            /*da.SelectCommand.Parameters.AddWithValue("@apell", "%" + apellido + "%" );*/
+            da.SelectCommand.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+            mi_conexion.Close();
         }
         //BOTON PARA MOSTRAR TODOS LOS DATOS DE LOS CLIENTES
         private void button1_Click(object sender, EventArgs e)
@@ -86,43 +103,66 @@ namespace Equipo1
         }
         private void rbn_Crear_CheckedChanged(object sender, EventArgs e)
         {
+            limpiarForm();
+            
+            cbx_nombrecontacto.Visible = true;
+            btn_buscarcliente.Visible = false;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
             cbx_cliente.Visible = false;
+            btn_Ejecutar.Visible = true;
             txt_nombrecontacto.Visible = false;
+            txt_buscarcliente.Visible = false;
+            mostrar_contactos();
             llenar_datagrid();
+            
         }
         private void rbn_Leer_CheckedChanged(object sender, EventArgs e)
         {
+            cbx_nombrecontacto.Visible = false;
+            btn_Ejecutar.Visible = false;
+            cbx_cliente.Visible = false;
+            btn_buscarcliente.Visible = true;
             txt_nombrecontacto.Visible = true;
-            txt_nombre.Enabled = false;
+            txt_buscarcliente.Visible = true;
             txt_area.Enabled = false;
-            txt_nombrecontacto.Enabled = false;
             txt_registro.Enabled = false;
-
+            txt_nombre.Enabled = false;
+            txt_nombrecontacto.Enabled = false;
             mostrar_clientes();
+            mostrar_contactos();
             llenar_clientes();
             llenar_datagrid();
+           
         }
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
             limpiarForm();
+            cbx_nombrecontacto.Visible = false;
+            btn_buscarcliente.Visible = true;
+            btn_Ejecutar.Visible = true;
+            cbx_cliente.Visible = false;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
-            txt_nombrecontacto.Visible = false;
+            txt_nombrecontacto.Visible = true;
+            txt_nombrecontacto.Enabled = false;
             mostrar_clientes();
             llenar_datagrid();
         }
         private void rbn_Borrar_CheckedChanged(object sender, EventArgs e)
         {
             limpiarForm();
+            cbx_nombrecontacto.Visible = false;
+            btn_buscarcliente.Visible = true;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
             cbx_cliente.Visible = false;
-            txt_nombrecontacto.Visible = false;
+            txt_nombrecontacto.Visible = true;
+            txt_nombrecontacto.Enabled = false;
+
             llenar_datagrid();
         }
 
@@ -166,6 +206,30 @@ namespace Equipo1
             //CIERRA LA CONEXION
             mi_conexion.Close();
         }
+        //FUNCION MOSTRAR CONTACTOS EN COMBOX
+        void mostrar_contactos()
+        {
+            SqlDataAdapter mostrar_tipo;
+            DataTable data = new DataTable();
+            //Abro la conexion
+            mi_conexion.Open();
+            //VARIABLE DONDE ALMACENO LA INSTRUCCION
+            mostrar_tipo = new SqlDataAdapter("SELECT ID_contacto, NOMBRE FROM contactos", mi_conexion);
+            //RELLENA LA VARIABLE DEL COMBO BOX
+            mostrar_tipo.Fill(data);
+            //RELLENA EL COMBO BOX
+            cbx_nombrecontacto.DataSource = data;
+            cbx_nombrecontacto.ValueMember = "ID_CONTACTO"; //VARIABLE VISIBLE
+            cbx_nombrecontacto.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
+
+
+
+
+
+            //CIERRA LA CONEXION
+            mi_conexion.Close();
+        }
+       
 
         //FUNCION llenar CLIENTES
         void llenar_clientes()
@@ -175,10 +239,10 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string consulta = "select area, id_contacto, fecha_registro from clientes " +
-                " where nombre like @cli ";
+            string consulta = "select c.area, co.nombre, c.fecha_registro from clientes as c, contactos as co " +
+                     " where c.id_contacto=co.id_contacto and co.nombre=@nom ";
             da = new SqlDataAdapter(consulta, mi_conexion);
-            da.SelectCommand.Parameters.AddWithValue("@cli", "%" + cliente + "%");
+            da.SelectCommand.Parameters.AddWithValue("@nom", "%" + cliente + "%");
             da.Fill(dt);
             mi_conexion.Close();
 
@@ -188,10 +252,10 @@ namespace Equipo1
                 txt_nombrecontacto.Text = Convert.ToString(dt.Rows[0][1]);
                 txt_registro.Text = Convert.ToString(dt.Rows[0][2]);
             }
-            else
-            {
-                MessageBox.Show("No existe Cliente ");
-            }
+           // else
+            //{
+              //  MessageBox.Show("No existe Cliente ");
+            //}
 
 
         }
@@ -221,13 +285,14 @@ namespace Equipo1
                 mi_conexion.Close();
                 mostrarMensaje("Cliente dado de alta correctamente");
 
-                limpiarForm();
+                
             }
             else
             {
                 mostrarMensaje("Por favor completar todos los campos");
             }
             llenar_datagrid();
+           // limpiarForm();
 
         }
 
@@ -303,6 +368,7 @@ namespace Equipo1
             }
             //Cierra la conexion
             mi_conexion.Close();
+            llenar_datagrid();
         }
 
         //FUNCION LLENAR DATAGRID
@@ -312,8 +378,8 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string query = "select nombre, area, fecha_registro from clientes" ;
-                     
+            string query = "select c.nombre,c.area,co.nombre,co.domicilio,p.provincia,co.telefono, co.mail,c.fecha_registro from clientes as c, contactos as co ,provincias as p where c.id_contacto = co.id_contacto and co.id_provincia = p.id_provincia ";
+
             da = new SqlDataAdapter(query, mi_conexion);
 
             da.Fill(dt);
@@ -356,7 +422,9 @@ namespace Equipo1
             DataGridViewRow dataGridView = dataGridView1.Rows[e.RowIndex];
             txt_nombre.Text = dataGridView.Cells[0].Value.ToString();
             txt_area.Text = dataGridView.Cells[1].Value.ToString();
-            txt_registro.Text = dataGridView.Cells[2].Value.ToString();
+            txt_registro.Text = dataGridView.Cells[7].Value.ToString();
+            txt_nombrecontacto.Text = dataGridView.Cells[2].Value.ToString();
+
         }
           //FUNCION ACTUALIZAR
           void actualizar()
@@ -388,6 +456,6 @@ namespace Equipo1
 
           }
 
-     
+       
     }
 }

@@ -36,6 +36,7 @@ namespace Equipo1
             lbl_error_fecha.Visible = false;
             lbl_error_servicio.Visible = false;
             rbn_borrar.Enabled = false;
+            rbn_actualizar.Enabled = false;
 
         }
 
@@ -181,17 +182,6 @@ namespace Equipo1
         {
             this.Close();
         }
-
-        private void cbx_cliente_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-           // mostrar_campos(cbx_cliente.SelectedValue.ToString());
-        }
-
-        private void cbx_servicio_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            //mostrar_campos(cbx_servicio.SelectedValue.ToString());
-        }
-
 
         //  ******************* FUNCIONES *******************
         void Mensaje (int id)
