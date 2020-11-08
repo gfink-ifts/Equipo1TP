@@ -408,7 +408,7 @@ namespace Equipo1
                 cmd.Parameters.AddWithValue("@nom", nombre);
                 ejecutarQuery(mi_conexion, cmd);
 
-                mostrarMensaje("Usuario eliminado correctamente");
+                mostrarMensaje("Cliente eliminado correctamente");
 
                 limpiarForm();
             }
