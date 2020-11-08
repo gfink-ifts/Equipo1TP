@@ -191,14 +191,15 @@ namespace Equipo1
                 }
                 else
 				{
-                    string nombre =  cbx_Nombre.Text;
+                    string nombre =  cbx_Nombre.SelectedValue.ToString() ;
                     string domicilio = txt_Domicilio.Text;
-                    string provincia = cbx_Id_Provincia.Text ;
+                    string provincia = cbx_Id_Provincia.SelectedValue.ToString();
                     string telefono = txt_Telefono.Text;
                     string mail = txt_Mail.Text;
 
                  
-                    string cmd = "UPDATE contactos SET nombre=@nom, domicilio=@dom, provincia=@prov, telefono=@tel, mail=@mail";
+                    string cmd = "UPDATE contactos SET domicilio=@dom, Id_provincia=@prov, telefono=@tel, mail=@mail" +
+                        " where id_contacto=@nom";
 
                     SqlCommand comando = new SqlCommand(cmd, cn);
 
