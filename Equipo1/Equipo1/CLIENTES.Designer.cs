@@ -141,7 +141,7 @@
             // cbx_cliente
             // 
             this.cbx_cliente.FormattingEnabled = true;
-            this.cbx_cliente.Location = new System.Drawing.Point(124, 138);
+            this.cbx_cliente.Location = new System.Drawing.Point(116, 138);
             this.cbx_cliente.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_cliente.Name = "cbx_cliente";
             this.cbx_cliente.Size = new System.Drawing.Size(363, 24);
@@ -265,7 +265,7 @@
             // cbx_nombrecontacto
             // 
             this.cbx_nombrecontacto.FormattingEnabled = true;
-            this.cbx_nombrecontacto.Location = new System.Drawing.Point(124, 204);
+            this.cbx_nombrecontacto.Location = new System.Drawing.Point(116, 204);
             this.cbx_nombrecontacto.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_nombrecontacto.Name = "cbx_nombrecontacto";
             this.cbx_nombrecontacto.Size = new System.Drawing.Size(363, 24);
