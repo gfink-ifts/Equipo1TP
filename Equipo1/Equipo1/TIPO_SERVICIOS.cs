@@ -52,22 +52,7 @@ namespace Equipo1
                 if (rbn_actualizar.Checked)
                 {
                     actualizar();
-                    /*
-
-                    SqlDataAdapter llenar_combo;
-
-                    DataTable tabla_cat_cliente = new DataTable();
-
-                    mi_conexion.Open();
-
-                    mostrar_por = new SqlDataAdapter("select * from clientes where direccion LIKE '%" + buscar + "%'", mi_conexion);
-
-                    mostrar_por.Fill(tabla_cat_cliente);
-
-                    mi_conexion.Close();
-                    */
-
-
+                   
                 }
                 //CRUD: DELETE
                 if (rbn_borrar.Checked)
@@ -84,7 +69,7 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string consulta = "select t.descripcion_tipo_servicio,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios and t.descripcion_tipo_servicio like @nombre";
+            string consulta = "select t.descripcion,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios and t.descripcion like @nombre";
             da = new SqlDataAdapter(consulta, mi_conexion);
             /*da.SelectCommand.Parameters.AddWithValue("@apell", "%" + apellido + "%" );*/
             da.SelectCommand.Parameters.AddWithValue("@nombre", "%" + nombre + "%");
@@ -168,7 +153,7 @@ namespace Equipo1
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
-            string query = "select t.descripcion_tipo_servicio,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios ";
+            string query = "select t.descripcion,s.descripcion,s.precios from tipo_servicios as t, servicios as s where t.id_tipo_servicios = s.id_tipo_servicios ";
 
             da = new SqlDataAdapter(query, mi_conexion);
 
@@ -248,10 +233,10 @@ namespace Equipo1
                 //string area = txt_area.Text;
 
 
-                string cmd = "update tipo_servicios set descripcion_tipo_servicio=@descripcion_tipo_servicio where descripcion_tipo_servicio like @id";
+                string cmd = "update tipo_servicios set descripcion=@descripcion where descripcion like @id";
                 mi_conexion.Open();
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
-                comando.Parameters.AddWithValue("@descripcion_tipo_servicio", nombre);
+                comando.Parameters.AddWithValue("@descripcion", nombre);
                 comando.Parameters.AddWithValue("@id", nombre);
 
 

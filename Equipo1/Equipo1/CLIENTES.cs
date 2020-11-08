@@ -139,14 +139,14 @@ namespace Equipo1
         private void rbn_Actualizar_CheckedChanged(object sender, EventArgs e)
         {
             limpiarForm();
-            cbx_nombrecontacto.Visible = false;
+            cbx_nombrecontacto.Visible = true;
             btn_buscarcliente.Visible = true;
             btn_Ejecutar.Visible = true;
             cbx_cliente.Visible = false;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
-            txt_nombrecontacto.Visible = true;
+            txt_nombrecontacto.Visible = false;
             txt_nombrecontacto.Enabled = false;
             mostrar_clientes();
             llenar_datagrid();
@@ -235,7 +235,7 @@ namespace Equipo1
         void llenar_clientes()
 
         {
-            string cliente = cbx_cliente.Text;
+            string cliente = cbx_cliente.SelectedValue.ToString();
             SqlDataAdapter da;
             DataTable dt = new DataTable();
             mi_conexion.Open();
@@ -266,10 +266,12 @@ namespace Equipo1
             if (validartextbox())
             {
                 string nombre, area, registro;
+                string id = cbx_nombrecontacto.SelectedValue.ToString();
                 mi_conexion.Open();
                 nombre = txt_nombre.Text;
                 area = txt_area.Text;
                 registro = txt_registro.Text;
+                
 
                 string cmd = "insert into Clientes (nombre,area,fecha_registro) " +
                                 "values ( @nombre, @area , @fecha_registro )";
@@ -279,8 +281,10 @@ namespace Equipo1
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
+                comando.Parameters.AddWithValue("@id", id);
 
-                
+
+
                 comando.ExecuteNonQuery();
                 mi_conexion.Close();
                 mostrarMensaje("Cliente dado de alta correctamente");
@@ -433,9 +437,10 @@ namespace Equipo1
             {
                   string nombre = txt_nombre.Text;
                   string area=txt_area.Text;
+                string id = cbx_nombrecontacto.SelectedValue.ToString();
               
 
-            string cmd = "update Clientes set area=@area where nombre like @id";
+            string cmd = "update Clientes  set area=@area,   where nombre like @id";
             mi_conexion.Open();
             SqlCommand comando = new SqlCommand(cmd, mi_conexion);
              comando.Parameters.AddWithValue("@area", area);
