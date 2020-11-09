@@ -71,6 +71,10 @@ namespace Equipo1
             txt_oc.Enabled = false;
             lbl_cantidad.Enabled = false;
             txt_cantidad.Enabled = false;
+            chx_cliente.Enabled = true;
+            chx_fecha.Enabled = true;
+            chx_servicios.Enabled = true;
+
 
             Limpiar();
         }
@@ -136,17 +140,20 @@ namespace Equipo1
             {
                 if (rbn_leer.Checked) {
 
+                    consulta = "SELECT FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, ORDEN_DE_COMPRA "+
+                                        "FROM VENTAS AS V, CLIENTES AS C, SERVICIOS AS S "+
+                                        "WHERE V.ID_CLIENTE = C.ID_CLIENTE AND V.ID_SERVICIOS = S.ID_SERVICIOS";
                     if (chx_fecha.Checked)
                     {
-                        consulta = "SELECT * FROM VENTAS WHERE FECHA_VENTA LIKE '%" + fecha + "%'";
+                        consulta += " AND FECHA_VENTA LIKE '%" + fecha + "%'";
                     }
                     if (chx_cliente.Checked)
                     {
-                        consulta = "SELECT * FROM VENTAS WHERE ID_CLIENTE='" + id_cliente + "'";
+                        consulta += " AND V.ID_CLIENTE='" + id_cliente + "'";
                     }
                     if (chx_servicios.Checked)
                     {
-                        consulta = "SELECT * FROM VENTAS WHERE ID_SERVICIOS='" + id_servicio + "'";
+                        consulta += " AND V.ID_SERVICIOS='" + id_servicio + "'";
                     }
 
                     //CARGA EL DATAGRID CON LA BUSQUEDA

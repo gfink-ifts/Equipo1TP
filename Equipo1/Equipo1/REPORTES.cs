@@ -50,6 +50,7 @@ namespace Equipo1
             //VISIBILIDAD DE VARIABLES
             btn_buscar.Visible = true;
             gbx_fecha.Visible = true;
+            rbn_cliente_2.Checked = true;
             Limpiar();
         }
 
@@ -101,7 +102,7 @@ namespace Equipo1
 
             if (cbx_mes.SelectedIndex == 0)
             {
-                mes = " ";
+                mes = "";
             }
             else if (cbx_mes.SelectedIndex == 10 || cbx_mes.SelectedIndex == 11 || cbx_mes.SelectedIndex == 12)
             {
@@ -117,13 +118,13 @@ namespace Equipo1
                 instruccion = "SELECT V.FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, V.CANTIDAD, CANTIDAD*PRECIOS AS TOTAL " +
                               "FROM CLIENTES AS C, SERVICIOS AS S, VENTAS AS V " +
                               "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND " +
-                              "fecha_venta LIKE '%" + ano + "-" + mes + "%' ORDER BY FECHA_VENTA DESC";
+                              "V.FECHA_VENTA LIKE '%" + ano + "-" + mes + "%' ORDER BY FECHA_VENTA DESC";
             }
-            else
+            if (rbn_producto_2.Checked)
             {
-                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD)" +
+                instruccion = "SELECT S.DESCRIPCION, COUNT(CANTIDAD) AS CANTIDAD " +
                               "FROM VENTAS AS V, SERVICIOS AS S " +
-                              "WHERE fecha_venta LIKE '%" + ano + "-" + mes + "%'" +
+                              "WHERE S.ID_SERVICIOS = V.ID_SERVICIOS AND V.FECHA_VENTA LIKE '%" + ano + "-" + mes + "%' " +
                               "GROUP BY s.descripcion";
             }  
 
