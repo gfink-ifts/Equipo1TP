@@ -141,8 +141,8 @@ namespace Equipo1
                 if (rbn_leer.Checked) {
 
                     consulta = "SELECT FECHA_VENTA, C.NOMBRE, S.DESCRIPCION, ORDEN_DE_COMPRA "+
-                                        "FROM VENTAS AS V, CLIENTES AS C, SERVICIOS AS S "+
-                                        "WHERE V.ID_CLIENTE = C.ID_CLIENTE AND V.ID_SERVICIOS = S.ID_SERVICIOS";
+                               "FROM VENTAS AS V, CLIENTES AS C, SERVICIOS AS S "+
+                               "WHERE V.ID_CLIENTE = C.ID_CLIENTE AND V.ID_SERVICIOS = S.ID_SERVICIOS";
                     if (chx_fecha.Checked)
                     {
                         consulta += " AND FECHA_VENTA LIKE '%" + fecha + "%'";
@@ -155,6 +155,7 @@ namespace Equipo1
                     {
                         consulta += " AND V.ID_SERVICIOS='" + id_servicio + "'";
                     }
+                    consulta += " ORDER BY FECHA_VENTA DESC";
 
                     //CARGA EL DATAGRID CON LA BUSQUEDA
                     SqlDataAdapter mostrar;
