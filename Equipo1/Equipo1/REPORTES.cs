@@ -101,7 +101,7 @@ namespace Equipo1
 
             if (cbx_mes.SelectedIndex == 0)
             {
-                mes = " ";
+                mes = "";
             }
             else if (cbx_mes.SelectedIndex == 10 || cbx_mes.SelectedIndex == 11 || cbx_mes.SelectedIndex == 12)
             {
@@ -121,9 +121,9 @@ namespace Equipo1
             }
             if (rbn_producto_2.Checked)
             {
-                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD) AS CANTIDAD" +
+                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD) AS CANTIDAD " +
                               "FROM VENTAS AS V, SERVICIOS AS S " +
-                              "WHERE fecha_venta LIKE '%" + ano + "-" + mes + "%'" +
+                              "WHERE fecha_venta LIKE '%" + ano + "-" + mes + "%' " +
                               "GROUP BY s.descripcion";
             }  
 

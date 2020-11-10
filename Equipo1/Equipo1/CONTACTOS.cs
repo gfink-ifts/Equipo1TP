@@ -60,7 +60,7 @@ namespace Equipo1
             txt_Telefono.Visible = true;
             txt_Mail.Visible = true;
             cbx_Nombre.Visible = false;
-            cbx_Id_Provincia.Visible = false;
+            cbx_Id_Provincia.Enabled = false;
             Llenar_datagrid();
         }
 
@@ -72,6 +72,7 @@ namespace Equipo1
             txt_Telefono.Visible = true;
             cbx_Nombre.Visible = true;
             cbx_Id_Provincia.Visible = true;
+            cbx_Id_Provincia.Enabled = true;
             txt_Mail.Enabled = true;
             txt_Domicilio.Enabled = true;
             txt_Id_Provincia.Enabled = false;
@@ -95,7 +96,7 @@ namespace Equipo1
             txt_Telefono.Visible = true;
             txt_Mail.Visible = true;
             cbx_Nombre.Visible = true;
-            cbx_Id_Provincia.Visible = true;
+            cbx_Id_Provincia.Enabled = false;
             CargarNombre_cbx();
             Llenar_datagrid();
 

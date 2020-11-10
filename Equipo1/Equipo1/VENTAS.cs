@@ -175,6 +175,7 @@ namespace Equipo1
                     dgw_ventas.DataSource = tabla;
 
                     Limpiar();
+                    chx_cliente.Checked = true;
                 }
             }
             //NO COMPLETO NINGUNO DE LOS CAMPOS REQUERIDOS
