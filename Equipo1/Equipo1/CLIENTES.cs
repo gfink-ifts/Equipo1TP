@@ -143,6 +143,7 @@ namespace Equipo1
             btn_buscarcliente.Visible = true;
             btn_Ejecutar.Visible = true;
             cbx_cliente.Visible = false;
+            cbx_nombrecontacto.Visible = true;
             txt_nombre.Enabled = true;
             txt_area.Enabled = true;
             txt_registro.Enabled = true;
