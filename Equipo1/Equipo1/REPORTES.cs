@@ -119,9 +119,9 @@ namespace Equipo1
                               "WHERE C.ID_CLIENTE = V.ID_CLIENTE AND S.ID_SERVICIOS = V.ID_SERVICIOS AND " +
                               "fecha_venta LIKE '%" + ano + "-" + mes + "%' ORDER BY FECHA_VENTA DESC";
             }
-            else
+            f(rbn_producto_2.Checked)
             {
-                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD)" +
+                instruccion = "SELECT S.descripcion, COUNT(CANTIDAD) AS CANTIDAD" +
                               "FROM VENTAS AS V, SERVICIOS AS S " +
                               "WHERE fecha_venta LIKE '%" + ano + "-" + mes + "%'" +
                               "GROUP BY s.descripcion";
