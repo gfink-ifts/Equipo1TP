@@ -61,7 +61,7 @@
             // cbx_descripcion
             // 
             this.cbx_descripcion.FormattingEnabled = true;
-            this.cbx_descripcion.Location = new System.Drawing.Point(188, 156);
+            this.cbx_descripcion.Location = new System.Drawing.Point(165, 156);
             this.cbx_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.cbx_descripcion.Name = "cbx_descripcion";
             this.cbx_descripcion.Size = new System.Drawing.Size(363, 24);

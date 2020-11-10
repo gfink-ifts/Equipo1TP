@@ -176,12 +176,12 @@ namespace Equipo1
                // area = txt_area.Text;
                 //registro = txt_registro.Text;
 
-                string cmd = "insert into tipo_servicios (descripcion_tipo_servicio) " +
-                                "values ( @descripcion_tipo_servicio)";
+                string cmd = "insert into tipo_servicios (descripcion) " +
+                                "values ( @descripcion)";
 
 
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
-                comando.Parameters.AddWithValue("@descripcion_tipo_servicio", descripcion);
+                comando.Parameters.AddWithValue("@descripcion", descripcion);
                // comando.Parameters.AddWithValue("@area", area);
                 //comando.Parameters.AddWithValue("@fecha_registro", registro);
 
