@@ -71,6 +71,9 @@ namespace Equipo1
             txt_oc.Enabled = false;
             lbl_cantidad.Enabled = false;
             txt_cantidad.Enabled = false;
+            chx_cliente.Enabled = true;
+            chx_fecha.Enabled = true;
+            chx_servicios.Enabled = true;
 
             Limpiar();
         }
