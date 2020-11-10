@@ -15,7 +15,7 @@ namespace Equipo1
     public partial class CLIENTES : Form
     {
 
-        // CONEXION A LA BASE DE DATOS (patch / BBDD / seguridad)
+        // //CONEXION A LA BASE DE DATOS (patch / BBDD / seguridad)
         string conectar = @"data source=DESKTOP-6NP4PUO\SQLEXPRESS; initial catalog= OUTSOURCING; integrated security= SSPI";
         //DEFINIMOS LA VARIABLE DE SqlConnection
         SqlConnection mi_conexion;
