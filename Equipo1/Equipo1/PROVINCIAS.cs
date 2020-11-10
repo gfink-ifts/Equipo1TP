@@ -14,7 +14,7 @@ namespace Equipo1
 {
     public partial class PROVINCIAS : Form
     {
-        string cadenaConnex = @"data source=DESKTOP-E2DA7HR\SQLEXPRESS; initial catalog='outsourcing'; integrated security=SSPI";
+        string cadenaConnex = @"data source = DV3458 - FUSTARIZ\SQLEXPRESS; initial catalog='outsourcing'; integrated security=SSPI";
         SqlConnection cn;
 
         //FUNCIONES
