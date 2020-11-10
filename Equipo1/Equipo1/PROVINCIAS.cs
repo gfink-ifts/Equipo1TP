@@ -56,6 +56,7 @@ namespace Equipo1
             rbn_Actualizar.Enabled = false;
             rbn_Borrar.Enabled = false;
             rbn_Leer.Checked = true;
+            btn_Ejecutar.Visible = false;
         }
 
 
