@@ -265,19 +265,21 @@ namespace Equipo1
         {
             if (validartextbox())
             {
-                string nombre, area, registro;
+                string nombre, area, id, registro;
                 mi_conexion.Open();
                 nombre = txt_nombre.Text;
+                id = cbx_nombrecontacto.SelectedValue.ToString();
                 area = txt_area.Text;
                 registro = txt_registro.Text;
 
-                string cmd = "insert into Clientes (nombre,area,fecha_registro) " +
-                                "values ( @nombre, @area , @fecha_registro )";
-               
+                string cmd = "insert into Clientes (nombre,area,id_contacto,fecha_registro) " +                             "values ( @nombre, @area ,@id, @fecha_registro )";
+
+
 
                 SqlCommand comando = new SqlCommand(cmd, mi_conexion);
                 comando.Parameters.AddWithValue("@nombre", nombre);
                 comando.Parameters.AddWithValue("@area", area);
+                comando.Parameters.AddWithValue("@id", id);
                 comando.Parameters.AddWithValue("@fecha_registro", registro);
 
                 

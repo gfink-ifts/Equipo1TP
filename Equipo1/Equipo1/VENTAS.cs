@@ -191,6 +191,16 @@ namespace Equipo1
             this.Close();
         }
 
+
+        private void btn_reportes_Click(object sender, EventArgs e)
+        {
+            //DECLARACION DE LOS FORMULARIOS
+            REPORTES reportes = new REPORTES();
+            //LLAMA AL FORMULARIO
+            reportes.Show();
+        }
+
+
         //  ******************* FUNCIONES *******************
         void Mensaje (int id)
         {
@@ -262,14 +272,6 @@ namespace Equipo1
             cbx_cliente.DisplayMember = "NOMBRE"; //VARIABLE DESPLEGADA
             //CIERRA LA CONEXION
             mi_conexion.Close();
-        }
-
-        private void btn_reportes_Click(object sender, EventArgs e)
-        {
-            //DECLARACION DE LOS FORMULARIOS
-            REPORTES reportes = new REPORTES();
-            //LLAMA AL FORMULARIO
-            reportes.Show();
         }
     }
 }
