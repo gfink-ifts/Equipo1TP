@@ -95,7 +95,7 @@ namespace Equipo1
             txt_Telefono.Visible = true;
             txt_Mail.Visible = true;
             cbx_Nombre.Visible = true;
-            cbx_Id_Provincia.Visible = false;
+            cbx_Id_Provincia.Visible = true;
             CargarNombre_cbx();
             Llenar_datagrid();
 
