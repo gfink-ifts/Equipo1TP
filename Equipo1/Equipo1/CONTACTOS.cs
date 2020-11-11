@@ -140,6 +140,7 @@ namespace Equipo1
         private void btn_Ejecutar_Click(object sender, EventArgs e)
         {
             //listo
+            //Un comentario
             if (rbn_Crear.Checked)
             {
                 if (txt_Nombre.Text == "" || txt_Domicilio.Text == "" || txt_Telefono.Text == "" || txt_Mail.Text == "")
