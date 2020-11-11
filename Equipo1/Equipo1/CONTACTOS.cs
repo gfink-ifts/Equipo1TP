@@ -141,6 +141,7 @@ namespace Equipo1
         {
             //listo
             //Un comentario
+            //Otro cambio
             if (rbn_Crear.Checked)
             {
                 if (txt_Nombre.Text == "" || txt_Domicilio.Text == "" || txt_Telefono.Text == "" || txt_Mail.Text == "")
